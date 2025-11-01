@@ -14,11 +14,12 @@ import User from "../models/user.js";
     const { _id } = decodedObj;
 
     const user = await User.findById(_id);
+         const { password, ...userData } = user;
     if (!user) {
       throw new Error("User not found");
     }
 
-    req.user = user;
+    req.user = userData;
     next();
   } catch (err) {
     res.status(400).send("ERROR: " + err.message);
