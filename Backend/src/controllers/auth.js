@@ -36,8 +36,17 @@ res.status(200).cookie("token", token, {
     } catch (error) {
       res.status(400).json({ message: "Login failed", error: error.message });
     }
+  },
+
+  async logout(req, res) {
+    res.cookie("token", null, {
+      expires: new Date(Date.now()),
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+    });
+    res.status(200).json({ message: "Logout Successful!!" });
   }
 
 };
-
 export default AuthController;

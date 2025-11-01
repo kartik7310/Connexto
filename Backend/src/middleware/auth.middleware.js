@@ -1,15 +1,28 @@
-import jwt from "jsonwebtoken";
- const authenticateUser = (req, res, next) => {
-  const token = req.cookies?.token;
-  if (!token) return res.status(401).json({ message: "Unauthorized" });
 
+import jwt from "jsonwebtoken";
+import User from "../models/user.js";
+
+ async function userAuth(req, res, next) {
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded;
+    const { token } = req.cookies;
+    if (!token) {
+      return res.status(401).send("Please Login!");
+    }
+
+    const decodedObj = await jwt.verify(token, process.env.JWT_SECRET);
+
+    const { _id } = decodedObj;
+
+    const user = await User.findById(_id);
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    req.user = user;
     next();
-  } catch {
-    return res.status(401).json({ message: "Invalid or expired token" });
+  } catch (err) {
+    res.status(400).send("ERROR: " + err.message);
   }
 };
 
-export default authenticateUser;
+export default userAuth;

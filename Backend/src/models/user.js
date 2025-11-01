@@ -1,41 +1,62 @@
 import mongoose from "mongoose";
-const userSchema = new mongoose.Schema({
-  firstName: {
-    type: String,
-    required: true,
+
+const userSchema = new mongoose.Schema(
+  {
+    firstName: {
+      type: String,
+      required: [true, "First name is required"],
+      minLength: [2, "First name must be at least 2 characters long"],
+      maxLength: [50, "First name must not exceed 50 characters"],
+      trim: true,
+    },
+    lastName: {
+      type: String,
+      required: [true, "Last name is required"],
+      trim: true,
+    },
+    email: {
+      type: String,
+      required: [true, "Email is required"],
+      lowercase: true,
+      unique: true,
+      trim: true,
+      match: [/^\S+@\S+\.\S+$/, "Please enter a valid email address"],
+    },
+    password: {
+      type: String,
+      required: [true, "Password is required"],
+      minLength: [6, "Password must be at least 6 characters long"],
+      select: false,
+    },
+    age: { type: Number, min: [18, "User must be at least 18 years old"] },
+    gender: {
+      type: String,
+      enum: {
+        values: ["male", "female", "other"],
+        message: "{VALUE} is not a valid gender type",
+      },
+    },
+    skills: { type: [String], default: [] },
+    about: {
+      type: String,
+      default: "This is a default about of the user!",
+      maxLength: [300, "About section must not exceed 300 characters"],
+    },
+    photoUrl: {
+      type: String,
+      default: "https://geographyandyou.com/images/user-profile.png",
+      validate: {
+        validator: (v) => /^https?:\/\/.+\.(jpg|jpeg|png|webp|svg)?$/.test(v),
+        message: "Please enter a valid image URL",
+      },
+    },
+    role: { type: String, enum: ["user", "admin"], default: "user" },
+    isVerified: { type: Boolean, default: false },
+    lastLogin: { type: Date },
   },
-  lastName: {
-    type: String,
-    required: true,
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-  age:{
-    type: Number,
-    required: false,
-  },
-  gender:{
-    type: String,
-    required: false,
-  },
-  skills:{
-    type: [String],
-    default: [],
-    // required: false,
-  },
-  bio:{
-    type: String,
-    default:"user is lazy to write bio",
-    // required: false,  
-  }
-});
+  { timestamps: true }
+);
 
 const User = mongoose.model("User", userSchema);
+
 export default User;
