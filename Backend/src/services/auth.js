@@ -3,7 +3,7 @@ import User from "../models/user.js";
 import AppError from "../utils/AppError.js";
 import logger from "../config/logger.js";
 import { generateToken } from "../utils/generateToken.js";
-import { th } from "zod/v4/locales";
+
 
 const AuthService = {
   async signup(data) {

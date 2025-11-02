@@ -24,9 +24,11 @@ const connectionRequestSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// ConnectionRequest.find({fromUserId: 273478465864786587, toUserId: 273478465864786587})
 
+//compound index to ensure unique connection requests between two users
 connectionRequestSchema.index({ fromUserId: 1, toUserId: 1 });
+
+// ConnectionRequest.find({fromUserId: 273478465864786587, toUserId: 273478465864786587}) ensures no self connection requests
 
 connectionRequestSchema.pre("save", function (next) {
   const connectionRequest = this;

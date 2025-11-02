@@ -7,6 +7,7 @@ import Profile from "./routes/user.route.js"
 import logger from "./config/logger.js";
 import cookieParser from "cookie-parser";
 import globalErrorHandler from "./middleware/errorMiddleware.js"
+import ConnectionRoutes from "./routes/connection.routes.js"
 const app = express();
 const PORT = process.env.PORT || 3000;
 app.use(express.json());
@@ -24,6 +25,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/profile',Profile );
+app.use('/api/v1/connections', ConnectionRoutes);
 
 app.use(globalErrorHandler);
 connectDB().then(() => {
