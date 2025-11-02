@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: [true, "Password is required"],
       minLength: [6, "Password must be at least 6 characters long"],
-      select: false,
+      
     },
     age: { type: Number, min: [18, "User must be at least 18 years old"] },
     gender: {

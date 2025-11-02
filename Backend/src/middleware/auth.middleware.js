@@ -1,29 +1,19 @@
-
 import jwt from "jsonwebtoken";
 import User from "../models/user.js";
 
- async function userAuth(req, res, next) {
+
+export const protect = async (req, res, next) => {
   try {
-    const { token } = req.cookies;
+    const token = req.cookies?.token || req.headers.authorization?.split(" ")[1];
+    console.log("token", token);
     if (!token) {
-      return res.status(401).send("Please Login!");
+      return res.status(401).json({ message: "Not authorized, token missing" });
     }
 
-    const decodedObj = await jwt.verify(token, process.env.JWT_SECRET);
-
-    const { _id } = decodedObj;
-
-    const user = await User.findById(_id);
-         const { password, ...userData } = user;
-    if (!user) {
-      throw new Error("User not found");
-    }
-
-    req.user = userData;
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = await User.findById(decoded.id).select("-password");
     next();
-  } catch (err) {
-    res.status(400).send("ERROR: " + err.message);
+  } catch (error) {
+    return res.status(401).json({ message: "Invalid or expired token" });
   }
 };
-
-export default userAuth;

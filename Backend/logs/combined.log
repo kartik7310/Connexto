@@ -1,0 +1,330 @@
+2025-11-02 11:47:41 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 11:48:05 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 11:48:05 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 11:50:21 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 11:50:21 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 11:50:27 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 11:50:27 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 11:51:51 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 11:51:51 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 11:51:57 [[33mwarn[39m] : Signup attempt with existing email: kartik@gmail.com
+2025-11-02 11:51:57 [[31merror[39m] : Error: User already exists with this email
+    at Object.signup (file:///D:/Connectly/Backend/src/services/auth.js:15:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async signup (file:///D:/Connectly/Backend/src/controllers/auth.js:15:20)
+2025-11-02 11:52:23 [[33mwarn[39m] : Signup attempt with existing email: kartik1@gmail.com
+2025-11-02 11:52:23 [[31merror[39m] : Error: User already exists with this email
+    at Object.signup (file:///D:/Connectly/Backend/src/services/auth.js:15:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async signup (file:///D:/Connectly/Backend/src/controllers/auth.js:15:20)
+2025-11-02 11:55:24 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 11:55:24 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 11:55:28 [[33mwarn[39m] : Signup attempt with existing email: kartik2@gmail.com
+2025-11-02 11:55:28 [[31merror[39m] : Error: User already exists with this email
+    at Object.signup (file:///D:/Connectly/Backend/src/services/auth.js:15:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async signup (file:///D:/Connectly/Backend/src/controllers/auth.js:15:20)
+2025-11-02 11:55:55 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 11:55:55 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 11:56:50 [[33mwarn[39m] : Signup attempt with existing email: kartik2@gmail.com
+2025-11-02 11:56:50 [[31merror[39m] : Error: User already exists with this email
+    at Object.signup (file:///D:/Connectly/Backend/src/services/auth.js:15:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async signup (file:///D:/Connectly/Backend/src/controllers/auth.js:15:20)
+2025-11-02 11:57:09 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 11:57:09 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 11:57:11 [[33mwarn[39m] : Signup attempt with existing email: kartik2@gmail.com
+2025-11-02 11:57:11 [[31merror[39m] : Error: User already exists with this email
+    at Object.signup (file:///D:/Connectly/Backend/src/services/auth.js:15:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async signup (file:///D:/Connectly/Backend/src/controllers/auth.js:15:20)
+2025-11-02 11:58:00 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 11:58:00 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 11:58:03 [[33mwarn[39m] : Signup attempt with existing email: kartik2@gmail.com
+2025-11-02 11:58:03 [[31merror[39m] : Error: User already exists with this email
+    at Object.signup (file:///D:/Connectly/Backend/src/services/auth.js:15:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async signup (file:///D:/Connectly/Backend/src/controllers/auth.js:15:20)
+2025-11-02 11:58:49 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 11:58:49 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:00:06 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:00:06 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:00:10 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:00:10 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:00:14 [[33mwarn[39m] : Signup attempt with existing email: kartik2@gmail.com
+2025-11-02 12:00:14 [[31merror[39m] : Error: User already exists with this email
+    at Object.signup (file:///D:/Connectly/Backend/src/services/auth.js:16:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async signup (file:///D:/Connectly/Backend/src/controllers/auth.js:15:20)
+2025-11-02 12:01:56 [[31merror[39m] : ReferenceError: logger is not defined
+    at login (file:///D:/Connectly/Backend/src/controllers/auth.js:59:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-11-02 12:02:05 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:02:05 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:02:08 [[31merror[39m] : ReferenceError: logger is not defined
+    at login (file:///D:/Connectly/Backend/src/controllers/auth.js:59:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-11-02 12:02:44 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:02:44 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:02:52 [[31merror[39m] : Login failed
+2025-11-02 12:02:52 [[31merror[39m] : Error: data and hash arguments required
+    at Object.compare (D:\Connectly\Backend\node_modules\bcrypt\bcrypt.js:204:17)
+    at D:\Connectly\Backend\node_modules\bcrypt\promises.js:26:12
+    at new Promise (<anonymous>)
+    at Object.promise (D:\Connectly\Backend\node_modules\bcrypt\promises.js:17:12)
+    at Object.compare (D:\Connectly\Backend\node_modules\bcrypt\bcrypt.js:200:25)
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:38:34)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:29)
+2025-11-02 12:03:02 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:03:02 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:03:05 [[31merror[39m] : Login failed
+2025-11-02 12:03:05 [[31merror[39m] : Error: data and hash arguments required
+    at Object.compare (D:\Connectly\Backend\node_modules\bcrypt\bcrypt.js:204:17)
+    at D:\Connectly\Backend\node_modules\bcrypt\promises.js:26:12
+    at new Promise (<anonymous>)
+    at Object.promise (D:\Connectly\Backend\node_modules\bcrypt\promises.js:17:12)
+    at Object.compare (D:\Connectly\Backend\node_modules\bcrypt\bcrypt.js:200:25)
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:38:34)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:29)
+2025-11-02 12:04:39 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:04:39 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:04:47 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:04:47 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:05:03 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:05:03 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:05:19 [[31merror[39m] : Login failed
+2025-11-02 12:05:19 [[31merror[39m] : Error: data and hash arguments required
+    at Object.compare (D:\Connectly\Backend\node_modules\bcrypt\bcrypt.js:204:17)
+    at D:\Connectly\Backend\node_modules\bcrypt\promises.js:26:12
+    at new Promise (<anonymous>)
+    at Object.promise (D:\Connectly\Backend\node_modules\bcrypt\promises.js:17:12)
+    at Object.compare (D:\Connectly\Backend\node_modules\bcrypt\bcrypt.js:200:25)
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:38:34)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:29)
+2025-11-02 12:07:22 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:07:22 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:07:28 [[31merror[39m] : Login failed
+2025-11-02 12:07:28 [[31merror[39m] : Error: data and hash arguments required
+    at Object.compare (D:\Connectly\Backend\node_modules\bcrypt\bcrypt.js:204:17)
+    at D:\Connectly\Backend\node_modules\bcrypt\promises.js:26:12
+    at new Promise (<anonymous>)
+    at Object.promise (D:\Connectly\Backend\node_modules\bcrypt\promises.js:17:12)
+    at Object.compare (D:\Connectly\Backend\node_modules\bcrypt\bcrypt.js:200:25)
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:38:34)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:29)
+2025-11-02 12:08:34 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:08:34 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:08:36 [[31merror[39m] : Login failed
+2025-11-02 12:08:36 [[31merror[39m] : Error: data and hash arguments required
+    at Object.compare (D:\Connectly\Backend\node_modules\bcrypt\bcrypt.js:204:17)
+    at D:\Connectly\Backend\node_modules\bcrypt\promises.js:26:12
+    at new Promise (<anonymous>)
+    at Object.promise (D:\Connectly\Backend\node_modules\bcrypt\promises.js:17:12)
+    at Object.compare (D:\Connectly\Backend\node_modules\bcrypt\bcrypt.js:200:25)
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:38:34)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:29)
+2025-11-02 12:09:42 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:09:42 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:09:46 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:09:46 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:09:49 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:09:49 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:09:51 [[31merror[39m] : Login failed
+2025-11-02 12:09:51 [[31merror[39m] : Error: data and hash arguments required
+    at Object.compare (D:\Connectly\Backend\node_modules\bcrypt\bcrypt.js:204:17)
+    at D:\Connectly\Backend\node_modules\bcrypt\promises.js:26:12
+    at new Promise (<anonymous>)
+    at Object.promise (D:\Connectly\Backend\node_modules\bcrypt\promises.js:17:12)
+    at Object.compare (D:\Connectly\Backend\node_modules\bcrypt\bcrypt.js:200:25)
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:40:34)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:29)
+2025-11-02 12:11:59 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:11:59 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:12:31 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:12:31 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:12:33 [[31merror[39m] : Login failed
+2025-11-02 12:12:33 [[31merror[39m] : Error: secretOrPrivateKey must have a value
+    at module.exports [as sign] (D:\Connectly\Backend\node_modules\jsonwebtoken\sign.js:111:20)
+    at generateToken (file:///D:/Connectly/Backend/src/utils/generateToken.js:4:14)
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:46:19)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:29)
+2025-11-02 12:13:27 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:13:27 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:13:29 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:13:29 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:13:39 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:13:39 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:13:44 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:13:44 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:14:15 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:14:15 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:14:18 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:14:18 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:14:21 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:14:21 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:14:24 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:14:24 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:14:25 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:14:26 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:14:46 [[31merror[39m] : Login failed
+2025-11-02 12:14:46 [[31merror[39m] : Error: secretOrPrivateKey must have a value
+    at module.exports [as sign] (D:\Connectly\Backend\node_modules\jsonwebtoken\sign.js:111:20)
+    at generateToken (file:///D:/Connectly/Backend/src/utils/generateToken.js:4:14)
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:46:19)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:29)
+2025-11-02 12:15:12 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:15:12 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:15:16 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:15:16 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:15:20 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:15:20 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:15:23 [[32minfo[39m] : User logged in: kartik2@gmail.com
+2025-11-02 12:15:52 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:15:52 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:15:57 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:15:57 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:16:11 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:16:11 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:16:26 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:16:26 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:16:32 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:16:32 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:17:01 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:17:01 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:17:07 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:17:07 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:17:12 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:17:12 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:17:14 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:17:14 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:17:18 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:17:18 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:17:26 [[32minfo[39m] : New user registered: kartik52@gmail.com
+2025-11-02 12:17:26 [[31merror[39m] : TypeError: Converting circular structure to JSON
+    --> starting at object with constructor 'DerivedLogger'
+    |     property '_readableState' -> object with constructor 'ReadableState'
+    |     property 'pipes' -> object with constructor 'Array'
+    |     index 0 -> object with constructor 'Console'
+    --- property 'parent' closes the circle
+    at JSON.stringify (<anonymous>)
+    at stringify (D:\Connectly\Backend\node_modules\express\lib\response.js:1020:12)
+    at ServerResponse.json (D:\Connectly\Backend\node_modules\express\lib\response.js:243:14)
+    at signup (file:///D:/Connectly/Backend/src/controllers/auth.js:19:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-11-02 12:17:39 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:17:39 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:17:42 [[33mwarn[39m] : Signup attempt with existing email: kartik52@gmail.com
+2025-11-02 12:17:42 [[31merror[39m] : Error: User already exists with this email
+    at Object.signup (file:///D:/Connectly/Backend/src/services/auth.js:16:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async signup (file:///D:/Connectly/Backend/src/controllers/auth.js:16:22)
+2025-11-02 12:17:49 [[32minfo[39m] : New user registered: kartik592@gmail.com
+2025-11-02 12:17:49 [[31merror[39m] : TypeError: Converting circular structure to JSON
+    --> starting at object with constructor 'DerivedLogger'
+    |     property '_readableState' -> object with constructor 'ReadableState'
+    |     property 'pipes' -> object with constructor 'Array'
+    |     index 0 -> object with constructor 'Console'
+    --- property 'parent' closes the circle
+    at JSON.stringify (<anonymous>)
+    at stringify (D:\Connectly\Backend\node_modules\express\lib\response.js:1020:12)
+    at ServerResponse.json (D:\Connectly\Backend\node_modules\express\lib\response.js:243:14)
+    at signup (file:///D:/Connectly/Backend/src/controllers/auth.js:19:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-11-02 12:18:14 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:18:14 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:18:19 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:18:19 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:18:21 [[33mwarn[39m] : Signup attempt with existing email: kartik592@gmail.com
+2025-11-02 12:18:21 [[31merror[39m] : Error: User already exists with this email
+    at Object.signup (file:///D:/Connectly/Backend/src/services/auth.js:16:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async signup (file:///D:/Connectly/Backend/src/controllers/auth.js:16:7)
+2025-11-02 12:18:26 [[32minfo[39m] : New user registered: kartik5992@gmail.com
+2025-11-02 12:18:35 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:18:35 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:18:39 [[32minfo[39m] : New user registered: kartik59972@gmail.com
+2025-11-02 12:19:01 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:19:01 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:19:06 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:19:06 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:19:10 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:19:10 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:19:13 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:19:13 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:19:17 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:19:17 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:19:21 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:19:21 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:19:26 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:19:26 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:19:34 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:19:34 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:19:37 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:19:37 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:19:47 [[31merror[39m] : Login failed
+2025-11-02 12:19:47 [[31merror[39m] : ReferenceError: user is not defined
+    at login (file:///D:/Connectly/Backend/src/controllers/auth.js:54:36)
+2025-11-02 12:21:00 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:21:00 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:21:05 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:21:05 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:21:08 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:21:08 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:21:13 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:21:13 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:21:58 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:21:58 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:22:02 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:22:03 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:22:25 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:22:25 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:22:28 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:22:28 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:22:33 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:22:33 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:23:02 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:23:02 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:23:06 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:23:06 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:23:11 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:23:11 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:23:15 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:23:15 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:24:03 [[31merror[39m] : Login failed
+2025-11-02 12:24:03 [[31merror[39m] : ReferenceError: user is not defined
+    at login (file:///D:/Connectly/Backend/src/controllers/auth.js:54:36)
+2025-11-02 12:24:25 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:24:25 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:24:43 [[31merror[39m] : Login failed
+2025-11-02 12:24:43 [[31merror[39m] : ReferenceError: user is not defined
+    at login (file:///D:/Connectly/Backend/src/controllers/auth.js:54:36)
+2025-11-02 12:25:22 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:25:22 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:25:29 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:25:30 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:25:40 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:25:40 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:26:06 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:26:06 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:27:19 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:27:19 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:27:30 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:27:30 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:27:34 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:27:34 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:27:40 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:27:40 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:28:38 [[31merror[39m] : Login failed
+2025-11-02 12:28:38 [[31merror[39m] : ReferenceError: user is not defined
+    at login (file:///D:/Connectly/Backend/src/controllers/auth.js:54:36)
+2025-11-02 12:28:57 [[32minfo[39m] : Server is running on port 5000
+2025-11-02 12:28:57 [[32minfo[39m] : MongoDB connected successfully
+2025-11-02 12:29:18 [[31merror[39m] : Login failed
+2025-11-02 12:29:18 [[31merror[39m] : ReferenceError: user is not defined
+    at login (file:///D:/Connectly/Backend/src/controllers/auth.js:54:36)

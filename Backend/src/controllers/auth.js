@@ -1,52 +1,72 @@
-import { loginSchema, signupSchema } from "../validators/user.js";
-import authService  from "../services/user.js"; 
+import logger from "../config/logger.js";
+import AuthService from "../services/auth.js";
+import { signupSchema, loginSchema } from "../validators/user.js"
 
 const AuthController = {
-  async signup(req, res) {
+  async signup(req, res, next) {
     try {
-      const validatedData = signupSchema.safeParse(req.body);
-      if (!validatedData.success) {
-          return res.status(400).json({ message: "Invalid user data", errors: validatedData.error.errors });
+      const parsed = signupSchema.safeParse(req.body);
+      if (!parsed.success) {
+        return res.status(400).json({
+          message: "Validation failed",
+          errors: parsed.error.errors,
+        });
       }
 
-     const user = await authService.signup(validatedData.data);
-     const { password, ...userData } = user;
-     res.status(201).json({ message: "User signed up successfully", data: userData });
-    } catch (error) {
-    res.status(400).json({ message: "Invalid user data", error });
-  }
-},
-async login(req, res) {
-    try {
-       const validatedData = loginSchema.safeParse(req.body);
-      if (!validatedData.success) {
-          return res.status(400).json({ message: "Invalid user data", errors: validatedData.error.errors });
-      }
-      const { result, token } = await authService.login(validatedData.data);
-      const { password, ...userData } = result;
+      await AuthService.signup(parsed.data);
+      
 
-res.status(200).cookie("token", token, {
-    httpOnly: true,   
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "strict",  
-    maxAge: 7 * 24 * 60 * 60 * 1000, 
-  })
-  .json({ message: "Login successful", data: userData });
-
-    } catch (error) {
-      res.status(400).json({ message: "Login failed", error: error.message });
+      res.status(201).json({
+        message: "User registered successfully",
+      });
+    } catch (err) {
+      next(err);
     }
   },
 
-  async logout(req, res) {
-    res.cookie("token", null, {
-      expires: new Date(Date.now()),
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
-    });
-    res.status(200).json({ message: "Logout Successful!!" });
-  }
+   async login(req, res, next) {
+  try {
+   
+    const parsed = loginSchema.safeParse(req.body);
+    if (!parsed.success) {
+      logger.warn("Login validation failed", { errors: parsed.error.errors });
+      return next(new AppError("Validation failed", 400));
+    }
 
+
+    const { token } = await AuthService.login(parsed.data);
+
+ 
+    res
+      .cookie("token", token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "strict",
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+      })
+      .status(200)
+      .json({
+        status: "success",
+        message: "Login successful",
+        token,
+      });
+
+    logger.info(`User logged in: ${user.email}`);
+  } catch (err) {
+    logger.error("Login failed", { error: err.message });
+    next(err);
+  }
+},
+
+  async logout(req, res) {
+    res
+      .cookie("token", null, {
+        expires: new Date(0),
+        httpOnly: true,
+      })
+      .status(200)
+      .json({ message: "Logout successful" });
+  },
 };
+
 export default AuthController;
