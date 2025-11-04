@@ -1,4 +1,4 @@
-export const baseUrl = "https://locallhost:8080/api/v1";
+export const baseUrl = "http://localhost:5000/api/v1";
 
 export const apiEndpoints = {
   signUp: "/auth/signup",
@@ -29,7 +29,7 @@ export const validations = {
             message: "Maximum length can have 50 characters",
         },
     },
-    emailId: {
+    email: {
         required: "Email is required",
         pattern: {
             value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,

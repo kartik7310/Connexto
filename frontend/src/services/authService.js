@@ -1,7 +1,6 @@
 import { apiEndpoints,baseUrl } from "../utils/constants";
 import axios from "axios";
 class AuthService {
-  baseUrl
   constructor(baseUrl){
     this.baseUrl = baseUrl
   }
@@ -22,16 +21,17 @@ class AuthService {
             );
 
             return res;
-        } catch (error) {
-            return error;
+        } catch (err) {
+           const serverMsg = err?.response?.data?.message || err?.response?.data?.error;
+    throw new Error(serverMsg || "Invalid credentials"); // <-- key change  
         }
     }
-     async loginAccount({ emailId, password }) {
+     async loginAccount({ email, password }) {
         try {
             const res = await axios.post(
                 this.baseUrl + apiEndpoints.login,
                 {
-                    emailId,
+                    email,
                     password,
                 },
                 {
@@ -40,8 +40,10 @@ class AuthService {
             );
 
             return res;
-        } catch (error) {
-            return error;
+        } catch (err) {
+           const serverMsg = err?.response?.data?.message || err?.response?.data?.error;
+    throw new Error(serverMsg || "Invalid credentials"); // <-- key change  
         }
     }
 }
+export default new AuthService(baseUrl);

@@ -1,3 +1,4 @@
+import { success } from "zod";
 import logger from "../config/logger.js";
 import AuthService from "../services/auth.js";
 import { signupSchema, loginSchema } from "../validators/user.js"
@@ -17,6 +18,7 @@ const AuthController = {
       
 
       res.status(201).json({
+        success:true,
         message: "User registered successfully",
       });
     } catch (err) {
@@ -34,7 +36,7 @@ const AuthController = {
     }
 
 
-    const { token } = await AuthService.login(parsed.data);
+    const { token,user } = await AuthService.login(parsed.data);
 
  
     res
@@ -46,8 +48,9 @@ const AuthController = {
       })
       .status(200)
       .json({
-        status: "success",
+        success: "true",
         message: "Login successful",
+         user,
         token,
       });
 

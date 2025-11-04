@@ -45,7 +45,8 @@ const AuthService = {
   
 
     const token = generateToken(user._id, process.env.JWT_SECRET, '7d');
-    return {token };
+     const { password: _, ...safeUser } = user.toObject();
+    return {token ,user:safeUser};
   },
 };
 

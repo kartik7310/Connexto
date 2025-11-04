@@ -1124,3 +1124,264 @@
 2025-11-03 11:47:27 [[32minfo[39m] : MongoDB connected successfully
 2025-11-03 16:41:50 [[32minfo[39m] : Server is running on port 5000
 2025-11-03 16:41:51 [[32minfo[39m] : MongoDB connected successfully
+2025-11-04 20:52:54 [[32minfo[39m] : Server is running on port 5000
+2025-11-04 20:52:54 [[32minfo[39m] : MongoDB connected successfully
+2025-11-04 20:56:03 [[32minfo[39m] : Server is running on port 5000
+2025-11-04 20:56:03 [[32minfo[39m] : MongoDB connected successfully
+2025-11-04 20:56:06 [[32minfo[39m] : Server is running on port 5000
+2025-11-04 20:56:06 [[32minfo[39m] : MongoDB connected successfully
+2025-11-04 20:56:09 [[32minfo[39m] : Server is running on port 5000
+2025-11-04 20:56:09 [[32minfo[39m] : MongoDB connected successfully
+2025-11-04 20:56:42 [[31merror[39m] : Login failed
+2025-11-04 20:56:42 [[31merror[39m] : ReferenceError: user is not defined
+    at login (file:///D:/Connectly/Backend/src/controllers/auth.js:54:36)
+2025-11-04 21:03:43 [[32minfo[39m] : Server is running on port 5000
+2025-11-04 21:03:43 [[32minfo[39m] : MongoDB connected successfully
+2025-11-04 21:04:19 [[32minfo[39m] : User logged in: kunal@gmail.com
+2025-11-04 21:06:47 [[32minfo[39m] : User logged in: kunal@gmail.com
+2025-11-04 21:08:29 [[32minfo[39m] : User logged in: kunal@gmail.com
+2025-11-04 21:09:28 [[32minfo[39m] : User logged in: kunal@gmail.com
+2025-11-04 21:10:21 [[32minfo[39m] : User logged in: kunal@gmail.com
+2025-11-04 21:11:40 [[32minfo[39m] : User logged in: kunal@gmail.com
+2025-11-04 21:12:28 [[32minfo[39m] : Server is running on port 5000
+2025-11-04 21:12:28 [[32minfo[39m] : MongoDB connected successfully
+2025-11-04 21:14:33 [[32minfo[39m] : User logged in: kunal@gmail.com
+2025-11-04 21:14:38 [[32minfo[39m] : User logged in: kunal@gmail.com
+2025-11-04 21:15:51 [[32minfo[39m] : Server is running on port 5000
+2025-11-04 21:15:51 [[32minfo[39m] : MongoDB connected successfully
+2025-11-04 21:15:55 [[32minfo[39m] : Server is running on port 5000
+2025-11-04 21:15:55 [[32minfo[39m] : MongoDB connected successfully
+2025-11-04 21:16:43 [[32minfo[39m] : User logged in: kunal@gmail.com
+2025-11-04 21:17:29 [[33mwarn[39m] : Login failed - incorrect password: kunal@gmail.com
+2025-11-04 21:17:29 [[31merror[39m] : Login failed
+2025-11-04 21:17:29 [[31merror[39m] : Error: Invalid credentials
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:43:13)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:28)
+2025-11-04 21:17:32 [[33mwarn[39m] : Login failed - incorrect password: kunal@gmail.com
+2025-11-04 21:17:32 [[31merror[39m] : Login failed
+2025-11-04 21:17:32 [[31merror[39m] : Error: Invalid credentials
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:43:13)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:28)
+2025-11-04 21:17:47 [[33mwarn[39m] : Login failed - incorrect password: kunal@gmail.com
+2025-11-04 21:17:47 [[31merror[39m] : Login failed
+2025-11-04 21:17:47 [[31merror[39m] : Error: Invalid credentials
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:43:13)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:28)
+2025-11-04 21:18:28 [[33mwarn[39m] : Login failed - incorrect password: kunal@gmail.com
+2025-11-04 21:18:28 [[31merror[39m] : Login failed
+2025-11-04 21:18:28 [[31merror[39m] : Error: Invalid credentials
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:43:13)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:28)
+2025-11-04 21:18:28 [[33mwarn[39m] : Login failed - incorrect password: kunal@gmail.com
+2025-11-04 21:18:28 [[31merror[39m] : Login failed
+2025-11-04 21:18:28 [[31merror[39m] : Error: Invalid credentials
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:43:13)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:28)
+2025-11-04 21:20:16 [[31merror[39m] : Login failed
+2025-11-04 21:20:16 [[31merror[39m] : Error: Invalid credentials
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:37:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:28)
+2025-11-04 21:20:37 [[31merror[39m] : Login failed
+2025-11-04 21:20:37 [[31merror[39m] : Error: Invalid credentials
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:37:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:28)
+2025-11-04 21:21:25 [[31merror[39m] : Login failed
+2025-11-04 21:21:25 [[31merror[39m] : Error: Invalid credentials
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:37:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:28)
+2025-11-04 21:24:20 [[31merror[39m] : Login failed
+2025-11-04 21:24:20 [[31merror[39m] : Error: Invalid credentials
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:37:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:28)
+2025-11-04 21:24:46 [[31merror[39m] : Login failed
+2025-11-04 21:24:46 [[31merror[39m] : Error: Invalid credentials
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:37:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:28)
+2025-11-04 21:24:49 [[31merror[39m] : Login failed
+2025-11-04 21:24:49 [[31merror[39m] : Error: Invalid credentials
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:37:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:28)
+2025-11-04 21:25:02 [[31merror[39m] : Login failed
+2025-11-04 21:25:02 [[31merror[39m] : Error: Invalid credentials
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:37:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:28)
+2025-11-04 21:25:03 [[31merror[39m] : Login failed
+2025-11-04 21:25:03 [[31merror[39m] : Error: Invalid credentials
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:37:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:28)
+2025-11-04 21:25:36 [[31merror[39m] : Login failed
+2025-11-04 21:25:36 [[31merror[39m] : Error: Invalid credentials
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:37:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:28)
+2025-11-04 21:25:37 [[31merror[39m] : Login failed
+2025-11-04 21:25:37 [[31merror[39m] : Error: Invalid credentials
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:37:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:28)
+2025-11-04 21:25:54 [[31merror[39m] : Login failed
+2025-11-04 21:25:54 [[31merror[39m] : Error: Invalid credentials
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:37:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:28)
+2025-11-04 21:25:55 [[31merror[39m] : Login failed
+2025-11-04 21:25:55 [[31merror[39m] : Error: Invalid credentials
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:37:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:28)
+2025-11-04 21:25:55 [[31merror[39m] : Login failed
+2025-11-04 21:25:55 [[31merror[39m] : Error: Invalid credentials
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:37:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:28)
+2025-11-04 21:26:08 [[31merror[39m] : Login failed
+2025-11-04 21:26:08 [[31merror[39m] : Error: Invalid credentials
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:37:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:28)
+2025-11-04 21:26:14 [[31merror[39m] : Login failed
+2025-11-04 21:26:14 [[31merror[39m] : Error: Invalid credentials
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:37:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:28)
+2025-11-04 21:28:43 [[31merror[39m] : Login failed
+2025-11-04 21:28:43 [[31merror[39m] : Error: Invalid credentials
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:37:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:28)
+2025-11-04 21:28:45 [[31merror[39m] : Login failed
+2025-11-04 21:28:45 [[31merror[39m] : Error: Invalid credentials
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:37:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:28)
+2025-11-04 21:28:47 [[31merror[39m] : Login failed
+2025-11-04 21:28:47 [[31merror[39m] : Error: Invalid credentials
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:37:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:28)
+2025-11-04 21:28:47 [[31merror[39m] : Login failed
+2025-11-04 21:28:47 [[31merror[39m] : Error: Invalid credentials
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:37:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:28)
+2025-11-04 21:28:47 [[31merror[39m] : Login failed
+2025-11-04 21:28:48 [[31merror[39m] : Error: Invalid credentials
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:37:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:28)
+2025-11-04 21:28:48 [[31merror[39m] : Login failed
+2025-11-04 21:28:48 [[31merror[39m] : Error: Invalid credentials
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:37:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:28)
+2025-11-04 21:33:04 [[31merror[39m] : Login failed
+2025-11-04 21:33:04 [[31merror[39m] : Error: Invalid credentials
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:37:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:28)
+2025-11-04 21:33:05 [[31merror[39m] : Login failed
+2025-11-04 21:33:05 [[31merror[39m] : Error: Invalid credentials
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:37:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:28)
+2025-11-04 21:33:14 [[31merror[39m] : Login failed
+2025-11-04 21:33:14 [[31merror[39m] : Error: Invalid credentials
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:37:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:28)
+2025-11-04 21:33:15 [[31merror[39m] : Login failed
+2025-11-04 21:33:15 [[31merror[39m] : Error: Invalid credentials
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:37:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:28)
+2025-11-04 21:33:23 [[31merror[39m] : Login failed
+2025-11-04 21:33:23 [[31merror[39m] : Error: Invalid credentials
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:37:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:28)
+2025-11-04 21:33:25 [[31merror[39m] : Login failed
+2025-11-04 21:33:25 [[31merror[39m] : Error: Invalid credentials
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:37:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:28)
+2025-11-04 21:33:25 [[31merror[39m] : Login failed
+2025-11-04 21:33:25 [[31merror[39m] : Error: Invalid credentials
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:37:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:28)
+2025-11-04 21:33:26 [[31merror[39m] : Login failed
+2025-11-04 21:33:26 [[31merror[39m] : Error: Invalid credentials
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:37:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:28)
+2025-11-04 21:33:26 [[31merror[39m] : Login failed
+2025-11-04 21:33:26 [[31merror[39m] : Error: Invalid credentials
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:37:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:28)
+2025-11-04 21:33:27 [[31merror[39m] : Login failed
+2025-11-04 21:33:27 [[31merror[39m] : Error: Invalid credentials
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:37:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:28)
+2025-11-04 21:33:42 [[31merror[39m] : Login failed
+2025-11-04 21:33:42 [[31merror[39m] : Error: Invalid credentials
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:37:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:28)
+2025-11-04 21:33:43 [[31merror[39m] : Login failed
+2025-11-04 21:33:43 [[31merror[39m] : Error: Invalid credentials
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:37:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:28)
+2025-11-04 21:33:44 [[31merror[39m] : Login failed
+2025-11-04 21:33:44 [[31merror[39m] : Error: Invalid credentials
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:37:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:28)
+2025-11-04 21:33:46 [[31merror[39m] : Login failed
+2025-11-04 21:33:46 [[31merror[39m] : Error: Invalid credentials
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:37:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:28)
+2025-11-04 21:33:52 [[31merror[39m] : Login failed
+2025-11-04 21:33:52 [[31merror[39m] : Error: Invalid credentials
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:37:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:28)
+2025-11-04 21:33:58 [[31merror[39m] : Login failed
+2025-11-04 21:33:58 [[31merror[39m] : Error: Invalid credentials
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:37:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:38:28)
+2025-11-04 21:34:18 [[32minfo[39m] : User logged in: kunal@gmail.com
+2025-11-04 21:38:41 [[32minfo[39m] : Server is running on port 5000
+2025-11-04 21:38:41 [[32minfo[39m] : MongoDB connected successfully
+2025-11-04 21:39:24 [[33mwarn[39m] : Signup attempt with existing email: kunal@gmail.com
+2025-11-04 21:39:24 [[31merror[39m] : Error: User already exists with this email
+    at Object.signup (file:///D:/Connectly/Backend/src/services/auth.js:16:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async signup (file:///D:/Connectly/Backend/src/controllers/auth.js:17:7)
+2025-11-04 21:39:58 [[33mwarn[39m] : Signup attempt with existing email: kunal@gmail.com
+2025-11-04 21:39:58 [[31merror[39m] : Error: User already exists with this email
+    at Object.signup (file:///D:/Connectly/Backend/src/services/auth.js:16:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async signup (file:///D:/Connectly/Backend/src/controllers/auth.js:17:7)
+2025-11-04 21:40:06 [[32minfo[39m] : New user registered: kunal90@gmail.com
+2025-11-04 21:41:08 [[32minfo[39m] : Server is running on port 5000
+2025-11-04 21:41:08 [[32minfo[39m] : MongoDB connected successfully
+2025-11-04 21:41:32 [[33mwarn[39m] : Signup attempt with existing email: kunal90@gmail.com
+2025-11-04 21:41:32 [[31merror[39m] : Error: User already exists with this email
+    at Object.signup (file:///D:/Connectly/Backend/src/services/auth.js:16:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async signup (file:///D:/Connectly/Backend/src/controllers/auth.js:17:7)
+2025-11-04 21:41:39 [[32minfo[39m] : New user registered: kunal900@gmail.com
+2025-11-04 21:42:27 [[32minfo[39m] : New user registered: kunal9000@gmail.com
