@@ -13,7 +13,7 @@ class AuthService {
                 {
                     firstName,
                     lastName,
-                    emailId,
+                    email,
                     password,
                 },
                 {
