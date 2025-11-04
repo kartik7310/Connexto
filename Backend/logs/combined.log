@@ -1385,3 +1385,8 @@
     at async signup (file:///D:/Connectly/Backend/src/controllers/auth.js:17:7)
 2025-11-04 21:41:39 [[32minfo[39m] : New user registered: kunal900@gmail.com
 2025-11-04 21:42:27 [[32minfo[39m] : New user registered: kunal9000@gmail.com
+2025-11-04 21:44:49 [[32minfo[39m] : Server is running on port 5000
+2025-11-04 21:44:49 [[32minfo[39m] : MongoDB connected successfully
+2025-11-04 21:44:55 [[32minfo[39m] : User logged in: kunal@gmail.com
+2025-11-04 22:12:35 [[32minfo[39m] : User logged in: kunal@gmail.com
+2025-11-04 22:44:37 [[32minfo[39m] : User logged in: kunal@gmail.com

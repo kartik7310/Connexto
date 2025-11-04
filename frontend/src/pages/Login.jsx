@@ -5,6 +5,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { addUser } from "../store/store-slices/userSlice";
 import { validations } from "../utils/constants";
+
 import Auth from "../services/authService";
 
 export default function Login() {

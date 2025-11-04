@@ -5,6 +5,7 @@ import Login from "./pages/Login"
 import Body from "./pages/Layout"
 import {store} from "./store/appStore"
 import { Provider } from 'react-redux'
+import Profile from "./pages/Profile"
 
 function App() {
  return(
@@ -17,6 +18,7 @@ function App() {
     <Route path="/" element={<Body/>}>
     <Route path="/login" element={<Login/>}/>
     <Route path="/signup" element={<Signup/>}/>
+    <Route path="/profile" element={<Profile/>}/>
     </Route>
   </Routes>
  </BrowserRouter>
