@@ -2,7 +2,7 @@ import logger from "../config/logger.js";
 import ConnectionRequest from "../models/connectionRequest.js";
 import User from "../models/user.js";  
 
-const POPULATE_FIELDS = "firstName lastName age photoUrl skills bio gender ";
+const POPULATE_FIELDS = "firstName lastName age photoUrl skills about gender ";
 const ProfileService = {
   async getProfile(userId) {
     try {

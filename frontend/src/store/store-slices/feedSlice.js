@@ -5,13 +5,8 @@ export const feedSlice = createSlice({
    feed:null
   },
   reducers: {
-    addFeed: (state,data) => {
-        state.feed = data.payload
-    },
-    removeFeed: (state) => {
-       state.feed=null 
-      
-    },
+    addFeed: (state,actions) => actions.payload,
+    removeFeed: (state,actions) =>null,
   },
 })
 

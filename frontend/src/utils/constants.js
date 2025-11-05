@@ -5,6 +5,7 @@ export const apiEndpoints = {
   login: "/auth/login",
   Profile:"/profile/view",
   logout: "/auth/logout",
+  getFeed:"/profile/user/feed"
 };
 
 export const validations = {
