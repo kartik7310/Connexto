@@ -10,6 +10,7 @@ import cookieParser from "cookie-parser";
 import globalErrorHandler from "./middleware/errorMiddleware.js"
 import ConnectionRoutes from "./routes/connection.routes.js"
 import SubscriptionRoutes from "./routes/subscription.routes.js"
+import ChatRoutes from "./routes/chat.routes.js"
 import { createServer } from 'node:http';
 const app = express();
 
@@ -37,6 +38,7 @@ app.use('/api/v1/user',UserRoutes );
 app.use('/api/v1/profile',ProfileRoutes );
 app.use('/api/v1/connections', ConnectionRoutes);
 app.use('/api/v1/payment', SubscriptionRoutes);
+app.use('/api/v1/chat', ChatRoutes);
 
 const server = createServer(app);
 intitlizeSocket(server)

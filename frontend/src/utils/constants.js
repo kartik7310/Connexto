@@ -11,6 +11,7 @@ export const apiEndpoints = {
   request:"/user/request/received",
   createOrder:"/payment/order-create",
   isPremium:"/payment/isPremium",
+  chats:"/chat/fetch"
 };
 
 export const validations = {
