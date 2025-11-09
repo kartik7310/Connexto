@@ -60,7 +60,15 @@ const AuthController = {
     next(err);
   }
 },
+ 
+async googleLogin(req, res, next) {
 
+  try {
+    
+  } catch (error) {
+    
+  }
+},
   async logout(req, res) {
     res
       .cookie("token", null, {

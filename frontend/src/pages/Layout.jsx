@@ -20,7 +20,7 @@ export default function Layout() {
       const res = await Profile.getProfile()
       dispatch(addUser(res.data))
     } catch (error) {
-      navigate("/login")
+      navigate("/")
         toast.error(err.message);
     }
    }
