@@ -67,3 +67,100 @@
 2025-11-09 15:40:23 [[32minfo[39m] : MongoDB connected successfully
 2025-11-09 15:40:33 [[32minfo[39m] : Server is running on port 5000
 2025-11-09 15:40:33 [[32minfo[39m] : MongoDB connected successfully
+2025-11-09 20:23:57 [[32minfo[39m] : Server is running on port 5000
+2025-11-09 20:23:57 [[32minfo[39m] : MongoDB connected successfully
+2025-11-09 20:25:04 [[32minfo[39m] : User profile updated successfully for userId: 69106814452a3ba7d34a5815
+2025-11-09 20:26:00 [[32minfo[39m] : Fetched 0 connection requests for user: 69106814452a3ba7d34a5815
+2025-11-09 20:27:54 [[32minfo[39m] : User profile updated successfully for userId: 69106814452a3ba7d34a5815
+2025-11-09 20:28:24 [[33mwarn[39m] : Validation failed on updateProfile request
+2025-11-09 20:28:24 [[31merror[39m] : Error: Validation failed
+    at updateProfile (file:///D:/Connectly/Backend/src/controllers/profile.js:23:13)
+    at Layer.handleRequest (D:\Connectly\Backend\node_modules\router\lib\layer.js:152:17)
+    at next (D:\Connectly\Backend\node_modules\router\lib\route.js:157:13)
+    at protect (file:///D:/Connectly/Backend/src/middleware/auth.middleware.js:21:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-11-09 20:28:35 [[33mwarn[39m] : Validation failed on updateProfile request
+2025-11-09 20:28:35 [[31merror[39m] : Error: Validation failed
+    at updateProfile (file:///D:/Connectly/Backend/src/controllers/profile.js:23:13)
+    at Layer.handleRequest (D:\Connectly\Backend\node_modules\router\lib\layer.js:152:17)
+    at next (D:\Connectly\Backend\node_modules\router\lib\route.js:157:13)
+    at protect (file:///D:/Connectly/Backend/src/middleware/auth.middleware.js:21:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-11-09 20:29:05 [[33mwarn[39m] : Validation failed on updateProfile request
+2025-11-09 20:29:05 [[31merror[39m] : Error: Validation failed
+    at updateProfile (file:///D:/Connectly/Backend/src/controllers/profile.js:23:13)
+    at Layer.handleRequest (D:\Connectly\Backend\node_modules\router\lib\layer.js:152:17)
+    at next (D:\Connectly\Backend\node_modules\router\lib\route.js:157:13)
+    at protect (file:///D:/Connectly/Backend/src/middleware/auth.middleware.js:21:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-11-09 20:29:13 [[33mwarn[39m] : Validation failed on updateProfile request
+2025-11-09 20:29:13 [[31merror[39m] : Error: Validation failed
+    at updateProfile (file:///D:/Connectly/Backend/src/controllers/profile.js:23:13)
+    at Layer.handleRequest (D:\Connectly\Backend\node_modules\router\lib\layer.js:152:17)
+    at next (D:\Connectly\Backend\node_modules\router\lib\route.js:157:13)
+    at protect (file:///D:/Connectly/Backend/src/middleware/auth.middleware.js:21:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-11-09 20:30:30 [[32minfo[39m] : User profile updated successfully for userId: 69106814452a3ba7d34a5815
+2025-11-09 20:30:53 [[33mwarn[39m] : Validation failed on updateProfile request
+2025-11-09 20:30:53 [[31merror[39m] : Error: Validation failed
+    at updateProfile (file:///D:/Connectly/Backend/src/controllers/profile.js:23:13)
+    at Layer.handleRequest (D:\Connectly\Backend\node_modules\router\lib\layer.js:152:17)
+    at next (D:\Connectly\Backend\node_modules\router\lib\route.js:157:13)
+    at protect (file:///D:/Connectly/Backend/src/middleware/auth.middleware.js:21:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-11-09 20:31:45 [[32minfo[39m] : Server is running on port 5000
+2025-11-09 20:31:45 [[32minfo[39m] : MongoDB connected successfully
+2025-11-09 20:31:48 [[32minfo[39m] : Server is running on port 5000
+2025-11-09 20:31:48 [[32minfo[39m] : MongoDB connected successfully
+2025-11-09 20:31:49 [[32minfo[39m] : User profile updated successfully for userId: 69106814452a3ba7d34a5815
+2025-11-09 20:32:13 [[32minfo[39m] : User profile updated successfully for userId: 69106814452a3ba7d34a5815
+2025-11-09 20:32:44 [[32minfo[39m] : User profile updated successfully for userId: 69106814452a3ba7d34a5815
+2025-11-09 20:33:49 [[33mwarn[39m] : Validation failed on updateProfile request
+2025-11-09 20:33:49 [[31merror[39m] : Error: Validation failed
+    at updateProfile (file:///D:/Connectly/Backend/src/controllers/profile.js:24:13)
+    at Layer.handleRequest (D:\Connectly\Backend\node_modules\router\lib\layer.js:152:17)
+    at next (D:\Connectly\Backend\node_modules\router\lib\route.js:157:13)
+    at protect (file:///D:/Connectly/Backend/src/middleware/auth.middleware.js:21:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-11-09 20:34:13 [[33mwarn[39m] : Validation failed on updateProfile request
+2025-11-09 20:34:13 [[31merror[39m] : Error: Validation failed
+    at updateProfile (file:///D:/Connectly/Backend/src/controllers/profile.js:24:13)
+    at Layer.handleRequest (D:\Connectly\Backend\node_modules\router\lib\layer.js:152:17)
+    at next (D:\Connectly\Backend\node_modules\router\lib\route.js:157:13)
+    at protect (file:///D:/Connectly/Backend/src/middleware/auth.middleware.js:21:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-11-09 20:34:24 [[33mwarn[39m] : Validation failed on updateProfile request
+2025-11-09 20:34:24 [[31merror[39m] : Error: Validation failed
+    at updateProfile (file:///D:/Connectly/Backend/src/controllers/profile.js:24:13)
+    at Layer.handleRequest (D:\Connectly\Backend\node_modules\router\lib\layer.js:152:17)
+    at next (D:\Connectly\Backend\node_modules\router\lib\route.js:157:13)
+    at protect (file:///D:/Connectly/Backend/src/middleware/auth.middleware.js:21:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-11-09 20:34:57 [[32minfo[39m] : Server is running on port 5000
+2025-11-09 20:34:57 [[32minfo[39m] : MongoDB connected successfully
+2025-11-09 20:35:05 [[33mwarn[39m] : Validation failed on updateProfile request
+2025-11-09 20:35:05 [[31merror[39m] : Error: Validation failed
+    at updateProfile (file:///D:/Connectly/Backend/src/controllers/profile.js:24:13)
+    at Layer.handleRequest (D:\Connectly\Backend\node_modules\router\lib\layer.js:152:17)
+    at next (D:\Connectly\Backend\node_modules\router\lib\route.js:157:13)
+    at protect (file:///D:/Connectly/Backend/src/middleware/auth.middleware.js:21:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-11-09 20:36:55 [[33mwarn[39m] : Validation failed on updateProfile request
+2025-11-09 20:36:55 [[31merror[39m] : Error: Validation failed
+    at updateProfile (file:///D:/Connectly/Backend/src/controllers/profile.js:24:13)
+    at Layer.handleRequest (D:\Connectly\Backend\node_modules\router\lib\layer.js:152:17)
+    at next (D:\Connectly\Backend\node_modules\router\lib\route.js:157:13)
+    at protect (file:///D:/Connectly/Backend/src/middleware/auth.middleware.js:21:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-11-09 20:40:04 [[32minfo[39m] : User profile updated successfully for userId: 69106814452a3ba7d34a5815
+2025-11-09 20:40:43 [[32minfo[39m] : User profile updated successfully for userId: 69106814452a3ba7d34a5815
+2025-11-09 20:44:34 [[32minfo[39m] : User profile updated successfully for userId: 69106814452a3ba7d34a5815
+2025-11-09 20:45:15 [[32minfo[39m] : User profile updated successfully for userId: 69106814452a3ba7d34a5815
+2025-11-09 20:46:50 [[32minfo[39m] : Fetched 0 connection requests for user: 69106814452a3ba7d34a5815
+2025-11-09 20:47:10 [[32minfo[39m] : User profile updated successfully for userId: 69106814452a3ba7d34a5815
+2025-11-09 20:47:43 [[32minfo[39m] : User profile updated successfully for userId: 69106814452a3ba7d34a5815
+2025-11-09 20:49:09 [[32minfo[39m] : Fetched 0 connections for user: 69106814452a3ba7d34a5815
+2025-11-09 20:49:31 [[32minfo[39m] : Server is running on port 5000
+2025-11-09 20:49:31 [[32minfo[39m] : MongoDB connected successfully
+2025-11-09 20:49:43 [[32minfo[39m] : Server is running on port 5000
+2025-11-09 20:49:43 [[32minfo[39m] : MongoDB connected successfully

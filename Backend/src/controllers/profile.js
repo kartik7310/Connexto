@@ -17,7 +17,7 @@ const ProfileController = {
  async updateProfile (req, res){
   try {
     const parsed = updateUserSchema.safeParse(req.body);
-
+  
     if (!parsed.success) {
       logger.warn("Validation failed on updateProfile request", parsed.error.flatten());
       throw new AppError("Validation failed", 400);
