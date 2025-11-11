@@ -1,0 +1,72 @@
+// src/pages/BlogDetails.jsx
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import BlogService from "../services/blogService";
+import { Trash2 } from "lucide-react";
+import AuthorInfo from "../components/Author";
+import { useSelector } from "react-redux";
+
+const BlogDetails = () => {
+    const user = useSelector((state) => state.auth?.user);
+  const { blogId } = useParams();
+  const [blog, setBlog] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchBlog = async () => {
+      try {
+        const data = await BlogService.fetchSingleBlog(blogId);
+        setBlog(data);
+      } catch (err) {
+        setError(err.message || "Failed to fetch blog");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBlog();
+  }, [blogId]);
+
+  if (loading)
+    return <div className="text-center py-10 text-gray-500">Loading...</div>;
+
+  if (error)
+    return <div className="text-center py-10 text-red-500">{error}</div>;
+
+  if (!blog)
+    return <div className="text-center py-10 text-gray-500">Blog not found 😕</div>;
+
+  return (
+    <div className="max-w-3xl mx-auto py-10 px-4">
+      <img
+        src={blog.blogImage || "https://via.placeholder.com/800x400"}
+        alt={blog.title}
+        className="w-full h-64 object-cover rounded-xl mb-6"
+      />
+      <h1 className="text-3xl font-semibold mb-3">{blog.title}</h1> 
+      <h2>Read ~ 5 min</h2>
+
+      <p className="text-gray-600 leading-relaxed mb-6">{blog.content}</p>
+
+      <div className="flex flex-wrap gap-2 mt-4">
+        {Array.isArray(blog.tags) && blog.tags.length > 0 ? (
+          blog.tags.map((tag, i) => (
+            <span
+              key={i}
+              className="bg-base-300 text-gray-700 text-xs font-medium px-3 py-1 rounded-full"
+            >
+              #{tag}
+            </span>
+          ))
+        ) : (
+          <span className="text-sm text-gray-400 italic">No tags</span>
+        )}
+      </div>
+      <AuthorInfo author={blog.author}/>
+       
+    </div>
+  );  
+};
+
+export default BlogDetails;

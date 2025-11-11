@@ -472,3 +472,7 @@
 2025-11-11 13:39:05 [[32minfo[39m] : Fetched 0 connection requests for user: 6912e6a7365ee25c07a96ba5
 2025-11-11 13:41:13 [[32minfo[39m] : Server is running on port 5000
 2025-11-11 13:41:13 [[32minfo[39m] : MongoDB connected successfully
+2025-11-11 16:31:26 [[32minfo[39m] : Server is running on port 5000
+2025-11-11 16:31:26 [[32minfo[39m] : MongoDB connected successfully
+2025-11-11 16:32:15 [[32minfo[39m] : User logged in: kunal@gmail.com
+2025-11-11 17:20:27 [[32minfo[39m] : User logged in: kunal@gmail.com

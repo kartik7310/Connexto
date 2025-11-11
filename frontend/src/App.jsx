@@ -11,7 +11,8 @@ import ConnectionRequest from "./pages/ConnectionRequest"
 import Premium from "./pages/premium"
 import Chat from "./pages/Chat"
 import Homepage from "./pages/landingPage"
-
+import Blog from "./pages/blog"
+import BlogDetails from "./pages/BlogDetails"
 function App() {
  return(
  <Provider store={store}>
@@ -28,6 +29,8 @@ function App() {
          <Route path="connections" element={<Connections/>}/>
          <Route path="chat/:targetUserId" element={<Chat/>}/>
          <Route path="request-connection" element={<ConnectionRequest/>}/>
+         <Route path="blogs" element={<Blog/>}/>
+         <Route path="blogs/:blogId" element={<BlogDetails/>}/>
        </Route>
      </Routes>
    </BrowserRouter>
