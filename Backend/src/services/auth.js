@@ -4,9 +4,13 @@ import AppError from "../utils/AppError.js";
 import logger from "../config/logger.js";
 import { generateToken } from "../utils/generateToken.js";
 import { client } from "../config/googleOauth.js";
+import { sendOtpSchema } from "../validators/otp.js";
+import OTP from "../models/otp.js";
 
 
 const AuthService = {
+ 
+
   async signup(data) {
     const { firstName, lastName, email, password, age } = data;
 

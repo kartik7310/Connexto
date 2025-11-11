@@ -66,3 +66,64 @@
     at next (D:\Connectly\Backend\node_modules\router\lib\route.js:157:13)
     at protect (file:///D:/Connectly/Backend/src/middleware/auth.middleware.js:21:5)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-11-11 12:54:38 [[31merror[39m] : Error: Validation failed
+    at createBlog (file:///D:/Connectly/Backend/src/controllers/blog.js:23:21)
+    at Layer.handleRequest (D:\Connectly\Backend\node_modules\router\lib\layer.js:152:17)
+    at next (D:\Connectly\Backend\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (D:\Connectly\Backend\node_modules\router\lib\route.js:117:3)
+    at handle (D:\Connectly\Backend\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (D:\Connectly\Backend\node_modules\router\lib\layer.js:152:17)
+    at D:\Connectly\Backend\node_modules\router\index.js:295:15
+    at processParams (D:\Connectly\Backend\node_modules\router\index.js:582:12)
+    at next (D:\Connectly\Backend\node_modules\router\index.js:291:5)
+    at Function.handle (D:\Connectly\Backend\node_modules\router\index.js:186:3)
+2025-11-11 12:57:07 [[31merror[39m] : Error: Validation failed
+    at createBlog (file:///D:/Connectly/Backend/src/controllers/blog.js:18:21)
+    at Layer.handleRequest (D:\Connectly\Backend\node_modules\router\lib\layer.js:152:17)
+    at next (D:\Connectly\Backend\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (D:\Connectly\Backend\node_modules\router\lib\route.js:117:3)
+    at handle (D:\Connectly\Backend\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (D:\Connectly\Backend\node_modules\router\lib\layer.js:152:17)
+    at D:\Connectly\Backend\node_modules\router\index.js:295:15
+    at processParams (D:\Connectly\Backend\node_modules\router\index.js:582:12)
+    at next (D:\Connectly\Backend\node_modules\router\index.js:291:5)
+    at Function.handle (D:\Connectly\Backend\node_modules\router\index.js:186:3)
+2025-11-11 12:57:54 [[31merror[39m] : Error: Validation failed
+    at createBlog (file:///D:/Connectly/Backend/src/controllers/blog.js:18:21)
+    at Layer.handleRequest (D:\Connectly\Backend\node_modules\router\lib\layer.js:152:17)
+    at next (D:\Connectly\Backend\node_modules\router\lib\route.js:157:13)
+    at Route.dispatch (D:\Connectly\Backend\node_modules\router\lib\route.js:117:3)
+    at handle (D:\Connectly\Backend\node_modules\router\index.js:435:11)
+    at Layer.handleRequest (D:\Connectly\Backend\node_modules\router\lib\layer.js:152:17)
+    at D:\Connectly\Backend\node_modules\router\index.js:295:15
+    at processParams (D:\Connectly\Backend\node_modules\router\index.js:582:12)
+    at next (D:\Connectly\Backend\node_modules\router\index.js:291:5)
+    at Function.handle (D:\Connectly\Backend\node_modules\router\index.js:186:3)
+2025-11-11 12:58:16 [[31merror[39m] : Login failed
+2025-11-11 12:58:16 [[31merror[39m] : Error: Invalid credentials
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:42:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:151:28)
+2025-11-11 13:01:42 [[31merror[39m] : Login failed
+2025-11-11 13:01:42 [[31merror[39m] : Error: Invalid credentials
+2025-11-11 13:01:42 [[31merror[39m] : Error: Invalid credentials
+    at Object.login (file:///D:/Connectly/Backend/src/services/auth.js:42:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async login (file:///D:/Connectly/Backend/src/controllers/auth.js:151:28)
+2025-11-11 13:02:31 [[31merror[39m] : Login failed
+2025-11-11 13:02:31 [[31merror[39m] : Error: Invalid credentials
+2025-11-11 13:03:25 [[31merror[39m] : Error: Validation failed
+2025-11-11 13:03:27 [[31merror[39m] : Error: Validation failed
+2025-11-11 13:04:16 [[31merror[39m] : Error: Validation failed
+2025-11-11 13:05:15 [[31merror[39m] : ReferenceError: blogImage is not defined
+2025-11-11 13:06:48 [[31merror[39m] : TypeError: (intermediate value).lean is not a function
+2025-11-11 13:11:18 [[31merror[39m] : ReferenceError: mongoose is not defined
+2025-11-11 13:12:58 [[31merror[39m] : TypeError: BlogService.getBlogById is not a function
+2025-11-11 13:18:29 [[31merror[39m] : Error: Invalid blog id
+2025-11-11 13:26:04 [[31merror[39m] : Error: Blog not found
+2025-11-11 13:29:15 [[31merror[39m] : Error: No blogs found
+2025-11-11 13:30:32 [[31merror[39m] : Error: No blogs found
+2025-11-11 13:31:29 [[31merror[39m] : Error: No blogs found
+2025-11-11 13:32:41 [[31merror[39m] : Error: No blogs found
+2025-11-11 13:33:17 [[31merror[39m] : Error: Blog not found
+2025-11-11 13:34:17 [[31merror[39m] : Error: No blogs found

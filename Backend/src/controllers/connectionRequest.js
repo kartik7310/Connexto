@@ -21,8 +21,7 @@ const ConnectionController = {
         status,
       };
 
-      const connectionRequest =
-        await ConnectionService.createConnectionRequest(reqObject);
+      const connectionRequest = await ConnectionService.createConnectionRequest(reqObject);
 
       res.status(201).json({
         success: true,
@@ -31,6 +30,7 @@ const ConnectionController = {
       });
     } catch (err) {
       next(err);
+      logger.error("Error in sending connection request:", err?.message);
     }
   },
 

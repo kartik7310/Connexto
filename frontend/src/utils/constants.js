@@ -12,7 +12,13 @@ export const apiEndpoints = {
   request:"/user/request/received",
   createOrder:"/payment/order-create",
   isPremium:"/payment/isPremium",
-  chats:"/chat/fetch"
+  chats:"/chat/fetch",
+  fetchAllBlogs:"/blogs/fetch",
+  fetchSingleBlog:"/blogs/fetch/:blogId",
+  createBlog:"/blogs/create",
+  updateBlog:"/blogs/update/:blogId",
+  deleteBlog:"/blogs/delete/:blogId",
+
 };
 
 export const validations = {

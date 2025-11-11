@@ -27,7 +27,7 @@ export default function Signup() {
         age: Number(values.age),
       });
 
-      // keep same pattern as your Login (res?.data?.success)
+    
       if (res?.data?.success) {
         toast.success(res.data.message || "Account created");
         navigate("/login", { replace: true });

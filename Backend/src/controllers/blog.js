@@ -1,0 +1,131 @@
+import logger from "../config/logger.js";
+import BlogService from "../services/blog.js";
+import AppError from "../utils/AppError.js";
+import { blogSchema, updateBlogSchema } from "../validators/blog.js";
+import mongoose from "mongoose";
+const BlogController = {
+  async createBlog(req, res, next) {
+    try {
+      const parsed = blogSchema.safeParse(req.body);
+       if (!parsed.success) {
+      logger.warn("Validation failed on createBlog request", parsed.error.flatten());
+      const msg = parsed.error.issues.map(i => `${i.path.join(".")}: ${i.message}`).join(", ");
+      return next(new AppError(`Validation failed: ${msg}`, 400));
+    }
+      const userId = req?.user?._id;
+      console.log("userId",userId);
+      
+      if (!userId) {
+        logger.warn("Unauthorized access attempt on createBlog");
+        return next(new AppError("Validation failed", 400));
+      }
+      const { title, content, tags = [] ,blogImage, publishedAt} = parsed.data;
+
+      const blogPayload = { title, content, tags, blogImage, publishedAt };
+      if (blogImage) blogPayload.blogImage = blogImage;
+      if (publishedAt) blogPayload.publishedAt = publishedAt;
+
+      const blog = await BlogService.createBlog(userId, blogPayload);
+
+      return res.status(201).json({
+        success: true,
+        message: "Blog created successfully",
+        data: blog,
+      });
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  async getAllBlogs(req, res, next) {
+    try {
+      const page = parseInt(req.query.page) || 1;
+      const limit = parseInt(req.query.limit) || 10;
+      const skip = (page - 1) * limit;
+      const search = (req.query.search || "").trim();
+
+      const blogs = await BlogService.getAllBlogs(skip, limit, search);
+      return res.status(200).json({
+        success: true,
+        message: "Blogs fetched successfully",
+        data: blogs,
+      });
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  async fetchSingleBlog(req, res, next) {
+    try {
+      const blogId = req.params?.blogId;
+      if(mongoose.isValidObjectId(blogId) === false) return next(new AppError("Invalid blog id", 400));
+      
+      if (!blogId) return next(new AppError("Blog id is required", 400));
+      const blog = await BlogService.fetchSingleBlog(blogId);
+      return res.status(200).json({
+        success: true,
+        message: "Blog fetched successfully",
+        data: blog,
+      }); 
+    } catch (error) {
+      next(error);
+    }
+  },
+  async deleteBlog(req, res, next) {
+    try {
+      const blogId = req.params?.blogId;
+       if(mongoose.isValidObjectId(blogId) === false) return next(new AppError("Invalid blog id", 400));
+      const userId = req.user?._id;
+      if (!blogId) {
+        logger.warn("Blog id is required");
+        return next(new AppError("Blog id is required", 400));
+      }
+      await BlogService.deleteBlog(blogId, userId);
+      return res.status(200).json({
+        success: true,
+        message: "blog deleted",
+      });
+    } catch (error) {
+      next(error);
+    }
+  },
+   async updateBlog(req, res, next) {
+    try {
+
+   const blogId = req.params?.blogId;
+    if (!blogId) return next(new AppError("Blog id is required", 400));
+   if(mongoose.isValidObjectId(blogId) === false) return next(new AppError("Invalid blog id", 400));
+
+    const userId = req?.user?._id;
+    if (!userId) {
+      logger.warn("updateBlog: Unauthorized (no userId)");
+      return next(new AppError("Unauthorized", 401));
+    }
+
+    const parsed = updateBlogSchema.safeParse(req.body);
+    if (!parsed.success) {
+      logger.warn("Validation failed on updateBlog", parsed.error.flatten());
+      const msg = parsed.error.issues.map(i => `${i.path.join(".")}: ${i.message}`).join(", ");
+      return next(new AppError(`Validation failed: ${msg}`, 400));
+    }
+
+  
+    const blogPayload = parsed.data;
+    if (Object.keys(blogPayload).length === 0) {
+      return next(new AppError("No fields to update", 400));
+    }
+
+    const updated = await BlogService.updateBlog(blogId, userId, blogPayload);
+
+    return res.status(200).json({
+      success: true,
+      message: "Blog updated successfully",
+      data: updated,
+    });
+    } catch (error) {
+      next(error);
+    }
+  },
+};
+
+export default BlogController;

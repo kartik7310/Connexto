@@ -13,7 +13,7 @@ const intitlizeSocket = (server) => {
   io.on("connection", (socket) => {
     //handle events
     socket.on("joinChat", ({ userId, targetUserId, firstName }) => {
-      // const roomId = [userId,targetUserId].sort().join("_");
+      
       const roomId = secretRoomId({ userId, targetUserId });
       console.log(`${firstName} join the room with id ${roomId}`);
 
@@ -23,8 +23,7 @@ const intitlizeSocket = (server) => {
     socket.on(
       "send-message",
       async ({ firstName, userId, targetUserId, text }) => {
-      
-        //save to database
+    
         try {
           const roomId = secretRoomId({ userId, targetUserId });
           let chat = await Chat.findOne({

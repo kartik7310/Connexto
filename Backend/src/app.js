@@ -11,6 +11,8 @@ import globalErrorHandler from "./middleware/errorMiddleware.js"
 import ConnectionRoutes from "./routes/connection.routes.js"
 import SubscriptionRoutes from "./routes/subscription.routes.js"
 import ChatRoutes from "./routes/chat.routes.js"
+import BlogRoutes from "./routes/blog.route.js"
+
 import { createServer } from 'node:http';
 const app = express();
 
@@ -39,7 +41,7 @@ app.use('/api/v1/profile',ProfileRoutes );
 app.use('/api/v1/connections', ConnectionRoutes);
 app.use('/api/v1/payment', SubscriptionRoutes);
 app.use('/api/v1/chat', ChatRoutes);
-
+app.use('/api/v1/blogs',BlogRoutes);
 const server = createServer(app);
 intitlizeSocket(server)
 app.use(globalErrorHandler);
