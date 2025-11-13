@@ -52,13 +52,11 @@ intitlizeSocket(server)
 
 app.use(globalErrorHandler);
 connectDB().then(() => {
-  
+
   logger.info("MongoDB connected successfully");
 }).catch((err) => {
   logger.error('Database connection error:', err);
 });
-
-
 
 server.listen(PORT, () => {
   logger.info(`Server is running on port ${PORT}`);
