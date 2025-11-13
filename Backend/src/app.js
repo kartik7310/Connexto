@@ -42,6 +42,10 @@ app.use('/api/v1/connections', ConnectionRoutes);
 app.use('/api/v1/payment', SubscriptionRoutes);
 app.use('/api/v1/chat', ChatRoutes);
 app.use('/api/v1/blogs',BlogRoutes);
+
+app.get('/health',(req,res)=>{
+  res.status(200).json(ok)
+})
 const server = createServer(app);
 intitlizeSocket(server)
 app.use(globalErrorHandler);

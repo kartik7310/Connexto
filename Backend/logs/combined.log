@@ -505,3 +505,11 @@
 2025-11-12 15:52:22 [[31merror[39m] : Error: Invalid blog id
 2025-11-12 15:54:18 [[33mwarn[39m] : updateBlog: Forbidden user=69106814452a3ba7d34a5815 blog.author=6912e6a7365ee25c07a96ba5
 2025-11-12 15:54:18 [[31merror[39m] : Error: You are not allowed to update this blog
+2025-11-12 16:32:00 [[32minfo[39m] : Server is running on port 5000
+2025-11-12 16:32:00 [[32minfo[39m] : MongoDB connected successfully
+2025-11-12 16:34:44 [[32minfo[39m] : Fetched 0 connection requests for user: 69106814452a3ba7d34a5815
+2025-11-12 16:34:47 [[32minfo[39m] : Fetched 0 connection requests for user: 69106814452a3ba7d34a5815
+2025-11-12 16:34:55 [[32minfo[39m] : Connection request created from 69106814452a3ba7d34a5815 → 6912e6a7365ee25c07a96ba5 with status: interested
+2025-11-12 16:35:01 [[32minfo[39m] : Fetched 0 connections for user: 69106814452a3ba7d34a5815
+2025-11-12 16:35:02 [[32minfo[39m] : Fetched 0 connection requests for user: 69106814452a3ba7d34a5815
+2025-11-12 16:35:16 [[32minfo[39m] : Order created successfully
