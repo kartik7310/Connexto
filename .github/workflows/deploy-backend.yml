@@ -1,49 +1,46 @@
-name: Deploy to EC2
+
+name: Deploy Backend
 
 on:
   push:
     branches: [ main ]
     paths:
-      - 'Backend/**'   
-  workflow_dispatch:
+       - 'Backend/**'   
 jobs:
-  deploy:
+ 
+  build:
     runs-on: ubuntu-latest
+    
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    - uses: actions/checkout@v3
+    
+    - name: Login to Docker Hub
+      run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+    
+    - name: Build and Push
+      run: |
+        docker build -t ${{ secrets.DOCKER_USERNAME }}/connectly-backend:latest -f Backend/Dockerfile .
+        docker push ${{ secrets.DOCKER_USERNAME }}/connectly-backend:latest
 
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Build and Push Docker Image (tag by SHA + latest)
-        run: |
-          IMAGE=${{ secrets.DOCKER_USERNAME }}/connectly-backend
-          TAG=$(echo "${GITHUB_SHA}" | cut -c1-8)
-
-          docker build -t $IMAGE:$TAG -f Backend/Dockerfile Backend/
-          docker push $IMAGE:$TAG
-
-          docker tag $IMAGE:$TAG $IMAGE:latest
-          docker push $IMAGE:latest
-
-          
-
-      - name: Deploy to EC2
-        uses: appleboy/ssh-action@v0.1.6
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_SSH_KEY }}
-          script: |
-            set -e
-            IMAGE=${{ secrets.DOCKER_USERNAME }}/connectly-backend
-            TAG=${{ github.sha }}
-            # try SHA-tag first, fallback to latest
-            sudo docker pull $IMAGE:$TAG || sudo docker pull $IMAGE:latest
-            sudo docker-compose -f /home/ubuntu/connectly-backend/docker-compose.yml down || true
-            sudo docker-compose -f /home/ubuntu/connectly-backend/docker-compose.yml up -d
-            sudo docker image prune -f
+  # Deploy on your EC2 
+  deploy:
+    runs-on: self-hosted
+    needs: build
+    
+    steps:
+    - name: Pull latest image
+      run: docker pull ${{ secrets.DOCKER_USERNAME }}/connectly-backend:latest
+    
+    - name: Stop old container
+      run: docker stop my-app || true && docker rm my-app || true
+    
+    - name: Run new container
+      run: |
+        docker run -d \
+          --name my-app \
+          --restart unless-stopped \
+          -p 5000:5000 \
+          ${{ secrets.DOCKER_USERNAME }}/connectly-backend:latest
+    
+    - name: Cleanup
+      run: docker image prune -af
