@@ -25,7 +25,6 @@ app.use(cors({
     credentials: true                  
 }));
 
-
 import './config/db.js';
 import  intitlizeSocket from "./webSocket/socket.js";
 
