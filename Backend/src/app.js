@@ -16,7 +16,7 @@ import BlogRoutes from "./routes/blog.route.js"
 import { createServer } from 'node:http';
 const app = express();
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
