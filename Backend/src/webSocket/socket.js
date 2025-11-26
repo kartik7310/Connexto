@@ -5,7 +5,8 @@ import Chat from "../models/chat.js";
 const intitlizeSocket = (server) => {
   const io = new Server(server, {
     cors: {
-      origin: "http://localhost:5173",
+      origin: ["https://www.connexto.site", "https://connexto.site", "http://localhost:5173"],
+
       credentials: true,
     },
   });
