@@ -21,9 +21,10 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cors({
-    origin: "http://localhost:5173",   
-    credentials: true                  
+  origin: ["https://www.connexto.site", "https://connexto.site", "http://localhost:5173"],
+  credentials: true
 }));
+
 
 import './config/db.js';
 import  intitlizeSocket from "./webSocket/socket.js";
