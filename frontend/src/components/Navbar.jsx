@@ -1,10 +1,13 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Auth from "../services/authService"
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import { removeUser } from '../store/store-slices/userSlice'
 const Navbar = () => {
+  const user = useSelector((state)=>state.user?.user)
+  console.log("navser",user);
+  
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const handleLogout = async()=>{
@@ -21,7 +24,7 @@ const Navbar = () => {
     <div>
       <div className="navbar bg-base-300 shadow-sm">
         <div className="flex-1">
-          <Link to="/" className="btn btn-ghost text-xl">🧑‍💻Connectly</Link>
+          <Link to="/" className="btn btn-ghost text-xl">🧑‍💻Connexto</Link>
         </div>
         <div className="flex gap-2">
 
@@ -30,7 +33,7 @@ const Navbar = () => {
               <div className="w-10 rounded-full">
                 <img
                   alt="Tailwind CSS Navbar component"
-                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                  src={user?user?.photoUrl:"https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"}
                 />
               </div>
             </div>

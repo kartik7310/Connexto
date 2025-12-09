@@ -42,6 +42,7 @@ export default function Login() {
     
       const response = await Auth.googleLoginAccount(idToken);
       console.log("res", response);
+      dispatch(addUser(response.data.user));
       toast.success(response.data?.message || "Google login successful!");
       navigate("/feed", { replace: true });
     } catch (error) {

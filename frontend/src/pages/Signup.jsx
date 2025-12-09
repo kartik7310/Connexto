@@ -3,7 +3,8 @@ import { useForm } from "react-hook-form";
 
 import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
-
+import { useDispatch } from "react-redux";
+import { addUser } from "../store/store-slices/userSlice";
 import Auth from "../services/authService";
 import { GoogleLogin } from "@react-oauth/google";
 export default function Signup() {
@@ -13,7 +14,7 @@ export default function Signup() {
     formState: { errors, isSubmitting },
   } = useForm({ mode: "onTouched" });
 
-
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const onSubmit = async (values) => {
@@ -55,7 +56,7 @@ export default function Signup() {
       try {
       
         const response = await Auth.googleLoginAccount(idToken);
-        console.log("res", response);
+        dispatch(addUser(response.data.user));
         toast.success(response.data?.message || "Google signup successful!");
         navigate("/feed", { replace: true });
       } catch (error) {

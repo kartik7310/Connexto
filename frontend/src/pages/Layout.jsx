@@ -2,7 +2,7 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Outlet, useNavigate } from "react-router-dom";
-import { ToastContainer } from 'react-toastify'
+import { ToastContainer, toast } from 'react-toastify'
 import Profile from "../services/profileService";
 import { useDispatch,useSelector } from "react-redux";
 import { addUser } from "../store/store-slices/userSlice";
@@ -21,7 +21,7 @@ export default function Layout() {
       dispatch(addUser(res.data))
     } catch (error) {
       navigate("/")
-        toast.error(err.message);
+      toast.error(error.message);
     }
    }
 

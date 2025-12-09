@@ -2,8 +2,9 @@ import React from 'react'
 import Pricing from '../components/Pricing'
 import subscription from '../services/subscription'
 import { useState } from 'react'
+import { toast } from 'react-toastify'
 const premium = () => {
-  const [isPremium, setIsPremium] = useState(true) 
+  const [isPremium, setIsPremium] = useState(false) 
   const verifyPremiumUser = async()=>{
     try {
       const res = await subscription.checkPremium()
@@ -13,8 +14,7 @@ const premium = () => {
         setIsPremium(false)
       }
     } catch (error) {
-      console.log(error);
-      
+      toast.error("Failed to verify premium status");
     }
   }
 
@@ -65,7 +65,7 @@ const premium = () => {
        isPremium={isPremium}
       
         title="Silver"
-        price={9}
+        price={300}
         features={[
           "Basic image generation",
           "Standard quality export",
@@ -84,12 +84,12 @@ const premium = () => {
     
       clickHandle ={createOrder}
         title="Gold"
-        price={29}
+        price={500}
         features={[
           "High-resolution image generation",
           "Customizable style templates",
           "Batch processing capabilities",
-          "AI-driven image enhancements"
+          
         ]}
         disabledFeatures={[
           "Seamless cloud integration",

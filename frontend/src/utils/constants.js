@@ -1,4 +1,4 @@
-export const baseUrl = "https://api.connexto.site/api/v1";
+export const baseUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api/v1";
 
 export const apiEndpoints = {
   signUp: "/auth/signup",

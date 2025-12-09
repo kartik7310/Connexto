@@ -14,18 +14,37 @@ import Homepage from "./pages/landingPage"
 import Blog from "./pages/blog"
 import BlogDetails from "./pages/BlogDetails"
 import WriteBlog from "./pages/WriteBlog"
-import { Edit } from "lucide-react"
 import EditBlog from "./pages/EditBlog"
+import ProtectedRoute from "./components/ProtectedRoute"
+
 function App() {
  return(
  <Provider store={store}>
    <BrowserRouter>
      <Routes>
-     
-         <Route index element={<Homepage/>} />
-           <Route path="login" element={<Login/>}/>
-         <Route path="signup" element={<Signup/>}/>
-           <Route path="/" element={<Body/>}>
+       {/* Public routes - NO authentication needed */}
+       <Route index element={<Homepage/>} />
+       
+       {/* Public routes - Redirect to /feed if already logged in */}
+       <Route 
+         path="login" 
+         element={
+           <ProtectedRoute isPublic={true}>
+             <Login/>
+           </ProtectedRoute>
+         }
+       />
+       <Route 
+         path="signup" 
+         element={
+           <ProtectedRoute isPublic={true}>
+             <Signup/>
+           </ProtectedRoute>
+         }
+       />
+
+       {/* Protected routes - Require authentication */}
+       <Route path="/" element={<ProtectedRoute><Body/></ProtectedRoute>}>
          <Route path="profile" element={<Profile/>}/>
          <Route path="premium" element={<Premium/>}/>
          <Route path="feed" element={<Feed/>}/>
