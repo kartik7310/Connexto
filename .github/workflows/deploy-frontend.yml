@@ -20,13 +20,18 @@ jobs:
           node-version: 'latest' 
 
       - name: Install Dependencies
-        # Change directory to the frontend project folder
+       
         run: cd frontend && npm install
         
       - name: Build Static Files
-        # Run the build command (this should output to a folder like 'dist')
+       # Run the build command (this should output to a folder like 'dist')
         run: cd frontend && npm run build 
-
+        env:
+          VITE_API_BASE_URL: ${{ secrets.API_BASE_URL }}   
+          VITE_GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          VITE_IMAGEKIT_PUBLIC_KEY: ${{ secrets.IMAGEKIT_PUBLIC_KEY }}
+          VITE_IMAGEKIT_URL_ENDPOINT: ${{ secrets.IMAGEKIT_URL_ENDPOINT }}
+          VITE_RAZORPAY_KEY_ID: ${{ secrets.RAZORPAY_API_KEY }} 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -36,9 +41,10 @@ jobs:
 
       - name: Deploy Static Site to S3 Bucket
         run: |
-          aws s3 sync frontend/dist s3://connectly-frontend \
-            --delete \
-            --cache-control max-age=31536000,public 
-          # Note: The 'frontend/dist' path assumes your build command above 
-          # created a 'dist' directory inside the 'frontend' directory.
-          # The --cache-control setting optimizes caching for static assets.
+          aws s3 sync frontend/dist s3://connectly-frontend --delete --cache-control max-age=31536000,public
+
+      - name: Invalidate CloudFront cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} \
+            --paths "/*"

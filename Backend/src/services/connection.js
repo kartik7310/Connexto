@@ -72,7 +72,7 @@ const ConnectionService = {
       toUserId: new mongoose.Types.ObjectId(loggedInUser), 
       status: "interested"
       });
-      console.log("connectionReq",connectionReq);
+     
       
       if(!connectionReq){
         logger.warn(`Connection request not found: ${requestId}`);

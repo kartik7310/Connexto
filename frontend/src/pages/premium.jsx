@@ -25,30 +25,30 @@ const premium = () => {
        order = await subscription.createOrder({planType})
       console.log(order.data);
       
+      const {amount,currency,orderId,notes} = order.data
+      const options = {
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID, 
+        amount,
+        currency,
+        name: "Connexto",
+        description:"Connect to other developers",
+        image:"https://via.placeholder.com/150",  
+        order_id:orderId ,
+        prefill:{
+          name:notes.firstName + " " + notes.lastName,
+          email:notes.email,
+          contact:"9999999999",
+        },
+        handler:verifyPremiumUser
+          
+        }
+         const rzp = new window.Razorpay(options);
+     rzp.open();
+
     } catch (error) {
       console.log(error);
-      
+      toast.error(error.response?.data?.message || "Failed to create order");
     }
-  
-  const {amount,currency,orderId,notes} = order.data
-  const options = {
-    key:"rzp_test_RckpqiN886sfR0",
-    amount,
-    currency,
-    name: "Connectly",
-    description:"Connect to other developers",
-    image:"https://via.placeholder.com/150",  
-    order_id:orderId ,
-    prefill:{
-      name:notes.firstName + " " + notes.lastName,
-      email:notes.email,
-      contact:"9999999999",
-    },
-    handler:verifyPremiumUser
-      
-    }
-     const rzp = new window.Razorpay(options);
- rzp.open();
  };
 
   
