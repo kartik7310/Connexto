@@ -10,7 +10,7 @@ const SubscriptionController = {
     try {
       const { firstName, lastName, email, _id: userId } = req.user;
       const { planType } = req.body;
-      console.log("member", planType);
+      logger.info("Creating order", { planType, userId });
 
       if (!planType || !membershipType[planType]) {
         throw new AppError("Invalid membership type provided", 400);
@@ -37,28 +37,26 @@ const SubscriptionController = {
 
       const subscription = new Subscription({
         userId,
-        orderId: razorpayOrder.id,
         razorpayOrderId: razorpayOrder.id,
         membershipType: planType,
         amount: amount,
         receipt: razorpayOrder.receipt,
         currency: "INR",
         status: "created",
-        razorpayOrderId: razorpayOrder.id,
         notes: razorpayOrder.notes,
         createdAt: new Date(),
       });
 
       const savedSubscription = await subscription.save();
 
-      // Log successful order creation
+     
       logger.info("Order created successfully", {
         userId,
         orderId: razorpayOrder.id,
         membershipType: planType,
       });
 
-      // Send response
+  
       const data = savedSubscription.toJSON()
       res.status(201).json({
         success: true,
@@ -66,7 +64,7 @@ const SubscriptionController = {
         data,
       });
     } catch (error) {
-      // Log error
+      
       logger.error("Error creating order", {
         error: error.message,
         stack: error.stack,
@@ -80,7 +78,7 @@ const SubscriptionController = {
         );
       }
 
-      // Pass error to error handling middleware
+      
       if (error instanceof AppError) {
         return next(error);
       }
@@ -91,55 +89,59 @@ const SubscriptionController = {
     }
   },
   
-  //after deploy app have to setup webhook for verification
+  //after deploy need to setup webhook for verification
   async verifyPaymentWebhook(req, res, next) {
     try {
-      const signature = req.get["x-razorpay-signature"]
-   const isWebhookValid = validateWebhookSignature(
-    JSON.stringify(req.body),
-    signature,
-    process.env.WEBHOOK_KEY_SECRET 
-   )
-   if(isWebhookValid){
-    return new AppError("Invalid signature",400)
-   }
+      const signature = req.get("x-razorpay-signature");
+      const isWebhookValid = validateWebhookSignature(
+        JSON.stringify(req.body),
+        signature,
+        process.env.RAZORPAY_WEBHOOK_SECRET
+      );
+      
+      if (!isWebhookValid) {
+        return next(new AppError("Invalid signature", 400));
+      }
 
-   //update subscription status in db
-const paymentDetails = req.body.payload.payment.entity
- const subscription = await Subscription.findOne({
-  razorpayOrderId: paymentDetails.order_id
- })
- if(!subscription){
-  return new AppError("Subscription not found",404)
- }
- subscription.status = paymentDetails.status
- await subscription.save()
-const user = await User.findById({_id:subscription.userId})
-if(!user){
-  return new AppError("User not found",404)
-}
-user.isPremium = true
-user.membershipType = subscription?.notes?.membershipType
- 
-res.status(200).json({
-  success:true,
-  message:"Webhook received successfully"
-}   
-)
+      // Update subscription status in db
+      const paymentDetails = req.body.payload.payment.entity;
+      const subscription = await Subscription.findOne({
+        razorpayOrderId: paymentDetails.order_id
+      });
+      
+      if (!subscription) {
+        return next(new AppError("Subscription not found", 404));
+      }
+      
+      subscription.status = paymentDetails.status;
+      await subscription.save();
+      
+      const user = await User.findById(subscription.userId);
+      if (!user) {
+        return next(new AppError("User not found", 404));
+      }
+      
+      user.isPremium = true;
+      user.membershipType = subscription?.notes?.membershipType;
+      await user.save();
+
+      res.status(200).json({
+        success: true,
+        message: "Webhook received successfully"
+      });
     } catch (error) {
-      new AppError(error.message, error.statusCode)
+      next(new AppError(error.message, error.statusCode || 500));
     }
   },
   async getSubscriptions(req, res, next) {
     try {
-      const user = req.user.toJSON()
-      if(user.isPremium){
-        return res.status(200).json({isPremium:true})
+      const user = req.user.toJSON();
+      if (user.isPremium) {
+        return res.status(200).json({ isPremium: true });
       }
-      return res.status(200).json({isPremium:false})
-     
+      return res.status(200).json({ isPremium: false });
     } catch (error) {
-      
+      next(error);
     }
   },
 };

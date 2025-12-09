@@ -1,7 +1,7 @@
 
 import ConnectionService from "../services/connection.js";
-import  AppError  from "../utils/AppError.js";
-import logger from "../utils/logger.js";
+import AppError from "../utils/AppError.js";
+import logger from "../config/logger.js";
 
 const ConnectionController = {
   async sendConnectionRequest(req, res, next) {
@@ -44,7 +44,7 @@ const ConnectionController = {
       status
     };
     const connectionReq = await ConnectionService.reviewConnectionRequest(reqObject);
-    console.log("connectionReq",connectionReq);
+    logger.debug("Connection request reviewed", { connectionReq });
 
     res.status(200).json({
       success: true,

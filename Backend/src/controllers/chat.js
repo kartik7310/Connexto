@@ -1,7 +1,7 @@
 // controllers/chatController.js
 import ChatService from "../services/chat.js"
 import AppError from "../utils/AppError.js";
-import logger from "../utils/logger.js";
+import logger from "../config/logger.js";
 
 const ChatController = {
 

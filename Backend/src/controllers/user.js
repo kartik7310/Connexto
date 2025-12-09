@@ -1,6 +1,6 @@
 
+
 import UserService from "../services/user.js";
-import ProfileService from "../services/user.js";
 
 const UserController = {
    async getConnectionRequests(req, res, next) {

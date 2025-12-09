@@ -1,13 +1,13 @@
 import { Server } from "socket.io";
 import { secretRoomId } from "../utils/roomSecret.js";
 import Chat from "../models/chat.js";
+import { config } from "../config/env.js";
 
 const intitlizeSocket = (server) => {
   const io = new Server(server, {
     cors: {
-      origin: ["https://www.connexto.site", "https://connexto.site", "http://localhost:5173"],
-
-      credentials: true,
+      origin: config.corsOrigin.split(',').map(origin => origin.trim()),
+        credentials: true
     },
   });
 

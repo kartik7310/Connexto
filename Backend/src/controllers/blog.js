@@ -14,7 +14,7 @@ const BlogController = {
       return next(new AppError(`Validation failed: ${msg}`, 400));
     }
       const userId = req?.user?._id;
-      console.log("userId",userId);
+      logger.debug("Create blog request", { userId });
       
       if (!userId) {
         logger.warn("Unauthorized access attempt on createBlog");
