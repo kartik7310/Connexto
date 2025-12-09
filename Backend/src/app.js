@@ -1,6 +1,6 @@
 import express from "express";
-import bodyParser from 'body-parser';
 import cors from 'cors';
+import { config } from './config/env.js';
 import {connectDB} from './config/db.js';
 import authRoutes from './routes/auth.routes.js';
 import UserRoutes from "./routes/user.route.js"
@@ -16,17 +16,15 @@ import BlogRoutes from "./routes/blog.route.js"
 import { createServer } from 'node:http';
 const app = express();
 
-const PORT = process.env.PORT;
+const PORT = config.port;
 app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cors({
-  origin: ["https://www.connexto.site", "https://connexto.site", "http://localhost:5173"],
+  origin: config.corsOrigin.split(',').map(origin => origin.trim()),
   credentials: true
 }));
 
-
-import './config/db.js';
 import  intitlizeSocket from "./webSocket/socket.js";
 
 
@@ -51,15 +49,18 @@ const server = createServer(app);
 intitlizeSocket(server)
 
 app.use(globalErrorHandler);
-connectDB().then(() => {
 
-  logger.info("MongoDB connected successfully");
-}).catch((err) => {
-  logger.error('Database connection error:', err);
-});
-
-server.listen(PORT, () => {
-  logger.info(`Server is running on port ${PORT}`);
-});
+connectDB()
+  .then(() => {
+    logger.info("MongoDB connected successfully");
+    // Start server only after successful DB connection
+    server.listen(PORT, () => {
+      logger.info(`Server is running on port ${PORT}`);
+    });
+  })
+  .catch((err) => {
+    logger.error('Database connection error:', err);
+    process.exit(1); // Exit if DB connection fails
+  });
 
 export default app;

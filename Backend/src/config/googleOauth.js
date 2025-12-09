@@ -1,6 +1,4 @@
-// import { google } from "googleapis";
 import { OAuth2Client } from "google-auth-library";
-import dotenv from "dotenv";
-dotenv.config();
+import { config } from "./env.js";
 
-export const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+export const client = new OAuth2Client(config.googleClientId);

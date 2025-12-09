@@ -13,7 +13,7 @@ services:
     volumes:
       - ./logs:/app/logs  # Persist logs on host
     networks:
-      - Connectify-ne
+      - Connectify-backend
 
   nginx:
     image: nginx:alpine
