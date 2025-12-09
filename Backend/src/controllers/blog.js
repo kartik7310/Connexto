@@ -10,6 +10,7 @@ const BlogController = {
       const parsed = blogSchema.safeParse(req.body);
        if (!parsed.success) {
       logger.warn("Validation failed on createBlog request", parsed.error.flatten());
+      
       const msg = parsed.error.issues.map(i => `${i.path.join(".")}: ${i.message}`).join(", ");
       return next(new AppError(`Validation failed: ${msg}`, 400));
     }

@@ -41,8 +41,9 @@ jobs:
           IMAGEKIT_PUBLIC_KEY=${{ secrets.IMAGEKIT_PUBLIC_KEY }}
           IMAGEKIT_PRIVATE_KEY=${{ secrets.IMAGEKIT_PRIVATE_KEY }}
           IMAGEKIT_URL_ENDPOINT=${{ secrets.IMAGEKIT_URL_ENDPOINT }}
+          CORS_ORIGIN=${{ secrets.CORS_ORIGIN }}
           EOF
-          # Optional: show where file saved
+          #  show where file saved
           echo "Wrote $GITHUB_WORKSPACE/.env (size: $(wc -c < $GITHUB_WORKSPACE/.env) bytes)"
 
       - name: Pull latest image

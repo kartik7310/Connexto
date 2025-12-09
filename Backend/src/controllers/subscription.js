@@ -5,6 +5,7 @@ import { membershipType } from "../utils/planType.js";
 import Subscription from "../models/subscription.js";
 import { validateWebhookSignature } from "razorpay/dist/utils/razorpay-utils.js";
 import User from "../models/user.js";
+import { config } from "../config/env.js";
 const SubscriptionController = {
   async createOrder(req, res, next) {
     try {
@@ -96,7 +97,7 @@ const SubscriptionController = {
       const isWebhookValid = validateWebhookSignature(
         JSON.stringify(req.body),
         signature,
-        process.env.RAZORPAY_WEBHOOK_SECRET
+        config.razorpay.webhookSecret
       );
       
       if (!isWebhookValid) {
