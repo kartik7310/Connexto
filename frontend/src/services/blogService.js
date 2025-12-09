@@ -8,7 +8,6 @@ class BlogService {
   async fetchAllBlogs(params = {}) {
     try {
       const url = this.baseUrl + apiEndpoints.fetchAllBlogs;
-
       const res = await axios.get(url,{
         params,
         withCredentials:true

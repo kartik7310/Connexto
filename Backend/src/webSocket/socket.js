@@ -12,6 +12,7 @@ const intitlizeSocket = (server) => {
   });
 
   io.on("connection", (socket) => {
+    
     //handle events
     socket.on("joinChat", ({ userId, targetUserId, firstName }) => {
       
