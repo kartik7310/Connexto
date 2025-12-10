@@ -6,6 +6,7 @@ import { generateToken } from "../utils/generateToken.js";
 import { client } from "../config/googleOauth.js";
 import { sendOtpSchema } from "../validators/otp.js";
 import OTP from "../models/otp.js";
+import { config } from "../config/env.js";
 
 
 const AuthService = {
@@ -58,7 +59,7 @@ const AuthService = {
   
   const ticket = await client.verifyIdToken({
     idToken,
-    audience: process.env.GOOGLE_CLIENT_ID,
+    audience: config.googleClientId,
   });
   
   const payload = ticket.getPayload();
