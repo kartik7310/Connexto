@@ -4,7 +4,7 @@ import Chat from "../models/chat.js";
 import { config } from "../config/env.js";
 import logger from "../config/logger.js";
 import { setDataInRedis } from "../helper/redisData.js";
-const intitlizeSocket = (server) => {
+const intitlizeSocket = async(server) => {
   const io = new Server(server, {
     cors: {
       origin: config.corsOrigin.split(',').map(origin => origin.trim()),
@@ -26,13 +26,9 @@ const intitlizeSocket = (server) => {
     socket.on(
       "send-message",
       async ({ firstName, userId, targetUserId, text }) => {
-       
+    
         try {
           const roomId = secretRoomId({ userId, targetUserId });
-          
-          //emit the message
-          io.to(roomId).emit("receiveMessage", { firstName, text });
-
           let chat = await Chat.findOne({
             participants: {
               $all: [userId, targetUserId],
@@ -45,7 +41,7 @@ const intitlizeSocket = (server) => {
             });
           }
         
-           chat.message.push({ senderId: userId, text });
+         chat.message.push({ senderId: userId, text });
           await chat.save();
 
           //set to redis
@@ -55,7 +51,7 @@ const intitlizeSocket = (server) => {
           const ttlSeconds=60*60;
           await setDataInRedis(cacheKey,chat,ttlSeconds);
 
-          
+          io.to(roomId).emit("receiveMessage", { firstName, text });
         } catch (error) {
           logger.error(error.message);
         }
