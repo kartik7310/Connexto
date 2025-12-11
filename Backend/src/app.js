@@ -12,7 +12,7 @@ import ConnectionRoutes from "./routes/connection.routes.js"
 import SubscriptionRoutes from "./routes/subscription.routes.js"
 import ChatRoutes from "./routes/chat.routes.js"
 import BlogRoutes from "./routes/blog.route.js"
-
+import "./helper/cronJob.js"
 import { createServer } from 'node:http';
 const app = express();
 

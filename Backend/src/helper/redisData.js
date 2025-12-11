@@ -5,8 +5,6 @@ import RedisClient from "../config/redis.js";
      
       if (!key) throw new Error("Key is required");
       const data = await RedisClient.get(key);
-      console.log("data",data);
-      
      return data?JSON.parse(data):null;
     } catch (error) {
         logger.error(error.message);

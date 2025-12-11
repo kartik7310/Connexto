@@ -52,8 +52,7 @@ const BlogController = {
        const cacheKey = page || limit || skip || search ?`blogs:${page}:${limit}:${skip}:${search}` : "blogs";
 
       const cachedBlogs = await getDataFromRedis(cacheKey);
-      
-       
+
       if (cachedBlogs) {
         logger.info("Cache hit");
         return res.status(200).json({
@@ -63,7 +62,7 @@ const BlogController = {
         });
       }
       const blogs = await BlogService.getAllBlogs(skip, limit, search);
-      logger.info("Blogs fetched successfully", { blogs });
+     
       await setDataInRedis(cacheKey,blogs);
       logger.info("Cache miss");
       return res.status(200).json({
