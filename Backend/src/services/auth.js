@@ -5,17 +5,18 @@ import logger from "../config/logger.js";
 import { generateToken } from "../utils/generateToken.js";
 import { client } from "../config/googleOauth.js";
 import { sendOtpSchema } from "../validators/otp.js";
-import OTP from "../models/otp.js";
+import OTP from "../models/otp.js"
 import { config } from "../config/env.js";
 import { sendVerificationTokenEmail } from "../mails/verification.js";
-import { OTP_CONFIG } from "../utils/otpGenerator.js";
+import { OTP_CONFIG, secureOtpGenerator } from "../utils/otpGenerator.js";
+import otpHashing from "../utils/otpHashing.js";
 
 
 const AuthService = {
  
 
   async signup(data) {
-    const { firstName, lastName, email, password, age } = data;
+    const { firstName, lastName, email, password, age ,otp} = data;
 
     const existing = await User.findOne({ email });
    
@@ -23,6 +24,23 @@ const AuthService = {
         logger.warn(`Signup attempt with existing email: ${email}`);
     throw new AppError("User already exists with this email", 400);
     }
+     const existingOtp = await OTP.findOne({ email, Used: false });
+     logger.info(`Existing OTP: ${existingOtp}`);
+     if (!existingOtp) {
+      throw new AppError("Invalid or Expired OTP", 400);
+     }
+
+    const hashedOtp = otpHashing(otp);
+
+    if (hashedOtp !== existingOtp.otp) {
+      throw new AppError("Invalid OTP", 400);
+    }
+
+  const isOtpExpired = existingOtp.expireAt < new Date();
+     if (isOtpExpired) {
+      await OTP.deleteOne({ _id: existingOtp._id });
+      throw new AppError("OTP has expired", 400);
+     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = await User.create({
@@ -32,7 +50,7 @@ const AuthService = {
       password: hashedPassword,
       age,
     });
-
+    await OTP.updateOne({ _id: existingOtp._id }, { Used: true });
     return logger.info(`New user registered: ${email}`);
   },
 
@@ -49,17 +67,19 @@ const AuthService = {
     await OTP.deleteMany({ email });
     const otp = secureOtpGenerator(OTP_CONFIG.LENGTH);
  
-    
-    const hashedOTP = await bcrypt.hash(otp, 10);
+    const hashedOtp = otpHashing(otp);
+
 
     await OTP.create({
       email,
-      otp: hashedOTP,
-      expiresAt: new Date(Date.now() + OTP_CONFIG.EXPIRY_MINUTES * 60 * 1000), // 5 minutes
-      attempts: 0,
+      otp: hashedOtp,
+      expiresAt: new Date(Date.now() + OTP_CONFIG.EXPIRY_MINUTES * 60 * 1000),
+      Used:false // 5 minutes
+     
    
     });
-     await sendVerificationTokenEmail(email,otp)
+
+    await sendVerificationTokenEmail(email,otp)
     return logger.info(`OTP sent to: ${email}`);
   },
 

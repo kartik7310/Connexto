@@ -194,3 +194,83 @@
 2025-12-18 14:18:57 [[31merror[39m] : Error: Not authorized, token missing
 2025-12-18 14:23:24 [[31merror[39m] : Error: Not authorized, token missing
 2025-12-18 14:27:16 [[31merror[39m] : Error: Not authorized, token missing
+2025-12-18 17:17:55 [[32minfo[39m] : MongoDB connected successfully
+2025-12-18 17:17:55 [[32minfo[39m] : Server is running on port 5000
+2025-12-18 17:22:47 [[31merror[39m] : Error: Invalid email format
+2025-12-18 17:22:53 [[31merror[39m] : ReferenceError: secureOtpGenerator is not defined
+2025-12-18 17:24:04 [[32minfo[39m] : MongoDB connected successfully
+2025-12-18 17:24:04 [[32minfo[39m] : Server is running on port 5000
+2025-12-18 17:24:08 [[32minfo[39m] : Email sent successfully to kartiklathiyan455@gmail.com:
+2025-12-18 17:24:08 [[32minfo[39m] : OTP sent to: kartiklathiyan455@gmail.com
+2025-12-18 17:25:38 [[33mwarn[39m] : Signup attempt with existing email: kartiklathiyan455@gmail.com
+2025-12-18 17:25:38 [[31merror[39m] : Error: User already exists with this email
+2025-12-18 17:26:45 [[32minfo[39m] : Email sent successfully to kartiklathiyan455@gmail.com:
+2025-12-18 17:26:45 [[32minfo[39m] : OTP sent to: kartiklathiyan455@gmail.com
+2025-12-18 17:27:11 [[32minfo[39m] : Email sent successfully to kartiklathiyan55@gmail.com:
+2025-12-18 17:27:11 [[32minfo[39m] : OTP sent to: kartiklathiyan55@gmail.com
+2025-12-18 17:32:25 [[32minfo[39m] : Email sent successfully to kartiklathiyan455@gmail.com:
+2025-12-18 17:32:25 [[32minfo[39m] : OTP sent to: kartiklathiyan455@gmail.com
+2025-12-18 17:33:08 [[31merror[39m] : Error: Invalid or Expired OTP
+2025-12-18 17:34:19 [[32minfo[39m] : MongoDB connected successfully
+2025-12-18 17:34:19 [[32minfo[39m] : Server is running on port 5000
+2025-12-18 17:34:23 [[32minfo[39m] : Existing OTP: null
+2025-12-18 17:34:23 [[31merror[39m] : Error: Invalid or Expired OTP
+2025-12-18 17:34:53 [[32minfo[39m] : MongoDB connected successfully
+2025-12-18 17:34:53 [[32minfo[39m] : Server is running on port 5000
+2025-12-18 17:34:56 [[32minfo[39m] : Existing OTP: null
+2025-12-18 17:34:56 [[31merror[39m] : Error: Invalid or Expired OTP
+2025-12-18 17:36:33 [[32minfo[39m] : MongoDB connected successfully
+2025-12-18 17:36:33 [[32minfo[39m] : Server is running on port 5000
+2025-12-18 17:36:46 [[31merror[39m] : TypeError: Cannot read properties of null (reading 'email')
+2025-12-18 17:38:14 [[32minfo[39m] : MongoDB connected successfully
+2025-12-18 17:38:14 [[32minfo[39m] : Server is running on port 5000
+2025-12-18 17:38:21 [[32minfo[39m] : Existing OTP: null
+2025-12-18 17:38:21 [[31merror[39m] : Error: Invalid or Expired OTP
+2025-12-18 17:38:45 [[32minfo[39m] : Email sent successfully to kartiklathiyan455@gmail.com:
+2025-12-18 17:38:45 [[32minfo[39m] : OTP sent to: kartiklathiyan455@gmail.com
+2025-12-18 17:39:16 [[32minfo[39m] : Existing OTP: null
+2025-12-18 17:39:16 [[31merror[39m] : Error: Invalid or Expired OTP
+2025-12-18 17:39:19 [[32minfo[39m] : Existing OTP: null
+2025-12-18 17:39:19 [[31merror[39m] : Error: Invalid or Expired OTP
+2025-12-18 17:40:41 [[32minfo[39m] : MongoDB connected successfully
+2025-12-18 17:40:41 [[32minfo[39m] : Server is running on port 5000
+2025-12-18 17:40:46 [[32minfo[39m] : Existing OTP: null
+2025-12-18 17:40:46 [[31merror[39m] : Error: Invalid or Expired OTP
+2025-12-18 17:41:14 [[32minfo[39m] : MongoDB connected successfully
+2025-12-18 17:41:14 [[32minfo[39m] : Server is running on port 5000
+2025-12-18 17:41:17 [[32minfo[39m] : Existing OTP: null
+2025-12-18 17:41:17 [[31merror[39m] : Error: Invalid or Expired OTP
+2025-12-18 17:42:20 [[32minfo[39m] : MongoDB connected successfully
+2025-12-18 17:42:20 [[32minfo[39m] : Server is running on port 5000
+2025-12-18 17:42:23 [[32minfo[39m] : Existing OTP: {
+  _id: new ObjectId('6943eecce6e0feace61e4635'),
+  email: 'kartiklathiyan455@gmail.com',
+  otp: 'b52c1842873c3ae9f6930de7608b1a933ba59c3a1f890d4290b3a7cd7070adc6',
+  Used: false,
+  otpCreatedAt: 2025-12-18T12:08:44.388Z,
+  expireAt: 2025-12-18T12:13:44.388Z,
+  __v: 0
+}
+2025-12-18 17:42:23 [[31merror[39m] : TypeError: (intermediate value).getTim is not a function
+2025-12-18 17:43:26 [[32minfo[39m] : MongoDB connected successfully
+2025-12-18 17:43:26 [[32minfo[39m] : Server is running on port 5000
+2025-12-18 17:43:45 [[32minfo[39m] : MongoDB connected successfully
+2025-12-18 17:43:45 [[32minfo[39m] : Server is running on port 5000
+2025-12-18 17:44:12 [[32minfo[39m] : MongoDB connected successfully
+2025-12-18 17:44:12 [[32minfo[39m] : Server is running on port 5000
+2025-12-18 17:44:15 [[32minfo[39m] : Existing OTP: null
+2025-12-18 17:44:15 [[31merror[39m] : Error: Invalid or Expired OTP
+2025-12-18 17:44:21 [[32minfo[39m] : Email sent successfully to kartiklathiyan455@gmail.com:
+2025-12-18 17:44:21 [[32minfo[39m] : OTP sent to: kartiklathiyan455@gmail.com
+2025-12-18 17:44:43 [[32minfo[39m] : Existing OTP: {
+  _id: new ObjectId('6943f01b312c88b64e197e7f'),
+  email: 'kartiklathiyan455@gmail.com',
+  otp: '7e68e4ba1bd35b612a28290c504084ef18601777b71a24108c75e5bcd6115b5b',
+  Used: false,
+  otpCreatedAt: 2025-12-18T12:14:19.905Z,
+  expireAt: 2025-12-18T12:19:19.905Z,
+  __v: 0
+}
+2025-12-18 17:44:44 [[32minfo[39m] : New user registered: kartiklathiyan455@gmail.com
+2025-12-18 17:45:09 [[32minfo[39m] : token
+2025-12-18 17:45:09 [[32minfo[39m] : User logged in: kartiklathiyan455@gmail.com

@@ -6,6 +6,7 @@ export const signupSchema = z.object({
   email: z.string().email(),
   password: z.string().min(6).max(100),
   age: z.coerce.number().min(0).max(120).optional(),
+  otp: z.string().min(6).max(6),
 });
 
 export const loginSchema = z.object({
