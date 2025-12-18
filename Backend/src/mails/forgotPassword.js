@@ -2,7 +2,7 @@
 import mailGenerator from "../config/mailgen.js";
 import sendMail from "./mailer.js";
 
-export async function sendForgotPasswordTokenEmail(toEmail, name, token, expiresIn = "15 minutes") {
+export async function sendForgotPasswordTokenEmail(toEmail, name, token, expiresIn = "5 minutes") {
   const email = {
     body: {
       name: name || "there",

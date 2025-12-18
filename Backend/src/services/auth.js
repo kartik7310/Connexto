@@ -10,6 +10,8 @@ import { config } from "../config/env.js";
 import { sendVerificationTokenEmail } from "../mails/verification.js";
 import { OTP_CONFIG, secureOtpGenerator } from "../utils/otpGenerator.js";
 import otpHashing from "../utils/otpHashing.js";
+import { sendForgotPasswordTokenEmail } from "../mails/forgotPassword.js";
+import { sendResetPasswordSuccessEmail } from "../mails/resetPassword.js";
 
 
 const AuthService = {
@@ -60,10 +62,7 @@ const AuthService = {
       throw new AppError("Email is required", 400);
      }
 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      throw new AppError("Invalid email format", 400);
-    }
+    EmailRegex(email);
     await OTP.deleteMany({ email });
     const otp = secureOtpGenerator(OTP_CONFIG.LENGTH);
  
@@ -152,7 +151,87 @@ const AuthService = {
       authProvider: user.authProvider,
     },
   };
-}
-};
+},
 
-export default AuthService;
+    async forgotPassword(email){
+        EmailRegex(email);
+      const user = await User.findOne({ email });
+      if (!user) {
+        logger.info(`Forgot password attempt for non-existent email: ${email}`);
+        throw new AppError(`Forgot password attempt for non-existent email: ${email}`, 404);
+      }
+      // Delete any previous forgot-password OTPs for this email
+      await OTP.deleteMany({ email, purpose: "password_reset" });
+
+      const otp = secureOtpGenerator(OTP_CONFIG.LENGTH);
+
+      const hashedOtp = otpHashing(otp);
+
+      await OTP.create({
+        email,
+        otp: hashedOtp,
+        expiresAt: new Date(Date.now() + OTP_CONFIG.EXPIRY_MINUTES * 60 * 1000),
+        Used:false, // 5 minutes
+      purpose: "password_reset",
+      });
+
+      await sendForgotPasswordTokenEmail(email,user.firstName,otp)
+      return logger.info(`OTP sent to: ${email}`);
+    },
+
+    async resetPassword(data) {
+      const { email, otp, password, confirmPassword } = data;
+
+      if (password !== confirmPassword) {
+        throw new AppError("Passwords do not match", 400);
+      }
+
+      const user = await User.findOne({ email });
+      if (!user) {
+        logger.info(`Password reset attempt for non-existent email: ${email}`);
+        return; 
+      }
+
+      const otpDoc = await OTP.findOne({
+        email,
+        purpose: "password_reset",
+        used: false,
+      });
+
+      if (!otpDoc) {
+        throw new AppError("Invalid or expired OTP", 400);
+      }
+
+      if (new Date() > otpDoc.expiresAt) {
+        await OTP.deleteOne({ _id: otpDoc._id });
+        throw new AppError("OTP has expired", 400);
+      }
+
+      const MAX_OTP_ATTEMPTS = 5;
+      if (otpDoc.attempts >= MAX_OTP_ATTEMPTS) {
+        await OTP.deleteOne({ _id: otpDoc._id });
+        throw new AppError(
+          "Too many OTP attempts. Please request a new OTP.",
+          429
+        );
+      }
+
+      const hashedOtp = otpHashing(otp);
+      if (hashedOtp !== otpDoc.otp) {
+        await OTP.updateOne({ _id: otpDoc._id },{ $inc: { attempts: 1 } }
+        );
+        throw new AppError("Invalid OTP", 400);
+      }
+
+      const hashedPassword = await bcrypt.hash(password, 10);
+      await User.updateOne({ _id: user._id }, { password: hashedPassword });
+      await OTP.updateOne({ _id: otpDoc._id }, { $set: { used: true } });
+
+      await OTP.deleteMany({email,purpose: "password_reset", used: false});
+        await sendResetPasswordSuccessEmail(email,user.firstName)
+      logger.info(`Password successfully reset for: ${email}`);
+    },
+  
+    }
+
+    export default AuthService;

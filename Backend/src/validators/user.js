@@ -23,3 +23,10 @@ export const updateUserSchema = z.object({
   skills: z.array(z.string()).optional(),
   about: z.string().max(500).optional()
 });
+
+export const resetPasswordSchema = z.object({
+  email: z.string().email(),
+  otp: z.string().min(6).max(6),
+  password: z.string().min(6).max(100),
+  confirmPassword: z.string().min(6).max(100),
+});
