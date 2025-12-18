@@ -2,10 +2,9 @@
 import mailGenerator from "../config/mailgen.js";
 import sendMail from "./mailer.js";
 
-export async function sendVerificationTokenEmail(toEmail, name, token, expiresIn = "15 minutes") {
+export async function sendVerificationTokenEmail(toEmail, token, expiresIn = "5 minutes") {
   const email = {
     body: {
-      name: name || "there",
       intro: "Welcome! Use the verification code below to activate your account.",
       table: {
         data: [

@@ -7,6 +7,7 @@ import { addUser } from "../store/store-slices/userSlice";
 import { validations } from "../utils/constants";
 import { GoogleLogin } from "@react-oauth/google";
 import Auth from "../services/authService";
+import authSide from "../assets/auth_side.png";
 
 export default function Login() {
 
@@ -61,63 +62,86 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-base-900">
-      <div className="bg-base-500 shadow-lg rounded-xl p-6 w-full max-w-sm">
-
-        <h2 className="text-2xl font-semibold mb-6">Login</h2>
-
-        <form onSubmit={handleSubmit(onSubmit)} noValidate>
-
-          <div className="mb-4">
-            <label className="text-sm font-medium block mb-1">Email</label>
-            <input 
-              type="email"
-              className={`w-full border rounded-xl px-3 py-2 ${errors.email ? "border-red-500" : "border-slate-300"}`}
-              {...register("email", validations.email)}
-            />
-            {errors.email && <p className="text-sm text-red-600 mt-1">{errors.email.message}</p>}
+    <div className="min-h-screen flex items-center justify-center bg-base-900 px-4 py-8">
+      <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 bg-base-800 shadow-xl rounded-2xl overflow-hidden">
+        
+        {/* Left Side - Image */}
+        <div className="hidden md:block relative h-full">
+          <img 
+            src={authSide} 
+            alt="Login Visual" 
+            className="w-full h-full object-cover absolute inset-0"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-base-900/90 to-transparent flex flex-col justify-end p-8">
+            <h2 className="text-3xl font-bold text-white mb-2">Welcome Back to Connexto</h2>
+            <p className="text-slate-300 font-medium">Log in to continue your journey with us.</p>
           </div>
-
-          <div className="mb-4">
-            <label className="text-sm font-medium block mb-1">Password</label>
-            <input 
-              type="password"
-              className={`w-full border rounded-xl px-3 py-2 ${errors.password ? "border-red-500" : "border-slate-300"}`}
-              {...register("password", validations.password)}
-            />
-            {errors.password && <p className="text-sm text-red-600 mt-1">{errors.password.message}</p>}
-          </div>
-
-          <button 
-            type="submit"
-            disabled={isSubmitting}
-            className="w-full bg-slate-900 text-white py-2 rounded-xl mt-2 disabled:opacity-60"
-          >
-            {isSubmitting ? "Logging in..." : "Login"}
-          </button>
-        </form>
-                {/* OR Divider */}
-        <div className="flex items-center my-6 gap-4">
-          <span className="flex-grow h-px bg-indigo-700"></span>
-          <span className="text-indigo-400 font-semibold">OR</span>
-          <span className="flex-grow h-px bg-indigo-700"></span>
         </div>
 
-        {/* Google Login */}
-<div className="w-full flex justify-center">
-  <GoogleLogin
-    onSuccess={handleSuccess}
-    onError={handleError}
-    size="medium"
-    type="standard"
-    shape="rectangular"
-    theme="filled_blue"
-  />
-</div>
+        {/* Right Side - Form */}
+        <div className="p-8 md:p-12 w-full flex flex-col justify-center">
+          
+          <div className="mb-8">
+             <h2 className="text-3xl font-bold text-white mb-2">Login</h2>
+             <p className="text-slate-400 text-sm">Welcome back! Please enter your details.</p>
+          </div>
 
-        <p className="text-sm text-center mt-3">
-          New user? <Link className="text-blue-600" to="/signup">Create an account</Link>
-        </p>
+          <form onSubmit={handleSubmit(onSubmit)} noValidate>
+
+            <div className="mb-5">
+              <label className="text-sm font-semibold text-slate-300 block mb-2">Email</label>
+              <input 
+                type="email"
+                className={`w-full border rounded-xl px-4 py-3 bg-base-700 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all ${errors.email ? "border-red-500" : "border-slate-600"}`}
+                {...register("email", validations.email)}
+                placeholder="name@example.com"
+              />
+              {errors.email && <p className="text-sm text-red-400 mt-2">{errors.email.message}</p>}
+            </div>
+
+            <div className="mb-5">
+              <label className="text-sm font-semibold text-slate-300 block mb-2">Password</label>
+              <input 
+                type="password"
+                className={`w-full border rounded-xl px-4 py-3 bg-base-700 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all ${errors.password ? "border-red-500" : "border-slate-600"}`}
+                {...register("password", validations.password)}
+                placeholder="Enter your password"
+              />
+              {errors.password && <p className="text-sm text-red-400 mt-2">{errors.password.message}</p>}
+            </div>
+
+            <button 
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full bg-slate-900 hover:bg-slate-950 text-white font-semibold py-3 rounded-xl transition-colors duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
+            >
+              {isSubmitting ? "Logging in..." : "Login"}
+            </button>
+          </form>
+          
+          {/* OR Divider */}
+          <div className="flex items-center my-6 gap-4">
+            <span className="flex-grow h-px bg-indigo-700"></span>
+            <span className="text-indigo-400 font-semibold text-sm">OR</span>
+            <span className="flex-grow h-px bg-indigo-700"></span>
+          </div>
+
+          {/* Google Login */}
+          <div className="w-full flex justify-center">
+            <GoogleLogin
+              onSuccess={handleSuccess}
+              onError={handleError}
+              size="large"
+              type="standard"
+              shape="rectangular"
+              theme="filled_blue"
+            />
+          </div>
+
+          <p className="text-sm text-center mt-6 text-slate-400">
+            New user? <Link className="text-blue-400 hover:text-blue-300 font-semibold hover:underline" to="/signup">Create an account</Link>
+          </p>
+        </div>
       </div>
     </div>
   )

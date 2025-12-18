@@ -4,7 +4,10 @@ import {protect} from "../middleware/auth.middleware.js"
 
 const router = express.Router();
 
+router.post("/send-otp", AuthController.sendOtp);
 router.post("/signup", AuthController.signup);
+
+router.post("/verify-otp", AuthController.verifyOtp);
 router.post("/login", AuthController.login);
 router.post("/logout", protect, AuthController.logout);
 router.post("/google-login", AuthController.googleLogin);

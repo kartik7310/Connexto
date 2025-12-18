@@ -7,6 +7,8 @@ import { client } from "../config/googleOauth.js";
 import { sendOtpSchema } from "../validators/otp.js";
 import OTP from "../models/otp.js";
 import { config } from "../config/env.js";
+import { sendVerificationTokenEmail } from "../mails/verification.js";
+import { OTP_CONFIG } from "../utils/otpGenerator.js";
 
 
 const AuthService = {
@@ -32,6 +34,33 @@ const AuthService = {
     });
 
     return logger.info(`New user registered: ${email}`);
+  },
+
+  async otpSend (data) {
+    const { email } = data;
+     if(!email){
+      throw new AppError("Email is required", 400);
+     }
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      throw new AppError("Invalid email format", 400);
+    }
+    await OTP.deleteMany({ email });
+    const otp = secureOtpGenerator(OTP_CONFIG.LENGTH);
+ 
+    
+    const hashedOTP = await bcrypt.hash(otp, 10);
+
+    await OTP.create({
+      email,
+      otp: hashedOTP,
+      expiresAt: new Date(Date.now() + OTP_CONFIG.EXPIRY_MINUTES * 60 * 1000), // 5 minutes
+      attempts: 0,
+   
+    });
+     await sendVerificationTokenEmail(email,otp)
+    return logger.info(`OTP sent to: ${email}`);
   },
 
   async login(data) {

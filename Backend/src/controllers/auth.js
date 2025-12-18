@@ -13,44 +13,16 @@ import { signupSchema, loginSchema } from "../validators/user.js"
 const AuthController = {
  async sendOtp(req, res, next){
   try {
- const result = sendOtpSchema.safeParse(req.body);
-  if (!result.success) {
-    const errorMessages = result.error.errors.map((err) => err.message).join(", ");
-    return next(new AppError(`Invalid input data: ${errorMessages}`, 400));
-  }
-  const {email} = result.data;
-  
-    // Rate limiting: Check if OTP was sent recently (within 1 minute)
-    const recentOTP = await OTP.findOne({
-      identifier: email,
-      createdAt: { $gt: new Date(Date.now() - 60000) }
-    });
+   const {email} = req.body;
+   if (!email) {
+    return next(new AppError('Email is required', 400))
+   }
 
-    if (recentOTP) {
-      return next(new AppError('Please wait before sending another OTP', 429))
-    }
-
-    // Generate OTP
-    const otp = secureOtpGenerator();
-    const hashedOTP = await bcrypt.hash(otp, 10);
-
-    // Store OTP in database
-    await OTP.create({
-      identifier: email,
-      otp: hashedOTP,
-      expiresAt: new Date(Date.now() + 5 * 60 * 1000), // 5 minutes
-      attempts: 0,
-      isUsed: false
-    });
-
-    // Send OTP via email
-    // await sendOTPEmail(email, otp, 'login');
-
+   await AuthService.otpSend({email});
     res.status(200).json({
       success: true,
-      otp,
       message: 'OTP sent successfully to your email',
-      expiresIn: 300 // seconds
+      
     });
 
   } catch (error) {

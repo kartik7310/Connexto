@@ -141,3 +141,56 @@
 2025-12-11 22:22:42 [[32minfo[39m] : Server is running on port 5000
 2025-12-11 22:22:52 [[32minfo[39m] : Cache hit
 2025-12-11 22:22:52 [[32minfo[39m] : Cache hit
+2025-12-18 13:01:38 [[32minfo[39m] : MongoDB connected successfully
+2025-12-18 13:01:38 [[32minfo[39m] : Server is running on port 5000
+2025-12-18 13:25:04 [[32minfo[39m] : MongoDB connected successfully
+2025-12-18 13:25:04 [[32minfo[39m] : Server is running on port 5000
+2025-12-18 13:26:01 [[32minfo[39m] : Fetched 0 connection requests for user: 693ae0d6fc633c520fce6168
+2025-12-18 13:26:05 [[32minfo[39m] : Fetched 0 connection requests for user: 693ae0d6fc633c520fce6168
+2025-12-18 13:26:10 [[32minfo[39m] : Cache miss
+2025-12-18 13:26:11 [[32minfo[39m] : Cache hit
+2025-12-18 13:26:19 [[32minfo[39m] : Cache miss
+2025-12-18 13:26:24 [[32minfo[39m] : Cache hit
+2025-12-18 13:26:25 [[32minfo[39m] : Cache hit
+2025-12-18 13:26:25 [[32minfo[39m] : Cache miss
+2025-12-18 13:26:29 [[32minfo[39m] : Cache hit
+2025-12-18 13:26:29 [[32minfo[39m] : Cache hit
+2025-12-18 13:26:30 [[32minfo[39m] : Cache hit
+2025-12-18 13:26:38 [[32minfo[39m] : Fetched 0 connection requests for user: 693ae0d6fc633c520fce6168
+2025-12-18 13:26:42 [[32minfo[39m] : Fetched 0 connections for user: 693ae0d6fc633c520fce6168
+2025-12-18 13:26:56 [[32minfo[39m] : Connection request created from 693ae0d6fc633c520fce6168 → 693de17efc633c520fce61c5 with status: interested
+2025-12-18 13:27:00 [[32minfo[39m] : Fetched 0 connections for user: 693ae0d6fc633c520fce6168
+2025-12-18 13:27:03 [[31merror[39m] : Error: Not authorized, token missing
+2025-12-18 13:27:03 [[31merror[39m] : Error: Not authorized, token missing
+2025-12-18 13:27:05 [[31merror[39m] : Error: Not authorized, token missing
+2025-12-18 13:27:17 [[31merror[39m] : Login failed
+2025-12-18 13:27:17 [[31merror[39m] : Error: data and hash arguments required
+2025-12-18 13:27:25 [[31merror[39m] : Login failed
+2025-12-18 13:27:25 [[31merror[39m] : Error: data and hash arguments required
+2025-12-18 13:39:36 [[31merror[39m] : Google login failed
+2025-12-18 13:39:36 [[31merror[39m] : Error: Wrong recipient, payload audience != requiredAudience
+2025-12-18 13:39:41 [[31merror[39m] : Error: Not authorized, token missing
+2025-12-18 13:39:54 [[31merror[39m] : Google login failed
+2025-12-18 13:39:54 [[31merror[39m] : Error: Wrong recipient, payload audience != requiredAudience
+2025-12-18 14:06:38 [[32minfo[39m] : New user registered: sourabh@gmail.com
+2025-12-18 14:07:35 [[32minfo[39m] : token
+2025-12-18 14:07:35 [[32minfo[39m] : User logged in: sourabh@gmail.com
+2025-12-18 14:07:48 [[32minfo[39m] : Connection request created from 6943bd16fe47ef509274a1ff → 6916b68604d6f30e6e05835c with status: interested
+2025-12-18 14:07:51 [[32minfo[39m] : Connection request created from 6943bd16fe47ef509274a1ff → 6916d64704d6f30e6e058362 with status: interested
+2025-12-18 14:08:05 [[32minfo[39m] : Fetched 0 connections for user: 6943bd16fe47ef509274a1ff
+2025-12-18 14:08:07 [[32minfo[39m] : Fetched 0 connection requests for user: 6943bd16fe47ef509274a1ff
+2025-12-18 14:08:19 [[32minfo[39m] : User profile updated successfully for userId: 6943bd16fe47ef509274a1ff
+2025-12-18 14:09:53 [[32minfo[39m] : Cache miss
+2025-12-18 14:09:53 [[32minfo[39m] : Cache hit
+2025-12-18 14:09:56 [[32minfo[39m] : Cache hit
+2025-12-18 14:09:58 [[32minfo[39m] : Cache hit
+2025-12-18 14:10:21 [[32minfo[39m] : Cache miss
+2025-12-18 14:11:44 [[32minfo[39m] : Cache miss
+2025-12-18 14:11:59 [[32minfo[39m] : Cache miss
+2025-12-18 14:12:08 [[32minfo[39m] : Cache miss
+2025-12-18 14:12:22 [[31merror[39m] : Error: Not authorized, token missing
+2025-12-18 14:12:22 [[31merror[39m] : Error: Not authorized, token missing
+2025-12-18 14:12:24 [[31merror[39m] : Error: Not authorized, token missing
+2025-12-18 14:18:57 [[31merror[39m] : Error: Not authorized, token missing
+2025-12-18 14:23:24 [[31merror[39m] : Error: Not authorized, token missing
+2025-12-18 14:27:16 [[31merror[39m] : Error: Not authorized, token missing

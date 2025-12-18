@@ -1,0 +1,18 @@
+2025-12-18 13:27:03 [[31merror[39m] : Error: Not authorized, token missing
+2025-12-18 13:27:03 [[31merror[39m] : Error: Not authorized, token missing
+2025-12-18 13:27:05 [[31merror[39m] : Error: Not authorized, token missing
+2025-12-18 13:27:17 [[31merror[39m] : Login failed
+2025-12-18 13:27:17 [[31merror[39m] : Error: data and hash arguments required
+2025-12-18 13:27:25 [[31merror[39m] : Login failed
+2025-12-18 13:27:25 [[31merror[39m] : Error: data and hash arguments required
+2025-12-18 13:39:36 [[31merror[39m] : Google login failed
+2025-12-18 13:39:36 [[31merror[39m] : Error: Wrong recipient, payload audience != requiredAudience
+2025-12-18 13:39:41 [[31merror[39m] : Error: Not authorized, token missing
+2025-12-18 13:39:54 [[31merror[39m] : Google login failed
+2025-12-18 13:39:54 [[31merror[39m] : Error: Wrong recipient, payload audience != requiredAudience
+2025-12-18 14:12:22 [[31merror[39m] : Error: Not authorized, token missing
+2025-12-18 14:12:22 [[31merror[39m] : Error: Not authorized, token missing
+2025-12-18 14:12:24 [[31merror[39m] : Error: Not authorized, token missing
+2025-12-18 14:18:57 [[31merror[39m] : Error: Not authorized, token missing
+2025-12-18 14:23:24 [[31merror[39m] : Error: Not authorized, token missing
+2025-12-18 14:27:16 [[31merror[39m] : Error: Not authorized, token missing
