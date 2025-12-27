@@ -1,5 +1,3 @@
-
-
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, Link } from "react-router-dom";
@@ -14,12 +12,16 @@ export default function Signup() {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors, isSubmitting },
   } = useForm({ mode: "onTouched" });
+
+  const email = watch("email");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // ✅ Signup submit
   const onSubmit = async (values) => {
     try {
       const res = await Auth.createAccount({
@@ -27,7 +29,8 @@ export default function Signup() {
         lastName: values.lastName,
         email: values.email,
         password: values.password,
-        age: Number(values.age),
+        age: values.age,
+        otp: values.otp,
       });
 
       if (res?.data?.success) {
@@ -39,251 +42,146 @@ export default function Signup() {
     } catch (err) {
       toast.error(
         err?.response?.data?.message ||
-          err?.response?.data?.error ||
           err?.message ||
           "Something went wrong"
       );
     }
   };
 
-  const handleSuccess = async (credentialResponse) => {
-    const idToken = credentialResponse?.credential;
-
-    if (!idToken) {
-      toast.error("Google login failed: Missing credential token");
+  // ✅ Send OTP
+  const handleSendOtp = async (email) => {
+    if (!email) {
+      toast.error("Please enter email first");
       return;
     }
+
     try {
-      const response = await Auth.googleLoginAccount(idToken);
-      dispatch(addUser(response.data.user));
-      toast.success(response.data?.message || "Google signup successful!");
-      navigate("/feed", { replace: true });
-    } catch (error) {
-      const message =
-        error?.response?.data?.message ||
-        error?.message ||
-        "Google signup failed. Please try again.";
-      toast.error(message);
-      console.error("signup failed:", error);
+      const res = await Auth.sendOtp({ email });
+      if (res?.data?.success) {
+        toast.success(res.data.message || "OTP sent successfully");
+      } else {
+        toast.error(res?.data?.message || "Could not send OTP");
+      }
+    } catch (err) {
+      toast.error("Failed to send OTP");
     }
   };
 
-  const handleError = () => {
-    toast.error("Google signup failed. Please try again.");
-    console.error("Google signup failed");
+  // ✅ Google signup
+  const handleSuccess = async (credentialResponse) => {
+    const idToken = credentialResponse?.credential;
+    if (!idToken) {
+      toast.error("Google login failed");
+      return;
+    }
+
+    try {
+      const res = await Auth.googleLoginAccount(idToken);
+      dispatch(addUser(res.data.user));
+      toast.success(res.data?.message || "Signup successful");
+      navigate("/feed", { replace: true });
+    } catch (err) {
+      toast.error("Google signup failed");
+    }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-base-900 px-4 py-8">
-      <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 bg-base-800 shadow-xl rounded-2xl overflow-hidden">
-        {/* Left Side - Image */}
-        <div className="hidden md:block relative h-full">
-          <img 
-            src={authSide} 
-            alt="Signup Visual" 
-            className="w-full h-full object-cover absolute inset-0"
+    <div className="min-h-[60vh] flex items-center justify-center bg-base-900 px-4 py-8">
+      <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 bg-base-800 shadow-xl rounded-2xl overflow-hidden">
+        
+        {/* Left Image */}
+        <div className="hidden md:block relative">
+          <img
+            src={authSide}
+            alt="Signup"
+            className="absolute inset-0 w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-base-900/90 to-transparent flex flex-col justify-end p-8">
-            <h2 className="text-3xl font-bold text-white mb-2">Welcome to Connexto</h2>
-            <p className="text-slate-300 font-medium">Join our community and start connecting with people today.</p>
-          </div>
         </div>
 
-        {/* Right Side - Form */}
-        <div className="p-8 md:p-12 w-full">
-          {/* Header */}
-          <div className="mb-8">
-            <h2 className="text-3xl font-bold text-white mb-2">Create Account</h2>
-            <p className="text-slate-400 text-sm">Sign up to get started</p>
-          </div>
+        {/* Form */}
+        <div className="p-8 md:p-12">
+          <h2 className="text-3xl font-bold text-white mb-5">Create Account</h2>
 
-          <div onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(onSubmit)}>
+
             {/* First Name */}
-            <div className="mb-5">
-              <label className="text-sm font-semibold text-slate-300 block mb-2">
-                First Name
-              </label>
-              <input
-                type="text"
-                className={`w-full border rounded-xl px-4 py-3 bg-base-700 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all ${
-                  errors.firstName ? "border-red-500" : "border-slate-600"
-                }`}
-                placeholder="Enter your first name"
-                {...register("firstName", {
-                  required: "First name is required",
-                  minLength: { value: 2, message: "Minimum 2 characters" },
-                  maxLength: { value: 50, message: "Maximum 50 characters" },
-                })}
-              />
-              {errors.firstName && (
-                <p className="text-sm text-red-400 mt-2">
-                  {errors.firstName.message}
-                </p>
-              )}
-            </div>
+            <input
+              className="w-full mb-3 px-3 py-2 rounded-xl bg-base-700 text-white"
+              placeholder="First Name"
+              {...register("firstName", { required: "First name required" })}
+            />
+            {errors.firstName && <p className="text-red-400">{errors.firstName.message}</p>}
 
             {/* Last Name */}
-            <div className="mb-5">
-              <label className="text-sm font-semibold text-slate-300 block mb-2">
-                Last Name
-              </label>
-              <input
-                type="text"
-                className={`w-full border rounded-xl px-4 py-3 bg-base-700 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all ${
-                  errors.lastName ? "border-red-500" : "border-slate-600"
-                }`}
-                placeholder="Enter your last name"
-                {...register("lastName", {
-                  required: "Last name is required",
-                  minLength: { value: 2, message: "Minimum 2 characters" },
-                  maxLength: { value: 50, message: "Maximum 50 characters" },
-                })}
-              />
-              {errors.lastName && (
-                <p className="text-sm text-red-400 mt-2">
-                  {errors.lastName.message}
-                </p>
-              )}
-            </div>    
+            <input
+              className="w-full mb-3 px-3 py-2 rounded-xl bg-base-700 text-white"
+              placeholder="Last Name"
+              {...register("lastName", { required: "Last name required" })}
+            />
 
             {/* Email */}
-            <div className="mb-5">
-              <label className="text-sm font-semibold text-slate-300 block mb-2">
-                Email
-              </label>
-              <input
-                type="email"
-                className={`w-full border rounded-xl px-4 py-3 bg-base-700 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all ${
-                  errors.email ? "border-red-500" : "border-slate-600"
-                }`}
-                placeholder="name@example.com"
-                {...register("email", {
-                  required: "Email is required",
-                  pattern: {
-                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                    message: "Email is not valid",
-                  },
-                })}
-              />
-              {errors.email && (
-                <p className="text-sm text-red-400 mt-2">
-                  {errors.email.message}
-                </p>
-              )}
-            </div>
+            <input
+              type="email"
+              className="w-full mb-3 px-3 py-2 rounded-xl bg-base-700 text-white"
+              placeholder="Email"
+              {...register("email", { required: "Email required" })}
+            />
 
             {/* Password */}
-            <div className="mb-5">
-              <label className="text-sm font-semibold text-slate-300 block mb-2">
-                Password
-              </label>
-              <input
-                type="password"
-                className={`w-full border rounded-xl px-4 py-3 bg-base-700 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all ${
-                  errors.password ? "border-red-500" : "border-slate-600"
-                }`}
-                placeholder="Create a strong password"
-                {...register("password", {
-                  required: "Password is required",
-                  pattern: {
-                    value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/,
-                    message: "Min 8 chars, 1 uppercase, 1 lowercase, 1 number",
-                  },
-                })}
-              />
-              {errors.password && (
-                <p className="text-sm text-red-400 mt-2">
-                  {errors.password.message}
-                </p>
-              )}
-            </div>
+            <input
+              type="password"
+              className="w-full mb-3 px-3 py-2 rounded-xl bg-base-700 text-white"
+              placeholder="Password"
+              {...register("password", { required: "Password required" })}
+            />
 
             {/* Age */}
-            <div className="mb-6">
-              <label className="text-sm font-semibold text-slate-300 block mb-2">
-                Age
-              </label>
+            <input
+              type="number"
+              className="w-full mb-3 px-3 py-2 rounded-xl bg-base-700 text-white"
+              placeholder="Age"
+              {...register("age", { required: "Age required" })}
+            />
+
+            {/* OTP */}
+            <div className="flex gap-2 mb-3">
               <input
-                type="number"
-                className={`w-full border rounded-xl px-4 py-3 bg-base-700 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all ${
-                  errors.age ? "border-red-500" : "border-slate-600"
-                }`}
-                placeholder="Enter your age"
-                {...register("age", {
-                  required: "Age is required",
-                  valueAsNumber: true,
-                  min: { value: 13, message: "Minimum age is 13" },
-                  max: { value: 120, message: "Maximum age is 120" },
-                })}
+                className="flex-1 px-3 py-2 rounded-xl bg-base-700 text-white"
+                placeholder="Enter OTP"
+                {...register("otp", { required: "OTP required" })}
               />
-              {errors.age && (
-                <p className="text-sm text-red-400 mt-2">
-                  {errors.age.message}
-                </p>
-              )}
+              <button
+                type="button"
+                onClick={() => handleSendOtp(email)}
+                className="bg-indigo-600 px-3 py-2 rounded-xl text-white"
+              >
+                Send OTP
+              </button>
             </div>
 
-            {/* OTP Section (New) */}
-            <div className="mb-6">
-              <label className="text-sm font-semibold text-slate-300 block mb-2">
-                OTP Verification
-              </label>
-              <div className="flex gap-2">
-                <input
-                  type="text"
-                  className="w-full border border-slate-600 rounded-xl px-4 py-3 bg-base-700 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
-                  placeholder="Enter OTP"
-                  {...register("otp")}
-                />
-                <button
-                  type="button"
-                  className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-4 py-3 rounded-xl transition-colors duration-200 whitespace-nowrap"
-                  onClick={() => toast.info("OTP sent to your email!")}
-                >
-                  Send OTP
-                </button>
-              </div>
-            </div>
-
-            {/* Submit Button */}
+            {/* Submit */}
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-slate-900 hover:bg-slate-950 text-white font-semibold py-3 rounded-xl transition-colors duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
-              onClick={handleSubmit(onSubmit)}
+              className="w-full bg-slate-900 py-2 rounded-xl text-white"
             >
               {isSubmitting ? "Creating..." : "Sign up"}
             </button>
-          </div>
-
-          {/* OR Divider */}
-          <div className="flex items-center my-6">
+          </form>
+         {/* OR Divider */}
+          <div className="flex items-center my-6 gap-4">
             <span className="flex-grow h-px bg-indigo-700"></span>
-            <span className="px-4 text-indigo-400 font-semibold text-sm">OR</span>
+            <span className="text-indigo-400 font-semibold text-sm">OR</span>
             <span className="flex-grow h-px bg-indigo-700"></span>
           </div>
-
-          {/* Google Login */}
-          <div className="w-full flex justify-center">
-            <GoogleLogin
-              onSuccess={handleSuccess}
-              onError={handleError}
-              size="large"
-              type="standard"
-              shape="rectangular"
-              theme="filled_blue"
-            />
+          {/* Google */}
+          <div className="mt-6 flex justify-center">
+            <GoogleLogin onSuccess={handleSuccess} onError={() => toast.error("Google login failed")} />
           </div>
 
-          {/* Login Link */}
-          <p className="text-sm text-center mt-6 text-slate-400">
+          <p className="text-center text-slate-400 mt-4">
             Already have an account?{" "}
-            <Link 
-              className="text-blue-400 hover:text-blue-300 font-semibold hover:underline" 
-              to="/login"
-            >
-              Login
-            </Link>
+            <Link to="/login" className="text-blue-400">Login</Link>
           </p>
         </div>
       </div>

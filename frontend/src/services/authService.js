@@ -5,7 +5,7 @@ class AuthService {
     this.baseUrl = baseUrl
   }
 
-   async createAccount({ firstName, lastName, email, password }) {
+   async createAccount({ firstName, lastName, email, password,otp ,age}) {
         try {
             const res = await axios.post(
                 this.baseUrl + apiEndpoints.signUp,
@@ -14,6 +14,8 @@ class AuthService {
                     lastName,
                     email,
                     password,
+                    age,
+                    otp,
                 },
                 {
                     withCredentials: true,
@@ -63,7 +65,25 @@ class AuthService {
     throw new Error(serverMsg || "Invalid credentials");  
         }
     }
+    
+    async sendOtp({email}){
+        try {
+            const res = await axios.post(
+                this.baseUrl + apiEndpoints.sendOtp,
+                {
+                    email,
+                },
+                {
+                    withCredentials: true,
+                }
+            );
 
+            return res;
+        } catch (err) {
+           const serverMsg = err?.response?.data?.message || err?.response?.data?.error;
+    throw new Error(serverMsg || "Invalid credentials");  
+        }
+    }
    
     async logout(){
         try {

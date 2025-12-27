@@ -3,6 +3,7 @@ export const baseUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:50
 export const apiEndpoints = {
   signUp: "/auth/signup",
   login: "/auth/login",
+  sendOtp:"/auth/send-otp",
   googleLogin: "/auth/google-login",
   logout: "/auth/logout",
   getFeed:"/user/feed",
@@ -18,7 +19,8 @@ export const apiEndpoints = {
   createBlog:"/blogs/create",
   updateBlog:"/blogs/update/:blogId",
   deleteBlog:"/blogs/delete/:blogId",
-  imagekitAuth:"/blogs/imagekit-auth"
+  imagekitAuth:"/blogs/imagekit-auth",
+
 
 };
 

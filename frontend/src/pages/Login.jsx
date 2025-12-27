@@ -128,14 +128,7 @@ export default function Login() {
 
           {/* Google Login */}
           <div className="w-full flex justify-center">
-            <GoogleLogin
-              onSuccess={handleSuccess}
-              onError={handleError}
-              size="large"
-              type="standard"
-              shape="rectangular"
-              theme="filled_blue"
-            />
+            <GoogleLogin onSuccess={handleSuccess} onError={() => toast.error("Google login failed")} />
           </div>
 
           <p className="text-sm text-center mt-6 text-slate-400">
