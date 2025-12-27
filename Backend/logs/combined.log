@@ -274,3 +274,68 @@
 2025-12-18 17:44:44 [[32minfo[39m] : New user registered: kartiklathiyan455@gmail.com
 2025-12-18 17:45:09 [[32minfo[39m] : token
 2025-12-18 17:45:09 [[32minfo[39m] : User logged in: kartiklathiyan455@gmail.com
+2025-12-26 17:38:09 [[32minfo[39m] : MongoDB connected successfully
+2025-12-26 17:38:09 [[32minfo[39m] : Server is running on port 5000
+2025-12-27 17:30:44 [[32minfo[39m] : MongoDB connected successfully
+2025-12-27 17:30:44 [[32minfo[39m] : Server is running on port 5000
+2025-12-27 17:31:10 [[31merror[39m] : JsonWebTokenError: invalid signature
+2025-12-27 17:31:21 [[31merror[39m] : Google login failed
+2025-12-27 17:31:21 [[31merror[39m] : Error: Wrong recipient, payload audience != requiredAudience
+2025-12-27 17:31:33 [[31merror[39m] : Google login failed
+2025-12-27 17:31:33 [[31merror[39m] : Error: Wrong recipient, payload audience != requiredAudience
+2025-12-27 17:34:50 [[32minfo[39m] : MongoDB connected successfully
+2025-12-27 17:34:50 [[32minfo[39m] : Server is running on port 5000
+2025-12-27 20:45:43 [[32minfo[39m] : MongoDB connected successfully
+2025-12-27 20:45:43 [[32minfo[39m] : Server is running on port 5000
+2025-12-27 20:50:00 [[31merror[39m] : ReferenceError: EmailRegex is not defined
+2025-12-27 20:50:55 [[32minfo[39m] : MongoDB connected successfully
+2025-12-27 20:50:55 [[32minfo[39m] : Server is running on port 5000
+2025-12-27 20:54:51 [[32minfo[39m] : MongoDB connected successfully
+2025-12-27 20:54:51 [[32minfo[39m] : Server is running on port 5000
+2025-12-27 20:54:56 [[32minfo[39m] : Email sent successfully to kartiklathiyan455@gmail.com:
+2025-12-27 20:54:56 [[32minfo[39m] : OTP sent to: kartiklathiyan455@gmail.com
+2025-12-27 20:55:30 [[31merror[39m] : Error: Not authorized, token missing
+2025-12-27 20:57:17 [[32minfo[39m] : MongoDB connected successfully
+2025-12-27 20:57:17 [[32minfo[39m] : Server is running on port 5000
+2025-12-27 20:57:23 [[32minfo[39m] : Email sent successfully to kartiklathiyan455@gmail.com:
+2025-12-27 20:57:23 [[32minfo[39m] : OTP sent to: kartiklathiyan455@gmail.com
+2025-12-27 21:06:27 [[31merror[39m] : Error: Not authorized, token missing
+2025-12-27 21:06:27 [[31merror[39m] : Error: Email is required
+2025-12-27 21:06:27 [[31merror[39m] : Error: Email is required
+2025-12-27 21:06:32 [[31merror[39m] : Error: Email is required
+2025-12-27 21:06:32 [[31merror[39m] : Error: Email is required
+2025-12-27 21:06:38 [[31merror[39m] : Error: Not authorized, token missing
+2025-12-27 21:13:04 [[32minfo[39m] : MongoDB connected successfully
+2025-12-27 21:13:04 [[32minfo[39m] : Server is running on port 5000
+2025-12-27 21:13:08 [[31merror[39m] : Error: Email is required
+2025-12-27 21:22:11 [[31merror[39m] : Error: Email is required
+2025-12-27 21:26:35 [[31merror[39m] : Error: Email is required
+2025-12-27 21:33:48 [[31merror[39m] : Error: Not authorized, token missing
+2025-12-27 21:35:51 [[32minfo[39m] : MongoDB connected successfully
+2025-12-27 21:35:51 [[32minfo[39m] : Server is running on port 5000
+2025-12-27 21:36:17 [[31merror[39m] : Error: Not authorized, token missing
+2025-12-27 21:38:13 [[32minfo[39m] : MongoDB connected successfully
+2025-12-27 21:38:13 [[32minfo[39m] : Server is running on port 5000
+2025-12-27 21:39:22 [[31merror[39m] : Error: Not authorized, token missing
+2025-12-27 21:40:14 [[32minfo[39m] : Email sent successfully to kartiklathiyan455@gmail.com:
+2025-12-27 21:40:14 [[32minfo[39m] : OTP sent to: kartiklathiyan455@gmail.com
+2025-12-27 21:42:01 [[31merror[39m] : Error: Not authorized, token missing
+2025-12-27 21:43:17 [[31merror[39m] : Error: Not authorized, token missing
+2025-12-27 21:43:17 [[31merror[39m] : Error: Not authorized, token missing
+2025-12-27 21:44:17 [[32minfo[39m] : MongoDB connected successfully
+2025-12-27 21:44:17 [[32minfo[39m] : Server is running on port 5000
+2025-12-27 21:44:44 [[31merror[39m] : Error: Not authorized, token missing
+2025-12-27 21:44:44 [[31merror[39m] : Error: Not authorized, token missing
+2025-12-27 21:45:04 [[31merror[39m] : Error: Not authorized, token missing
+2025-12-27 21:45:04 [[31merror[39m] : Error: Not authorized, token missing
+2025-12-27 21:45:27 [[32minfo[39m] : Email sent successfully to kartiklathiyan455@gmail.com:
+2025-12-27 21:45:27 [[32minfo[39m] : OTP sent to: kartiklathiyan455@gmail.com
+2025-12-27 22:00:26 [[31merror[39m] : Error: Not authorized, token missing
+2025-12-27 22:00:26 [[31merror[39m] : Error: Not authorized, token missing
+2025-12-27 22:04:36 [[32minfo[39m] : Email sent successfully to kartiklathiyan455@gmail.com:
+2025-12-27 22:04:36 [[32minfo[39m] : OTP sent to: kartiklathiyan455@gmail.com
+2025-12-27 22:05:46 [[33mwarn[39m] : Signup attempt with existing email: kartiklathiyan455@gmail.com
+2025-12-27 22:05:46 [[31merror[39m] : Error: User already exists with this email
+2025-12-27 22:06:25 [[33mwarn[39m] : Login failed - incorrect password: kartiklathiyan455@gmail.com
+2025-12-27 22:06:25 [[31merror[39m] : Login failed
+2025-12-27 22:06:25 [[31merror[39m] : Error: Invalid credentials

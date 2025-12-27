@@ -4,7 +4,7 @@ import {protect} from "../middleware/auth.middleware.js"
 import {otpLimiter,signupLimiter,loginLimiter,resetPasswordLimiter}  from "../middleware/rateLimiter.js"
 const router = express.Router();
 
-router.post("/send-otp", otpLimiter, AuthController.sendOtp);
+router.post("/send-otp",otpLimiter, AuthController.sendOtp);
 router.post("/signup",signupLimiter, AuthController.signup);
 router.post("/login",loginLimiter, AuthController.login);
 

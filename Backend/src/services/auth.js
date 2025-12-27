@@ -12,6 +12,7 @@ import { OTP_CONFIG, secureOtpGenerator } from "../utils/otpGenerator.js";
 import otpHashing from "../utils/otpHashing.js";
 import { sendForgotPasswordTokenEmail } from "../mails/forgotPassword.js";
 import { sendResetPasswordSuccessEmail } from "../mails/resetPassword.js";
+import EmailRegex from "../utils/EmailRegex.js";
 
 
 const AuthService = {

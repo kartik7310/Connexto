@@ -1,6 +1,6 @@
-import AppError from "./AppError";
+import AppError from "./AppError.js";
 
-export function EmailRegex(email){
+export default function EmailRegex(email){
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
           throw new AppError("Invalid email format", 400);
