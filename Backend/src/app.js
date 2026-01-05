@@ -14,9 +14,14 @@ import ChatRoutes from "./routes/chat.routes.js"
 import BlogRoutes from "./routes/blog.route.js"
 import "./helper/cronJob.js"
 import { createServer } from 'node:http';
+import SubscriptionController from "./controllers/subscription.js";
 const app = express();
-
 const PORT = config.port;
+app.post(
+  "/api/v1/connexto/webhook/stripe",
+  express.raw({ type: "application/json" }),
+  SubscriptionController.stripeWebhook
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());

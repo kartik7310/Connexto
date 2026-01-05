@@ -29,6 +29,11 @@ export const config = {
     keySecret: process.env.RAZORPAY_KEY_SECRET,
     webhookSecret: process.env.RAZORPAY_WEBHOOK_SECRET,
   },
+  stripe:{
+    stripePriceId:process.env.STRIPE_PREMIUM_PRICE_ID,
+    secretKey: process.env.STRIPE_SECRET_KEY,
+    webhookSecret: process.env.STRIPE_WEBHOOK_SECRET,
+  },
  
   nodemailer:{
     brevoLogin:process.env.BREVO_SMTP_LOGIN,

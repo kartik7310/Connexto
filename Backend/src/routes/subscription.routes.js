@@ -4,10 +4,6 @@ import {protect} from "../middleware/auth.middleware.js"
 import SubscriptionController from "../controllers/subscription.js";
 
 const router = express.Router();
-router.post("/order-create", protect, SubscriptionController.createOrder);
-router.get("/isPremium", protect, SubscriptionController.getSubscriptions);
-router.post("/webhook",express.json({ type: "*/*" }),SubscriptionController.verifyPaymentWebhook);
-
-
+router.post("/checkout", protect, SubscriptionController.createPayment);
 
 export default router;

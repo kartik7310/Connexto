@@ -1,152 +1,118 @@
-import instance from "../config/razorpay.js";
+
 import logger from "../config/logger.js";
 import AppError from "../utils/AppError.js";
-import { membershipType } from "../utils/planType.js";
-import Subscription from "../models/subscription.js";
-import { validateWebhookSignature } from "razorpay/dist/utils/razorpay-utils.js";
 import User from "../models/user.js";
 import { config } from "../config/env.js";
+import stripe from "../config/stripe.js";
 const SubscriptionController = {
-  async createOrder(req, res, next) {
-    try {
-      const { firstName, lastName, email, _id: userId } = req.user;
-      const { planType } = req.body;
-      logger.info("Creating order", { planType, userId });
 
-      if (!planType || !membershipType[planType]) {
-        throw new AppError("Invalid membership type provided", 400);
+async createPayment  (req, res,next) {
+  try {
+  const {_id:userId,email} = req.user;
+    if (!userId) {
+     return next(new AppError("User authentication required",401));
+    }
+
+    // Validate environment variables
+    if (!config.stripe.stripePriceId) {
+      return next(new AppError("Stripe price ID not configured",500));
+    }
+    const _id = userId
+    const session = await stripe.checkout.sessions.create({
+      mode: "subscription",
+      payment_method_types: ["card"],
+      customer_email: email,
+      line_items: [
+        {
+          price: config.stripe.stripePriceId,
+          quantity: 1
+        }
+      ],
+      success_url: `${config.corsOrigin}/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${config.corsOrigin}/cancel`,
+      metadata: {
+        userId: _id.toString()
+      },
+    });
+
+    // Validate session URL exists
+    if (!session.url) {
+      return next(new AppError("Failed to create checkout session URL",500));
+    }
+
+    return res.json({ url: session.url });
+
+  } catch (error) {
+  logger.error("Payment creation error:", error);
+    return next(new AppError("Failed to create payment session",500));
+  }
+},
+ 
+   async stripeWebhook(req,res, next) {
+      const signature = req.headers["stripe-signature"];
+      if (!signature) {
+        return next(new AppError("Missing stripe signature",400));
       }
 
-      if (!firstName || !lastName || !email || !userId) {
-        throw new AppError("User information is incomplete", 400);
+      let event
+
+      try {
+        event = stripe.webhooks.constructEvent(
+          req.body,
+          signature,
+          config.stripe.webhookSecret
+        );
+          
+      } catch (error) {
+        console.error(" Webhook verification failed:", error);
+        return next(new AppError("Invalid signature",400));
       }
-
-      const amount = membershipType[planType];
-
-      const razorpayOrder = await instance.orders.create({
-        amount: amount * 100,
-        currency: "INR",
-        receipt: `rcpt_${firstName}_${Date.now()}`,
-        payment_capture: 1,
-        notes: {
-          firstName,
-          lastName,
-          email,
-          userId,
-          membershipType: planType,
-        },
-      });
-
-      const subscription = new Subscription({
-        userId,
-        razorpayOrderId: razorpayOrder.id,
-        membershipType: planType,
-        amount: amount,
-        receipt: razorpayOrder.receipt,
-        currency: "INR",
-        status: "created",
-        notes: razorpayOrder.notes,
-        createdAt: new Date(),
-      });
-
-      const savedSubscription = await subscription.save();
-
-     
-      logger.info("Order created successfully", {
-        userId,
-        orderId: razorpayOrder.id,
-        membershipType: planType,
-      });
-
-  
-      const data = savedSubscription.toJSON()
-      res.status(201).json({
-        success: true,
-        message: "Order created successfully",
-        data,
-      });
-    } catch (error) {
       
-      logger.error("Error creating order", {
-        error: error.message,
-        stack: error.stack,
-        userId: req.user?.userId,
-      });
+      try {
+        //  Subscription started
+        if (event.type === "checkout.session.completed")
+          {const session = event.data.object ;
+      
+      
+      if (session.mode === "subscription" && session.metadata?.userId) {
 
-      // Handle Razorpay specific errors
-      if (error.error && error.error.description) {
-        return next(
-          new AppError(`Payment gateway error: ${error.error.description}`, 500)
+        await User.updateOne(
+          { _id: session.metadata.userId },
+          {
+            plan: "PREMIUM",
+            subscriptionStatus: "active",
+            stripeCustomerId: session.customer?.toString(),
+            stripeSubscriptionId: session.subscription,
+            subscriptionStartDate: new Date(),
+            subscriptionEndDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
+          }
         );
       }
+    }
+        //  Subscription cancelled
+      if (event.type === "customer.subscription.deleted") {
+      const subscription = event.data.object ;
 
-      
-      if (error instanceof AppError) {
-        return next(error);
-      }
-
-      next(
-        new AppError("Failed to create order. Please try again later.", 500)
+      await User.updateOne(
+        { stripeSubscriptionId: subscription.id },
+        {
+          plan: "FREE",
+          subscriptionStatus: "expired",
+          $unset: {
+            subscriptionStartDate: "",
+            subscriptionEndDate: ""
+          }
+        }
       );
     }
-  },
-  
-  //after deploy need to setup webhook for verification
-  async verifyPaymentWebhook(req, res, next) {
-    try {
-      const signature = req.get("x-razorpay-signature");
-      const isWebhookValid = validateWebhookSignature(
-        JSON.stringify(req.body),
-        signature,
-        config.razorpay.webhookSecret
-      );
-      
-      if (!isWebhookValid) {
-        return next(new AppError("Invalid signature", 400));
-      }
 
-      // Update subscription status in db
-      const paymentDetails = req.body.payload.payment.entity;
-      const subscription = await Subscription.findOne({
-        razorpayOrderId: paymentDetails.order_id
-      });
-      
-      if (!subscription) {
-        return next(new AppError("Subscription not found", 404));
-      }
-      
-      subscription.status = paymentDetails.status;
-      await subscription.save();
-      
-      const user = await User.findById(subscription.userId);
-      if (!user) {
-        return next(new AppError("User not found", 404));
-      }
-      
-      user.isPremium = true;
-      user.membershipType = subscription?.notes?.membershipType;
-      await user.save();
+        return res.json({ received: true });
 
-      res.status(200).json({
-        success: true,
-        message: "Webhook received successfully"
-      });
-    } catch (error) {
-      next(new AppError(error.message, error.statusCode || 500));
-    }
-  },
-  async getSubscriptions(req, res, next) {
-    try {
-      const user = req.user.toJSON();
-      logger.info("getSubscriptions", { user });
-      if (user.isPremium) {
-        return res.status(200).json({ isPremium: true });
+      } catch (error) {
+        console.error(" Webhook processing error:", error);
+        return res.json({ received: true });
       }
-      return res.status(200).json({ isPremium: false });
-    } catch (error) {
-      next(error);
     }
-  },
 };
 
 export default SubscriptionController;

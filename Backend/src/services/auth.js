@@ -19,6 +19,7 @@ const AuthService = {
  
 
   async signup(data) {
+
     const { firstName, lastName, email, password, age ,otp} = data;
 
     const existing = await User.findOne({ email });
@@ -27,7 +28,8 @@ const AuthService = {
         logger.warn(`Signup attempt with existing email: ${email}`);
     throw new AppError("User already exists with this email", 400);
     }
-     const existingOtp = await OTP.findOne({ email, Used: false });
+     const existingOtp = await OTP.findOne({ email, used: false });
+
      logger.info(`Existing OTP: ${existingOtp}`);
      if (!existingOtp) {
       throw new AppError("Invalid or Expired OTP", 400);
@@ -39,7 +41,7 @@ const AuthService = {
       throw new AppError("Invalid OTP", 400);
     }
 
-  const isOtpExpired = existingOtp.expireAt < new Date();
+  const isOtpExpired = existingOtp.expiresAt < new Date();
      if (isOtpExpired) {
       await OTP.deleteOne({ _id: existingOtp._id });
       throw new AppError("OTP has expired", 400);

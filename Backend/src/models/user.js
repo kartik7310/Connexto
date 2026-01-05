@@ -51,9 +51,15 @@ const userSchema = new mongoose.Schema(
     authProvider: { type: String, enum: ["local", "google"], default: "local" },
     role: { type: String, enum: ["user", "admin"], default: "user" },
     isVerified: { type: Boolean, default: false },
-    isPremium: { type: Boolean, default: false },
     membershipType: { type: String },
     lastLogin: { type: Date },
+    plan: { type: String, enum: ["FREE", "PREMIUM"], default: "FREE" },
+    stripeSubscriptionId:{type:String},
+    stripeCustomerId:{type:String},
+    subscriptionStatus:{type:String,enum:["active","expired"],default:"expired"},
+    subscriptionEndDate:{type:Date},
+    subscriptionStartDate:{type:Date},
+
   },
   { timestamps: true }
 );
