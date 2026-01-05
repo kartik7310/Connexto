@@ -126,7 +126,7 @@ async forgotPassword(req, res, next){
     return next(new AppError('Email is required', 400))
    }
 
-   await AuthService.otpSend({email});
+   await AuthService.forgotPassword(email);
     res.status(200).json({
       success: true,
       message: 'OTP sent successfully to your email',
