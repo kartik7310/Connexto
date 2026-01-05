@@ -15,6 +15,8 @@ import Blog from "./pages/blog"
 import BlogDetails from "./pages/BlogDetails"
 import WriteBlog from "./pages/WriteBlog"
 import EditBlog from "./pages/EditBlog"
+import ForgotPassword from "./pages/ForgotPassword"
+import ResetPassword from "./pages/ResetPassword"
 import ProtectedRoute from "./components/ProtectedRoute"
 
 function App() {
@@ -39,6 +41,22 @@ function App() {
          element={
            <ProtectedRoute isPublic={true}>
              <Signup/>
+           </ProtectedRoute>
+         }
+       />
+       <Route 
+         path="forgot-password" 
+         element={
+           <ProtectedRoute isPublic={true}>
+             <ForgotPassword/>
+           </ProtectedRoute>
+         }
+       />
+       <Route 
+         path="reset-password" 
+         element={
+           <ProtectedRoute isPublic={true}>
+             <ResetPassword/>
            </ProtectedRoute>
          }
        />

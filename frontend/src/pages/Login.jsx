@@ -108,6 +108,9 @@ export default function Login() {
                 placeholder="Enter your password"
               />
               {errors.password && <p className="text-sm text-red-400 mt-2">{errors.password.message}</p>}
+              <div className="flex justify-end mt-2">
+                <Link to="/forgot-password" title="Forgot Password?" className="text-sm text-indigo-400 hover:text-indigo-300 font-medium">Forgot Password?</Link>
+              </div>
             </div>
 
             <button 

@@ -7,6 +7,7 @@ import Profile from "../services/profileService";
 import { useDispatch,useSelector } from "react-redux";
 import { addUser } from "../store/store-slices/userSlice";
 import { useEffect } from "react";
+import Chatbot from "../components/Chatbot";
 
 
 export default function Layout() {
@@ -41,6 +42,8 @@ export default function Layout() {
       </main>
 
       <Footer />
+      <Chatbot />
+    
       <ToastContainer
                 position="top-left"
                 autoClose={5000}

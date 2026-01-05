@@ -20,6 +20,8 @@ export const apiEndpoints = {
   updateBlog:"/blogs/update/:blogId",
   deleteBlog:"/blogs/delete/:blogId",
   imagekitAuth:"/blogs/imagekit-auth",
+  forgotPassword: "/auth/forgot-password",
+  resetPassword: "/auth/reset-password",
 
 
 };

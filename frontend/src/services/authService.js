@@ -99,5 +99,33 @@ class AuthService {
     throw new Error(serverMsg || "Invalid credentials"); 
         }
     }
+
+    async forgotPassword(email) {
+        try {
+            const res = await axios.post(
+                this.baseUrl + apiEndpoints.forgotPassword,
+                { email },
+                { withCredentials: true }
+            );
+            return res;
+        } catch (err) {
+            const serverMsg = err?.response?.data?.message || err?.response?.data?.error;
+            throw new Error(serverMsg || "Failed to send reset OTP");
+        }
+    }
+
+    async resetPassword(data) {
+        try {
+            const res = await axios.post(
+                this.baseUrl + apiEndpoints.resetPassword,
+                data,
+                { withCredentials: true }
+            );
+            return res;
+        } catch (err) {
+            const serverMsg = err?.response?.data?.message || err?.response?.data?.error;
+            throw new Error(serverMsg || "Failed to reset password");
+        }
+    }
 }
 export default new AuthService(baseUrl);

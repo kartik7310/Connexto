@@ -48,7 +48,6 @@ export default function Signup() {
     }
   };
 
-  // ✅ Send OTP
   const handleSendOtp = async (email) => {
     if (!email) {
       toast.error("Please enter email first");
