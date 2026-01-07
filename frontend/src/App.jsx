@@ -17,6 +17,8 @@ import WriteBlog from "./pages/WriteBlog"
 import EditBlog from "./pages/EditBlog"
 import ForgotPassword from "./pages/ForgotPassword"
 import ResetPassword from "./pages/ResetPassword"
+import Success from "./pages/Success"
+import Cancel from "./pages/Cancel"
 import ProtectedRoute from "./components/ProtectedRoute"
 
 function App() {
@@ -73,6 +75,8 @@ function App() {
          <Route path="blogs/write-blog" element={<WriteBlog/>}/>
          <Route path="blogs/edit-blog/:blogId" element={<EditBlog/>}/>
          <Route path="blogs/:blogId" element={<BlogDetails/>}/>
+         <Route path="success" element={<Success/>}/>
+         <Route path="cancel" element={<Cancel/>}/>
        </Route>
      </Routes>
    </BrowserRouter>

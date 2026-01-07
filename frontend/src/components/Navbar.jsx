@@ -45,10 +45,15 @@ const Navbar = () => {
               <li>
                 <Link to="/profile" className="justify-between">
                   Profile
-                  <span className="badge">New</span>
+                  {user?.plan === "PREMIUM" ? (
+                    <span className="badge badge-primary">Premium</span>
+                  ) : (
+                    <span className="badge">New</span>
+                  )}
                 </Link>
               </li>
               <li><Link to="/connections">Connections</Link></li>
+              <li><Link to="/feed">Feed</Link></li>
               <li><Link to="/request-connection">Request</Link></li>
               <li><Link to="/blogs">Blogs</Link></li>
               <li><Link to="/premium">Premium</Link></li>
