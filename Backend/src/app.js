@@ -16,6 +16,7 @@ import "./helper/cronJob.js"
 import { createServer } from 'node:http';
 import SubscriptionController from "./controllers/subscription.js";
 const app = express();
+app.set("trust proxy", 1);
 const PORT = config.port;
 app.post(
   "/api/v1/connexto/webhook/stripe",

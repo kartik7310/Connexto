@@ -10,7 +10,7 @@ export const apiEndpoints = {
   updateProfile:"/profile/update",
   connections:"/user/connections",
   request:"/user/request/received",
-  createOrder:"/payment/order-create",
+  createOrder:"/payment/checkout",
   isPremium:"/payment/isPremium",
   chats:"/chat/fetch",
   fetchAllBlogs:"/blogs/fetch",

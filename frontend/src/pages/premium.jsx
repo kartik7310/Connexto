@@ -1,6 +1,6 @@
 import { Check, CreditCard, Shield } from "lucide-react";
 import { useSelector } from "react-redux";
-
+import subscriptionService from "../services/subscription";
 const PricingPage = () => {
   const user = useSelector((store) => store.user?.user);
   console.log("user in premium", user);
@@ -40,32 +40,16 @@ const PricingPage = () => {
     if (planId === "FREE") return;
 
     try {
-      const res = await fetch(
-        "http://localhost:5000/api/v1/payment/checkout",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          credentials: "include",
-        }
-      );
-
-      if (!res.ok) {
-        const err = await res.json();
-        alert(err.message || "Unable to start payment");
-        return;
-      }
-
-      const data = await res.json();
-      if (data.url) {
+      const data = await subscriptionService.createOrder(planId);
+      
+      if (data && data.url) {
         window.location.href = data.url;
       } else {
         alert("Failed to get checkout URL");
       }
     } catch (error) {
       console.error(error);
-      alert("Something went wrong. Please try again.");
+      alert(error.message || "Something went wrong. Please try again.");
     }
   };
 
