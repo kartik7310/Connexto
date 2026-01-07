@@ -4,6 +4,7 @@ import AppError from "../utils/AppError.js";
 import User from "../models/user.js";
 import { config } from "../config/env.js";
 import stripe from "../config/stripe.js";
+import { sendPaymentReceiptEmail } from "../mails/paymentReceipt.js";
 const SubscriptionController = {
 
 async createPayment  (req, res,next) {
@@ -88,6 +89,26 @@ async createPayment  (req, res,next) {
             subscriptionEndDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
           }
         );
+
+        // Send payment receipt email
+        const amount = (session.amount_total / 100).toFixed(2);
+        const currency = session.currency.toUpperCase();
+        const receiptDetails = {
+          amount: `${currency} ${amount}`,
+          transactionId: session.id,
+          date: new Date().toLocaleDateString()
+        };
+
+        try {
+          await sendPaymentReceiptEmail(
+            session.customer_details?.email || session.customer_email,
+            session.customer_details?.name || "Premium User",
+            receiptDetails
+          );
+        } catch (emailError) {
+          logger.error("Failed to send payment receipt email:", emailError);
+         
+        }
       }
     }
         //  Subscription cancelled
