@@ -160,7 +160,7 @@ async forgotPassword(req, res, next){
   } catch (error) {
     console.error('Reset password error:', error);
    next(error);
-    
+   
   }
  },
   async logout(req, res) {

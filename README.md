@@ -1,14 +1,16 @@
-# Connectly Backend
+# Connectly - Full Stack Real-time Communication Platform
 
 <div align="center">
 
-**Enterprise-grade Real-time Communication Backend**
+**Enterprise-grade Real-time Messaging & Social Networking Platform**
 
-![Node.js](https://img.shields.io/badge/Node.js-v18+-339933?style=flat&logo=node.js&logoColor=white)
-![Express](https://img.shields.io/badge/Express-v5.1-000000?style=flat&logo=express&logoColor=white)
-![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?style=flat&logo=mongodb&logoColor=white)
-![Socket.io](https://img.shields.io/badge/Socket.io-v4.8-010101?style=flat&logo=socket.io&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=flat&logo=docker&logoColor=white)
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?style=flat&logo=github&logoColor=white)](https://github.com/kartik7310/Connectly)
+[![Node.js](https://img.shields.io/badge/Node.js-v18+-339933?style=flat&logo=node.js&logoColor=white)](https://nodejs.org/)
+[![React](https://img.shields.io/badge/React-v19-61DAFB?style=flat&logo=react&logoColor=black)](https://reactjs.org/)
+[![Express](https://img.shields.io/badge/Express-v5.1-000000?style=flat&logo=express&logoColor=white)](https://expressjs.com/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?style=flat&logo=mongodb&logoColor=white)](https://www.mongodb.com/atlas)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind--CSS-v4-06B6D4?style=flat&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=flat&logo=docker&logoColor=white)](https://www.docker.com/)
 
 </div>
 
@@ -16,7 +18,7 @@
 
 ## 📋 Overview
 
-Connectly Backend is a scalable, production-ready RESTful API and WebSocket server powering the Connectly real-time communication platform. Built with modern Node.js technologies, it provides secure authentication, real-time messaging, social networking features, content management, and payment processing.
+Connectly is a modern, full-stack real-time communication platform built for speed and scalability. It features a robust **Node.js/Express** backend and a high-performance **React/Vite** frontend. Connectly provides secure authentication, real-time messaging, social interaction, content management, and premium subscriptions.
 
 ### Key Capabilities
 
@@ -37,53 +39,64 @@ Connectly Backend is a scalable, production-ready RESTful API and WebSocket serv
 The backend follows a layered architecture with clear separation of concerns, enabling scalability and maintainability.
 
 ```mermaid
-graph TB
-    Client[Client Applications]
+graph LR
+    User([User]) <--> Client[(React Frontend)]
+    Client <-->|HTTPS/WSS| API[(Express Backend)]
     
-    subgraph "API Gateway Layer"
-        LB[Load Balancer/Nginx]
-        CORS[CORS Middleware]
+    subgraph "Backend Services"
+        API <--> DB[(MongoDB)]
+        API <--> AI[Grok/LangChain]
+        API <--> Pay[Razorpay]
+        API <--> Media[ImageKit]
     end
     
-    subgraph "Application Layer"
-        Router[Express Router]
-        Auth[Auth Middleware]
-        ErrorHandler[Error Handler]
-    end
-    
-    subgraph "Business Logic Layer"
-        Controllers[Controllers]
-        Services[Services]
-        Validators[Validators]
-    end
-    
-    subgraph "Data Access Layer"
-        Models[Mongoose Models]
-    end
-    
-    subgraph "External Services"
-        DB[(MongoDB Atlas)]
-        Socket[Socket.io Server]
-        OAuth[Google OAuth]
-        Payment[Razorpay]
-        Media[ImageKit]
-    end
-    
-    Client -->|HTTP/HTTPS| LB
-    Client -->|WebSocket| Socket
-    LB --> CORS
-    CORS --> Router
-    Router --> Auth
-    Auth --> Controllers
-    Controllers --> Validators
-    Validators --> Services
-    Services --> Models
-    Models --> DB
-    Services --> OAuth
-    Services --> Payment
-    Services --> Media
-    Router --> ErrorHandler
+    API <--> Socket[Socket.io]
+    Socket <--> Client
 ```
+
+---
+
+## 💻 Frontend Application
+
+Connectly's frontend is a sleek, responsive Single Page Application (SPA) designed for a premium user experience.
+
+### Tech Stack
+
+- **Framework**: React 19 + Vite
+- **Styling**: Tailwind CSS v4 + DaisyUI
+- **State Management**: Redux Toolkit
+- **Real-time**: Socket.io Client
+- **Forms**: React Hook Form + Zod
+- **Networking**: Axios
+
+### Key Features
+
+- ⚡ **Optimized Performance** - Fast loading and smooth transitions using Vite
+- 🎨 **Modern UI** - Clean, responsive design with DaisyUI components
+- 💬 **Real-time Interaction** - Instant messaging with live status updates
+- 🤖 **AI Assistant** - Integrated chatbot powered by Grok AI
+- 💳 **Secure Payments** - Smooth Razorpay checkout experience
+- 📝 **Rich Content** - Advanced blog editing using Jodit React
+
+### Project Structure
+
+```
+frontend/
+├── src/
+│   ├── components/      # Reusable UI components (Navbar, Chatbot, etc.)
+│   ├── pages/           # Page containers (Feed, Profile, Chat, etc.)
+│   ├── services/        # API communication layers
+│   ├── store/           # Redux logic and slices
+│   ├── webSocket/       # Socket.io events and listeners
+│   ├── utils/           # Shared utility functions
+│   └── App.jsx          # Main routing and layout
+├── public/              # Static assets
+└── index.html           # HTML entry point
+```
+
+---
+
+## 🛠️ Backend Architecture
 
 ### Low-Level Design (LLD)
 
@@ -411,84 +424,72 @@ Content-Type: application/json
 
 ## 🗄️ Database Schema
 
-```mermaid
-erDiagram
-    User ||--o{ Blog : creates
-    User ||--o{ ConnectionRequest : sends
-    User ||--o{ ConnectionRequest : receives
-    User ||--o{ Chat : participates
-    User ||--o{ Subscription : has
-    User ||--o{ OTP : receives
+The database uses **MongoDB Atlas** as a cloud-hosted NoSQL cluster. Below are the key schemas for the application:
 
-    User {
-        ObjectId _id PK
-        string firstName
-        string lastName
-        string email UK
-        string password
-        number age
-        string gender
-        array skills
-        string about
-        string photoUrl
-        string authProvider
-        boolean isVerified
-        boolean isPremium
-        string membershipType
-        date lastLogin
-        date createdAt
-        date updatedAt
-    }
+#### 👤 User Model
+| Field | Type | Constraints | Description |
+|-------|------|-------------|-------------|
+| `_id` | `ObjectId` | PK | Unique identifier |
+| `firstName` | `string` | Required | User's first name |
+| `lastName` | `string` | Required | User's last name |
+| `email` | `string` | UK, Required | Unique identifier for login |
+| `password` | `string` | Required (local) | Hashed password |
+| `age` | `number` | Min: 18 | User's age |
+| `gender` | `string` | Enum | male, female, other |
+| `skills` | `array` | Default: [] | List of professional skills |
+| `about` | `string` | Max: 300 | User biography/overview |
+| `photoUrl` | `string` | Default: image | URL to profile image |
+| `authProvider`| `string` | local/google | Authentication method |
+| `role` | `string` | user/admin | User access level |
+| `isVerified` | `boolean` | Default: false | Email verification status |
+| `membershipType`| `string` | - | Type of premium plan |
+| `plan` | `string` | FREE/PREMIUM | Current subscription tier |
+| `subscriptionStatus`| `string` | active/expired | Subscription state |
+| `subscriptionStartDate`| `date` | - | Start of current subscription |
+| `subscriptionEndDate`| `date` | - | Expiry date of subscription |
+| `stripeCustomerId`| `string` | - | Stripe customer identifier |
+| `stripeSubscriptionId`| `string` | - | Stripe subscription identifier |
+| `lastLogin` | `date` | - | Timestamp of last activity |
+| `createdAt` | `date` | - | Account creation timestamp |
 
-    Blog {
-        ObjectId _id PK
-        ObjectId userId FK
-        string title
-        string content
-        string category
-        array tags
-        date createdAt
-        date updatedAt
-    }
+#### 📝 Blog Model
+| Field | Type | Constraints | Description |
+|-------|------|-------------|-------------|
+| `_id` | `ObjectId` | PK | Unique identifier |
+| `userId` | `ObjectId` | FK (User) | Author of the blog |
+| `title` | `string` | Required | Blog post title |
+| `content` | `string` | Required | Rich text HTML content |
+| `category` | `string` | - | Blog categorization |
+| `tags` | `array` | - | Searchable tags |
+| `createdAt` | `date` | - | Publication timestamp |
 
-    ConnectionRequest {
-        ObjectId _id PK
-        ObjectId fromUserId FK
-        ObjectId toUserId FK
-        string status
-        date createdAt
-        date updatedAt
-    }
+#### 🤝 Connection Request Model
+| Field | Type | Constraints | Description |
+|-------|------|-------------|-------------|
+| `_id` | `ObjectId` | PK | Unique identifier |
+| `fromUserId` | `ObjectId` | FK (User) | User sending the request |
+| `toUserId` | `ObjectId` | FK (User) | User receiving the request |
+| `status` | `string` | Enum | pending, accepted, rejected, ignored |
+| `createdAt` | `date` | - | Request timestamp |
 
-    Chat {
-        ObjectId _id PK
-        ObjectId senderId FK
-        ObjectId receiverId FK
-        string message
-        boolean isRead
-        date createdAt
-    }
+#### 💬 Chat Model
+| Field | Type | Constraints | Description |
+|-------|------|-------------|-------------|
+| `_id` | `ObjectId` | PK | Unique identifier |
+| `senderId` | `ObjectId` | FK (User) | Message sender |
+| `receiverId` | `ObjectId` | FK (User) | Message recipient |
+| `message` | `string` | Required | Chat message content |
+| `isRead` | `boolean` | Default: false | Message read status |
+| `createdAt` | `date` | - | Sent timestamp |
 
-    Subscription {
-        ObjectId _id PK
-        ObjectId userId FK
-        string planType
-        number amount
-        string orderId
-        string paymentId
-        string status
-        date startDate
-        date endDate
-    }
-
-    OTP {
-        ObjectId _id PK
-        string email
-        string otp
-        date expiresAt
-        date createdAt
-    }
-```
+#### 🔑 OTP Model
+| Field | Type | Constraints | Description |
+|-------|------|-------------|-------------|
+| `_id` | `ObjectId` | PK | Unique identifier |
+| `email` | `string` | Required | Target email for verification |
+| `otp` | `string` | Required | 6-digit verification code |
+| `expiresAt` | `date` | Index | auto-deleted after expiry |
+| `createdAt` | `date` | - | Generation timestamp |
 
 ---
 
@@ -647,63 +648,56 @@ curl https://yourdomain.com/health
 
 - **Node.js** v18 or higher
 - **MongoDB** (Local or Atlas connection string)
-- **Docker** (optional, for containerized deployment)
+- **Docker** (optional)
 
-### Environment Variables
-
-Create a `.env` file in the `Backend` directory:
-
-```env
-# Server Configuration
-PORT=5000
-NODE_ENV=production
-
-# Database
-MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/connectly
-
-# JWT Secret
-JWT_SECRET=your_super_secret_jwt_key_here
-
-# Google OAuth
-GOOGLE_CLIENT_ID=your_google_client_id.apps.googleusercontent.com
-
-# Razorpay
-RAZORPAY_KEY_ID=rzp_live_xxxxxxxxx
-RAZORPAY_KEY_SECRET=your_razorpay_secret
-
-# ImageKit
-IMAGEKIT_PUBLIC_KEY=public_xxxxxx
-IMAGEKIT_PRIVATE_KEY=private_xxxxxx
-IMAGEKIT_URL_ENDPOINT=https://ik.imagekit.io/your_id
-
-# CORS Origins
-ALLOWED_ORIGINS=https://yourdomain.com,http://localhost:5173
-```
-
-### Local Development
+### Installation
 
 1. **Clone the Repository**
    ```bash
    git clone https://github.com/kartik7310/Connectly.git
-   cd Connectly/Backend
+   cd Connectly
    ```
 
-2. **Install Dependencies**
+2. **Setup Backend**
    ```bash
+   cd Backend
    npm install
-   ```
-
-3. **Run Development Server**
-   ```bash
+   # Create .env and follow the configuration below
    npm run dev
    ```
 
-   Server starts on `http://localhost:5000`
-
-4. **Test Health Endpoint**
+3. **Setup Frontend**
    ```bash
-   curl http://localhost:5000/health
+   cd ../frontend
+   npm install
+   # Create .env (VITE_BASE_URL=http://localhost:5000/api/v1)
+   npm run dev
    ```
+
+### Environment Variables
+
+#### Backend (`/Backend/.env`)
+
+```env
+PORT=5000
+MONGO_URI=your_mongodb_uri
+JWT_SECRET=your_jwt_secret
+GOOGLE_CLIENT_ID=your_id
+RAZORPAY_KEY_ID=your_id
+RAZORPAY_KEY_SECRET=your_secret
+IMAGEKIT_PUBLIC_KEY=your_key
+IMAGEKIT_PRIVATE_KEY=your_key
+IMAGEKIT_URL_ENDPOINT=your_url
+ALLOWED_ORIGINS=http://localhost:5173
+```
+
+#### Frontend (`/frontend/.env`)
+
+```env
+VITE_BASE_URL=http://localhost:5000/api/v1
+VITE_GOOGLE_CLIENT_ID=your_id
+VITE_SOCKET_URL=http://localhost:5000
+```
 
 ### Docker Deployment
 
