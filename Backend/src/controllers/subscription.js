@@ -18,6 +18,7 @@ async createPayment  (req, res,next) {
       return next(new AppError("Stripe price ID not configured",500));
     }
     const _id = userId
+    const clientUrl = config.corsOrigin.split(',')[0].trim();
     const session = await stripe.checkout.sessions.create({
       mode: "subscription",
       payment_method_types: ["card"],
@@ -28,8 +29,8 @@ async createPayment  (req, res,next) {
           quantity: 1
         }
       ],
-      success_url: `${config.corsOrigin}/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${config.corsOrigin}/cancel`,
+      success_url: `${clientUrl}/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${clientUrl}/cancel`,
       metadata: {
         userId: _id.toString()
       },
