@@ -38,6 +38,14 @@ export async function sendPaymentReceiptEmail(toEmail, name, receiptDetails) {
           }
         }
       },
+      action: receiptDetails.invoiceUrl ? {
+        instructions: "You can download your official invoice using the button below:",
+        button: {
+          color: "#22BC66",
+          text: "Download Invoice",
+          link: receiptDetails.invoiceUrl
+        }
+      } : undefined,
       outro: "You now have full access to all premium features. If you have any questions or need assistance, feel free to reply to this email."
     }
   };

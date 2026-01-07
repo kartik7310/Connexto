@@ -93,10 +93,22 @@ async createPayment  (req, res,next) {
         // Send payment receipt email
         const amount = (session.amount_total / 100).toFixed(2);
         const currency = session.currency.toUpperCase();
+        
+        let invoiceUrl = null;
+        if (session.invoice) {
+          try {
+            const invoice = await stripe.invoices.retrieve(session.invoice.toString());
+            invoiceUrl = invoice.hosted_invoice_url;
+          } catch (error) {
+            logger.error("Failed to retrieve invoice:", error);
+          }
+        }
+
         const receiptDetails = {
           amount: `${currency} ${amount}`,
           transactionId: session.id,
-          date: new Date().toLocaleDateString()
+          date: new Date().toLocaleDateString(),
+          invoiceUrl: invoiceUrl
         };
 
         try {
