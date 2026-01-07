@@ -47,7 +47,6 @@ cron.schedule('0 9 * * *', async () => {
       });
     });
 
-    // Send emails in parallel
     const emailPromises = Object.entries(emailToConnections).map(([email, senders]) =>
       notificationEmail(email, senders)
         .catch(error => logger.error(`Failed to send email to ${email}:`, error.message))

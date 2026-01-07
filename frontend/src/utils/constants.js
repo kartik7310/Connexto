@@ -1,5 +1,4 @@
-export const baseUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api/v1";
-
+export const baseUrl = import.meta.env.VITE_API_BASE_URL 
 export const apiEndpoints = {
   signUp: "/auth/signup",
   login: "/auth/login",
