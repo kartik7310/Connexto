@@ -45,7 +45,7 @@ export async function notificationEmail(recipientEmail, senders) {
         button: {
           color: '#22BC66',
           text: `View ${senders.length} Request${senders.length > 1 ? 's' : ''}`,
-          link: 'http://localhost:5173/request-connection'
+          link: 'https://connexto.site/request-connection'
         }
       }
     }
