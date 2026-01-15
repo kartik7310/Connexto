@@ -21,8 +21,9 @@ export const apiEndpoints = {
   imagekitAuth:"/blogs/imagekit-auth",
   forgotPassword: "/auth/forgot-password",
   resetPassword: "/auth/reset-password",
-
-
+  likeBlog: "/blogs/:blogId/like",
+  addComment: "/blogs/:blogId/comment",
+  fetchComments: "/blogs/:blogId/comments",
 };
 
 export const validations = {

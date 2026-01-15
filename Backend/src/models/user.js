@@ -59,6 +59,12 @@ const userSchema = new mongoose.Schema(
     subscriptionStatus:{type:String,enum:["active","expired"],default:"expired"},
     subscriptionEndDate:{type:Date},
     subscriptionStartDate:{type:Date},
+    blogs:[
+      {
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Blog"
+      }
+    ]
 
   },
   { timestamps: true }

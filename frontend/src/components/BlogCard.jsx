@@ -1,8 +1,9 @@
 import React from "react";
 import { stripHtml } from "../utils/htmlparser";
+import { Heart } from "lucide-react";
 
 const BlogCard = ({ blog }) => {
-  const { title, content, blogImage, tags } = blog || {};
+  const { title, content, blogImage, tags, likes = [] } = blog || {};
 
   return (
     <div className="card w-full sm:w-72 md:w-80 bg-base-100 border border-base-200 shadow-sm hover:shadow-lg transition-all duration-300 rounded-xl overflow-hidden">
@@ -26,6 +27,12 @@ const BlogCard = ({ blog }) => {
     ? `${stripHtml(content).slice(0, 80)}... Read More`
     : "No content available."}
 </p>
+
+        {/* Likes section */}
+        <div className="flex items-center justify-center gap-1 mt-3">
+          <Heart className="w-4 h-4 text-red-500 fill-red-500" />
+          <span className="text-xs text-gray-600 font-medium">{likes.length}</span>
+        </div>
 
         {/* Tags section */}
        <div className="card-actions justify-center flex-wrap gap-2 mt-3">

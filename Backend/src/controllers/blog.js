@@ -4,6 +4,7 @@ import { getDataFromRedis, invalidateByPrefix, InvalidateCache, setDataInRedis }
 import BlogService from "../services/blog.js";
 import AppError from "../utils/AppError.js";
 import { blogSchema, updateBlogSchema } from "../validators/blog.js";
+import { commentSchema } from "../validators/comment.js";
 import mongoose from "mongoose";
 const BlogController = {
   async createBlog(req, res, next) {
@@ -62,7 +63,6 @@ const BlogController = {
         });
       }
       const blogs = await BlogService.getAllBlogs(skip, limit, search);
-     
       await setDataInRedis(cacheKey,blogs);
       logger.info("Cache miss");
       return res.status(200).json({
@@ -189,7 +189,78 @@ const BlogController = {
     } catch (error) {
       next(error)
     }
-  }
+  },
+
+  async likeUnlikeBlog(req, res, next) {
+    try {
+      const blogId = req.params?.blogId;
+      const userId = req.user?._id;
+
+      if (!mongoose.isValidObjectId(blogId)) {
+        return next(new AppError("Invalid blog id", 400));
+      }
+
+      const blog = await BlogService.likeUnlikeBlog(blogId, userId);
+
+      await InvalidateCache(`blog:${blogId}`);
+      await invalidateByPrefix("blogs");
+
+      return res.status(200).json({
+        success: true,
+        message: "Like toggled successfully",
+        data: blog.likes,
+      });
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  async addComment(req, res, next) {
+    try {
+      const blogId = req.params?.blogId;
+      const userId = req.user?._id;
+
+      if (!mongoose.isValidObjectId(blogId)) {
+        return next(new AppError("Invalid blog id", 400));
+      }
+
+      const parsed = commentSchema.safeParse(req.body);
+      if (!parsed.success) {
+        const msg = parsed.error.issues.map((i) => `${i.path.join(".")}: ${i.message}`).join(", ");
+        return next(new AppError(`Validation failed: ${msg}`, 400));
+      }
+
+      const comment = await BlogService.addComment(blogId, userId, parsed.data.content);
+
+      return res.status(201).json({
+        success: true,
+        message: "Comment added successfully",
+        data: comment,
+      });
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  async getComments(req, res, next) {
+    try {
+      const blogId = req.params?.blogId;
+
+      if (!mongoose.isValidObjectId(blogId)) {
+        return next(new AppError("Invalid blog id", 400));
+      }
+
+      const comments = await BlogService.getComments(blogId);
+
+      return res.status(200).json({
+        success: true,
+        message: "Comments fetched successfully",
+        data: comments,
+      });
+    } catch (error) {
+      next(error);
+    }
+  },
 };
 
 export default BlogController;

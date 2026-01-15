@@ -12,6 +12,8 @@ router.patch("/update/:blogId",protect, BlogController.updateBlog);
 router.delete("/delete/:blogId", protect,BlogController.deleteBlog);
 router.get("/imagekit-auth", protect,BlogController.ImagekitVerification );
 
-
+router.post("/:blogId/like", protect, BlogController.likeUnlikeBlog);
+router.post("/:blogId/comment", protect, BlogController.addComment);
+router.get("/:blogId/comments", BlogController.getComments);
 
 export default router;

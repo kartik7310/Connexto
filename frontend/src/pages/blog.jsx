@@ -22,7 +22,6 @@ const Blog = () => {
   // for debounce
   const debounceRef = useRef(null);
 
-  // derive available tags from fetched blogs (unique)
   const availableTags = React.useMemo(() => {
     const set = new Set();
     blogs.forEach((b) => {
@@ -40,17 +39,15 @@ const Blog = () => {
       const params = {
         page: pageNum,
         limit,
-        // send tags as CSV (backend accepts CSV or array)
+        
         ...(tags.length ? { tags: tags.join(",") } : {}),
         ...(searchTerm ? { search: searchTerm } : {}),
       };
 
       const res = await BlogService.fetchAllBlogs(params);
-      // BlogService may return either:
-      // - the array directly, or
-      // - an object { data, pagination }
-      const data = res?.data ?? res; // prefer res.data if present, else res
-      const finalArray = Array.isArray(data) ? data : data?.data ?? [];
+      
+   
+      const finalArray = Array.isArray(res) ? res : res?.data ?? [];
 
       dispatch(setBlogs(finalArray));
     } catch (err) {

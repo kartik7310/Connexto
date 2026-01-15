@@ -2,7 +2,7 @@
 import mailGenerator from "../config/mailgen.js";
 import sendMail from "./mailer.js";
 export async function notificationEmail(recipientEmail, senders) {
-  // Create custom HTML for sender details since mailgen table doesn't support images well
+
   const sendersHtml = senders.map(sender => `
     <tr>
       <td style="padding: 10px;">

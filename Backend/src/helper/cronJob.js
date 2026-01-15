@@ -6,7 +6,8 @@ import { notificationEmail } from '../mails/notificationEmail.js';
 import logger from '../config/logger.js';
 
 // This cron job will run at 9:00 AM every day
-cron.schedule('0 9 * * *', async () => {
+
+cron.schedule('0 9 * * *', async () => { 
 
   logger.info("Cron job started:", new Date().toISOString());
   

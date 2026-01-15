@@ -22,6 +22,12 @@ const blogSchema = new mongoose.Schema({
   blogImage:{
     type: String,
   },
+  likes: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
   publishedAt: {
     type: Date,
     default: Date.now

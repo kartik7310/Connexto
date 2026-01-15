@@ -12,6 +12,8 @@ class BlogService {
         params,
         withCredentials:true
       })
+      console.log("res",res);
+      
       return res.data?.data;
     } catch (err) {
       const serverMsg =
@@ -106,7 +108,38 @@ class BlogService {
     }
   }
 
-  
+  async likeBlog(blogId) {
+    try {
+      const url = `${this.baseUrl}${apiEndpoints.likeBlog.replace(":blogId", blogId)}`;
+      const res = await axios.post(url, {}, { withCredentials: true });
+      return res.data?.data;
+    } catch (err) {
+      const serverMsg = err?.response?.data?.message || err?.response?.data?.error;
+      throw new Error(serverMsg || "Something went wrong while liking the blog");
+    }
+  }
+
+  async addComment(blogId, content) {
+    try {
+      const url = `${this.baseUrl}${apiEndpoints.addComment.replace(":blogId", blogId)}`;
+      const res = await axios.post(url, { content }, { withCredentials: true });
+      return res.data?.data;
+    } catch (err) {
+      const serverMsg = err?.response?.data?.message || err?.response?.data?.error;
+      throw new Error(serverMsg || "Something went wrong while adding comment");
+    }
+  }
+
+  async fetchComments(blogId) {
+    try {
+      const url = `${this.baseUrl}${apiEndpoints.fetchComments.replace(":blogId", blogId)}`;
+      const res = await axios.get(url, { withCredentials: true });
+      return res.data?.data;
+    } catch (err) {
+      const serverMsg = err?.response?.data?.message || err?.response?.data?.error;
+      throw new Error(serverMsg || "Something went wrong while fetching comments");
+    }
+  }
 }
 
 export default new BlogService(baseUrl);
