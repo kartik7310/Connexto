@@ -1,6 +1,7 @@
 import { Server } from "socket.io";
 import { secretRoomId } from "../utils/roomSecret.js";
 import Chat from "../models/chat.js";
+import Notification from "../models/notification.js";
 import { config } from "../config/env.js";
 import logger from "../config/logger.js";
 import { setDataInRedis } from "../helper/redisData.js";
@@ -89,6 +90,27 @@ const intitlizeSocket = async (server) => {
             photoUrl,
             createdAt: savedMessage.createdAt
           });
+
+          // Save notification to DB for persistence
+          await Notification.create({
+            recipientId: targetUserId,
+            senderId: userId,
+            chatId: chat._id,
+            messageId: savedMessage._id,
+            text: text,
+            type: "MESSAGE"
+          });
+
+          //  emit a notification event to the target user
+          io.to(String(targetUserId)).emit("new-notification", {
+            senderId: userId,
+            targetUserId,
+            firstName,
+            lastName,
+            photoUrl,
+            text: text.substring(0, 50) + (text.length > 50 ? "..." : ""),
+            createdAt: savedMessage.createdAt
+          });
         } catch (error) {
           logger.error(error.message);
         }
@@ -124,6 +146,13 @@ const intitlizeSocket = async (server) => {
 
             // Notify the room that messages have been seen
             io.to(roomId).emit("messages-seen", { userId, targetUserId });
+
+            // Clear persistent notifications for this chat/recipient
+            await Notification.deleteMany({
+              recipientId: userId,
+              senderId: targetUserId,
+              chatId: chat._id
+            });
           }
         }
       } catch (error) {

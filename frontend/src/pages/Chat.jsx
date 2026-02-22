@@ -10,9 +10,12 @@ import ChatHeader from "../components/ChatHeader";
 import MessageItem from "../components/MessageItem";
 import { normalizeMessage } from "../utils/chatUtils";
 import { ArrowLeftIcon } from "lucide-react";
+import { useDispatch } from "react-redux";
+import { clearNotificationsForUser } from "../store/store-slices/notificationSlice";
 
 const Chat = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const userData = useSelector((store) => store.user.user);
   const { _id: userId, firstName: meFirstName, lastName: meLastName, photoUrl: mePhoto } = userData || {};
   const { targetUserId } = useParams();
@@ -59,7 +62,6 @@ const Chat = () => {
     setInputMessage("");
   };
 
-  // --- Effects ---
 
   // Auto-scroll on new messages
   useEffect(() => {
@@ -157,6 +159,9 @@ const Chat = () => {
         );
 
       setMessages(msgs);
+
+      // Clear notifications 
+      dispatch(clearNotificationsForUser(targetUserId));
 
       // Mark messages as seen once loaded
       if (socketRef.current && msgs.some(m => String(m.senderId) === String(targetUserId) && !m.seen)) {
