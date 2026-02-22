@@ -95,6 +95,11 @@ const intitlizeSocket = async (server) => {
       }
     );
 
+    socket.on("typing-status", ({ userId, targetUserId, isTyping }) => {
+      const roomId = secretRoomId({ userId, targetUserId });
+      socket.to(roomId).emit("typing-status", { userId, isTyping });
+    });
+
     socket.on("disconnect", () => {
       if (currentUserId && onlineUsers.has(currentUserId)) {
         const socketIds = onlineUsers.get(currentUserId);

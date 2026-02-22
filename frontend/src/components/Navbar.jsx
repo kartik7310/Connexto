@@ -5,26 +5,26 @@ import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import { removeUser } from '../store/store-slices/userSlice'
 const Navbar = () => {
-  const user = useSelector((state)=>state.user?.user)
-  console.log("navser",user);
-  
+  const user = useSelector((state) => state.user?.user)
+  console.log("navser", user);
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const handleLogout = async()=>{
-   try {
-     await Auth.logout()
-       toast.success( "Logged out");
-  dispatch(removeUser());
-  navigate("/login",{replace:true})
-   } catch (error) {
-     toast.error(error.message);
-   }
+  const handleLogout = async () => {
+    try {
+      await Auth.logout()
+      toast.success("Logged out");
+      dispatch(removeUser());
+      navigate("/login", { replace: true })
+    } catch (error) {
+      toast.error(error.message);
+    }
   }
   return (
     <div>
       <div className="navbar bg-base-300 shadow-sm">
         <div className="flex-1">
-          <Link to="/" className="btn btn-ghost text-xl">🧑‍💻Connexto</Link>
+          <div className="btn btn-ghost text-xl">🧑‍💻Connexto</div>
         </div>
         <div className="flex gap-2">
 
@@ -33,7 +33,7 @@ const Navbar = () => {
               <div className="w-10 rounded-full">
                 <img
                   alt="Tailwind CSS Navbar component"
-                  src={user?user?.photoUrl:"https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"}
+                  src={user ? user?.photoUrl : "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"}
                 />
               </div>
             </div>
@@ -57,7 +57,7 @@ const Navbar = () => {
               <li><Link to="/request-connection">Request</Link></li>
               <li><Link to="/blogs">Blogs</Link></li>
               <li><Link to="/premium">Premium</Link></li>
-               <li><button onClick={handleLogout}>Logout</button></li>{/* button is better here */}
+              <li><button onClick={handleLogout}>Logout</button></li>{/* button is better here */}
             </ul>
 
           </div>
