@@ -13,6 +13,7 @@ export const normalizeMessage = (raw, { userId, targetUserId, meFirstName, meLas
     return {
         id: raw._id || raw.id || crypto.randomUUID(),
         text: raw.text ?? "",
+        seen: raw.seen ?? false,
         createdAt: raw.createdAt || new Date().toISOString(),
         senderId: sId || sender?._id,
         firstName: raw.firstName || (isPopulated ? rawSender.firstName : null) || sender?.firstName || "User",

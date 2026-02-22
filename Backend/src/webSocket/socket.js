@@ -100,6 +100,37 @@ const intitlizeSocket = async (server) => {
       socket.to(roomId).emit("typing-status", { userId, isTyping });
     });
 
+    socket.on("mark-messages-seen", async ({ userId, targetUserId }) => {
+      try {
+        const roomId = secretRoomId({ userId, targetUserId });
+        const chat = await Chat.findOne({
+          participants: { $all: [userId, targetUserId] },
+        });
+
+        if (chat) {
+          let hasUpdates = false;
+          chat.message.forEach((msg) => {
+            if (String(msg.senderId) === String(targetUserId) && !msg.seen) {
+              msg.seen = true;
+              hasUpdates = true;
+            }
+          });
+
+          if (hasUpdates) {
+            await chat.save();
+            const sortedIds = [String(userId), String(targetUserId)].sort();
+            const cacheKey = `chats:${sortedIds[0]}:${sortedIds[1]}`;
+            await setDataInRedis(cacheKey, chat, 60 * 60);
+
+            // Notify the room that messages have been seen
+            io.to(roomId).emit("messages-seen", { userId, targetUserId });
+          }
+        }
+      } catch (error) {
+        logger.error(`Error marking messages as seen: ${error.message}`);
+      }
+    });
+
     socket.on("disconnect", () => {
       if (currentUserId && onlineUsers.has(currentUserId)) {
         const socketIds = onlineUsers.get(currentUserId);

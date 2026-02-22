@@ -93,10 +93,27 @@ const Chat = () => {
         if (prev.some((m) => m.id === msg.id)) return prev;
         return [...prev, msg];
       });
+
+      // If message is from target user, mark as seen
+      if (String(payload.senderId || payload.userId) === String(targetUserId)) {
+        socket.emit("mark-messages-seen", { userId, targetUserId });
+      }
+    });
+
+    socket.on("messages-seen", ({ userId: seerId, targetUserId: originalSenderId }) => {
+      // If the target user (the one I'm chatting with) has seen MY messages
+      if (String(seerId) === String(targetUserId)) {
+        setMessages((prev) =>
+          prev.map((m) =>
+            String(m.senderId) === String(userId) ? { ...m, seen: true } : m
+          )
+        );
+      }
     });
 
     return () => {
       socket.off("receiveMessage");
+      socket.off("messages-seen");
       socket.off("online-users-list");
       socket.off("typing-status");
       socket.disconnect();
@@ -140,6 +157,11 @@ const Chat = () => {
         );
 
       setMessages(msgs);
+
+      // Mark messages as seen once loaded
+      if (socketRef.current && msgs.some(m => String(m.senderId) === String(targetUserId) && !m.seen)) {
+        socketRef.current.emit("mark-messages-seen", { userId, targetUserId });
+      }
     } catch (error) {
       console.error("Error fetching chat data:", error);
       setIsHeaderLoading(false);
