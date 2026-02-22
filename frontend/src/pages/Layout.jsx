@@ -17,7 +17,6 @@ export default function Layout() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const user = useSelector((store => store.user.user))
-  console.log("user", user);
 
   const fetchUser = async () => {
     try {
@@ -42,7 +41,8 @@ export default function Layout() {
   const isChatPage = location.pathname.startsWith("/chat/");
   const targetUserIdInUrl = isChatPage ? location.pathname.split("/").pop() : null;
 
-  const audioRef = useRef(new Audio("https://assets.mixkit.co/active_storage/sfx/2354/2354-preview.mp3"));
+  const socketRef = useRef(null);
+  const audioRef = useRef(new Audio("/fah.mp3"));
 
   useEffect(() => {
     if (!user) {
@@ -53,17 +53,25 @@ export default function Layout() {
     // Initial notifications load
     fetchNotifications();
 
-    const socket = createSocketConnection();
-    socket.emit("register-user", user._id);
+    if (!socketRef.current) {
+      socketRef.current = createSocketConnection();
+      socketRef.current.emit("register-user", user._id);
+    }
 
-    socket.on("new-notification", (notification) => {
+    const socket = socketRef.current;
+
+    const handleNotification = (notification) => {
+      console.log("New notification received:", notification);
+
       // notification only will show when user is not in chat with that user
       if (isChatPage && String(notification.senderId) === String(targetUserIdInUrl)) {
+        console.log("Suppressed notification (user in chat)");
         return;
       }
 
       // If notification is for ME
       if (String(notification.targetUserId) === String(user._id)) {
+        console.log("Processing notification for current user");
         dispatch(addNotification(notification));
 
         // notification sound
@@ -71,14 +79,27 @@ export default function Layout() {
 
         // toast
         toast.info(`New message from ${notification.firstName}`);
+      } else {
+        console.log("Notification ignored (not for this user)");
       }
-    });
+    };
+
+    socket.on("new-notification", handleNotification);
 
     return () => {
-      socket.off("new-notification");
-      socket.disconnect();
+      socket.off("new-notification", handleNotification);
     };
   }, [user, isChatPage, targetUserIdInUrl]);
+
+  // global disconnect on unmount
+  useEffect(() => {
+    return () => {
+      if (socketRef.current) {
+        socketRef.current.disconnect();
+        socketRef.current = null;
+      }
+    };
+  }, []);
 
   return (
     <div className="min-h-dvh flex flex-col">

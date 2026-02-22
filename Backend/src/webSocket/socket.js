@@ -30,6 +30,9 @@ const intitlizeSocket = async (server) => {
       }
       onlineUsers.get(currentUserId).add(socket.id);
 
+      // Join a room named after the userId for targeted notifications
+      socket.join(currentUserId);
+
       logger.info(`User registered online: ${currentUserId}`);
       // Notify all clients about the updated online list
       io.emit("online-users-list", Array.from(onlineUsers.keys()));
@@ -91,17 +94,7 @@ const intitlizeSocket = async (server) => {
             createdAt: savedMessage.createdAt
           });
 
-          // Save notification to DB for persistence
-          await Notification.create({
-            recipientId: targetUserId,
-            senderId: userId,
-            chatId: chat._id,
-            messageId: savedMessage._id,
-            text: text,
-            type: "MESSAGE"
-          });
-
-          //  emit a notification event to the target user
+          //  emit a notification event to the target user 
           io.to(String(targetUserId)).emit("new-notification", {
             senderId: userId,
             targetUserId,
@@ -111,8 +104,20 @@ const intitlizeSocket = async (server) => {
             text: text.substring(0, 50) + (text.length > 50 ? "..." : ""),
             createdAt: savedMessage.createdAt
           });
+          logger.info(`Notification emitted to room: ${targetUserId}`);
+
+          // save notification to DB 
+          const newNotif = await Notification.create({
+            recipientId: targetUserId,
+            senderId: userId,
+            chatId: chat._id,
+            messageId: savedMessage._id,
+            text: text,
+            type: "MESSAGE"
+          });
+          logger.info(`Notification created in DB: ${newNotif._id} for recipient: ${targetUserId}`);
         } catch (error) {
-          logger.error(error.message);
+          logger.error(`Error in send-message: ${error.message}`);
         }
       }
     );
