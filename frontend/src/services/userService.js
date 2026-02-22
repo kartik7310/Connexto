@@ -29,5 +29,18 @@ class UserService {
       throw new Error(serverMsg || "something went wrong");
     }
   }
+
+  async getUserById(userId) {
+    try {
+      const res = await axios.get(`${this.baseUrl}${apiEndpoints.user}/${userId}`, {
+        withCredentials: true,
+      });
+      return res.data;
+    } catch (err) {
+      const serverMsg =
+        err?.response?.data?.message || err?.response?.data?.error;
+      throw new Error(serverMsg || "something went wrong");
+    }
+  }
 }
 export default new UserService(baseUrl);

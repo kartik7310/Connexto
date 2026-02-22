@@ -1,29 +1,30 @@
-export const baseUrl = import.meta.env.VITE_API_BASE_URL 
+export const baseUrl = import.meta.env.VITE_API_BASE_URL
 export const apiEndpoints = {
-  signUp: "/auth/signup",
-  login: "/auth/login",
-  sendOtp:"/auth/send-otp",
-  googleLogin: "/auth/google-login",
-  logout: "/auth/logout",
-  getFeed:"/user/feed",
-   Profile:"/profile/view",
-  updateProfile:"/profile/update",
-  connections:"/user/connections",
-  request:"/user/request/received",
-  createOrder:"/payment/checkout",
-  isPremium:"/payment/isPremium",
-  chats:"/chat/fetch",
-  fetchAllBlogs:"/blogs/fetch",
-  fetchSingleBlog:"/blogs/fetch/:blogId",
-  createBlog:"/blogs/create",
-  updateBlog:"/blogs/update/:blogId",
-  deleteBlog:"/blogs/delete/:blogId",
-  imagekitAuth:"/blogs/imagekit-auth",
-  forgotPassword: "/auth/forgot-password",
-  resetPassword: "/auth/reset-password",
-  likeBlog: "/blogs/:blogId/like",
-  addComment: "/blogs/:blogId/comment",
-  fetchComments: "/blogs/:blogId/comments",
+    user: "/user",
+    signUp: "/auth/signup",
+    login: "/auth/login",
+    sendOtp: "/auth/send-otp",
+    googleLogin: "/auth/google-login",
+    logout: "/auth/logout",
+    getFeed: "/user/feed",
+    Profile: "/profile/view",
+    updateProfile: "/profile/update",
+    connections: "/user/connections",
+    request: "/user/request/received",
+    createOrder: "/payment/checkout",
+    isPremium: "/payment/isPremium",
+    chats: "/chat/fetch",
+    fetchAllBlogs: "/blogs/fetch",
+    fetchSingleBlog: "/blogs/fetch/:blogId",
+    createBlog: "/blogs/create",
+    updateBlog: "/blogs/update/:blogId",
+    deleteBlog: "/blogs/delete/:blogId",
+    imagekitAuth: "/blogs/imagekit-auth",
+    forgotPassword: "/auth/forgot-password",
+    resetPassword: "/auth/reset-password",
+    likeBlog: "/blogs/:blogId/like",
+    addComment: "/blogs/:blogId/comment",
+    fetchComments: "/blogs/:blogId/comments",
 };
 
 export const validations = {
@@ -65,8 +66,8 @@ export const validations = {
     },
     gender: {
         validate: (gender) => {
-            if(!["Male", "Female"].includes(gender)) return "Gender can be Male or Female";
-        } 
+            if (!["Male", "Female"].includes(gender)) return "Gender can be Male or Female";
+        }
     },
     about: {
         minLength: {
