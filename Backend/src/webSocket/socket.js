@@ -25,7 +25,7 @@ const intitlizeSocket = async (server) => {
 
     socket.on(
       "send-message",
-      async ({ firstName, userId, targetUserId, text }) => {
+      async ({ firstName, lastName, photoUrl, userId, targetUserId, text }) => {
 
         try {
           const roomId = secretRoomId({ userId, targetUserId });
@@ -51,7 +51,19 @@ const intitlizeSocket = async (server) => {
           const ttlSeconds = 60 * 60;
           await setDataInRedis(cacheKey, chat, ttlSeconds);
 
-          io.to(roomId).emit("receiveMessage", { firstName, text });
+          // Find the specific message we just added to get its _id and createdAt
+          const savedMessage = chat.message[chat.message.length - 1];
+
+          io.to(roomId).emit("receiveMessage", {
+            _id: savedMessage._id,
+            text,
+            userId,
+            senderId: userId,
+            firstName,
+            lastName,
+            photoUrl,
+            createdAt: savedMessage.createdAt
+          });
         } catch (error) {
           logger.error(error.message);
         }
