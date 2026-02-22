@@ -19,6 +19,7 @@ const Chat = () => {
   const [inputMessage, setInputMessage] = useState("");
   const [targetUser, setTargetUser] = useState(null);
   const [isHeaderLoading, setIsHeaderLoading] = useState(true);
+  const [isOnline, setIsOnline] = useState(false);
 
   const endRef = useRef(null);
   const socketRef = useRef(null);
@@ -69,6 +70,11 @@ const Chat = () => {
     socketRef.current = socket;
 
     socket.emit("joinChat", { userId, targetUserId, firstName: meFirstName });
+    socket.emit("register-user", userId);
+
+    socket.on("online-users-list", (onlineIds) => {
+      setIsOnline(onlineIds.includes(String(targetUserId)));
+    });
 
     socket.on("receiveMessage", (payload) => {
       const msg = normalize(payload);
@@ -81,6 +87,7 @@ const Chat = () => {
 
     return () => {
       socket.off("receiveMessage");
+      socket.off("online-users-list");
       socket.disconnect();
       socketRef.current = null;
     };
@@ -137,7 +144,7 @@ const Chat = () => {
   return (
     <div className="w-full flex justify-center py-2 sm:py-6 px-0 sm:px-6">
       <div className="w-full max-w-4xl flex flex-col h-[calc(100vh-100px)] bg-gray-900/40 backdrop-blur-xl border border-gray-700/50 rounded-none sm:rounded-2xl shadow-2xl overflow-hidden relative">
-        <ChatHeader user={targetUser} isLoading={isHeaderLoading} />
+        <ChatHeader user={targetUser} isLoading={isHeaderLoading} isOnline={isOnline} />
 
         <div ref={chatContainerRef} className="flex-1 overflow-y-auto overscroll-contain p-4 sm:p-6 space-y-1 custom-scrollbar">
           {messages.length === 0 && !isHeaderLoading && (

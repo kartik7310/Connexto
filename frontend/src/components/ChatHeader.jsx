@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const ChatHeader = ({ user, isLoading }) => {
+const ChatHeader = ({ user, isLoading, isOnline }) => {
     if (isLoading) {
         return (
             <div className="flex items-center gap-3 p-4 border-b border-gray-700 bg-gray-800/60 backdrop-blur-md rounded-t-2xl animate-pulse">
@@ -28,9 +28,11 @@ const ChatHeader = ({ user, isLoading }) => {
             <div className="flex-1 min-w-0">
                 <h2 className="font-bold text-gray-100 truncate flex items-center gap-2">
                     {user?.firstName} {user?.lastName}
-                    <span className="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]" />
+                    <span className={`w-2 h-2 rounded-full ${isOnline ? "bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]" : "bg-gray-500"}`} />
                 </h2>
-                <p className="text-xs text-gray-400">Online</p>
+                <p className={`text-xs ${isOnline ? "text-green-400 font-medium" : "text-gray-400"}`}>
+                    {isOnline ? "Online" : "Offline"}
+                </p>
             </div>
         </div>
     );

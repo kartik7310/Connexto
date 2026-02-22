@@ -4,6 +4,10 @@ import Chat from "../models/chat.js";
 import { config } from "../config/env.js";
 import logger from "../config/logger.js";
 import { setDataInRedis } from "../helper/redisData.js";
+
+// Track online users: Map<userId, Set<socketId>>
+const onlineUsers = new Map();
+
 const intitlizeSocket = async (server) => {
   const io = new Server(server, {
     cors: {
@@ -13,20 +17,43 @@ const intitlizeSocket = async (server) => {
   });
 
   io.on("connection", (socket) => {
+    let currentUserId = null;
 
-    //handle events
+    // Handle user registration for online status
+    socket.on("register-user", (userId) => {
+      if (!userId) return;
+      currentUserId = String(userId);
+
+      if (!onlineUsers.has(currentUserId)) {
+        onlineUsers.set(currentUserId, new Set());
+      }
+      onlineUsers.get(currentUserId).add(socket.id);
+
+      logger.info(`User registered online: ${currentUserId}`);
+      // Notify all clients about the updated online list
+      io.emit("online-users-list", Array.from(onlineUsers.keys()));
+    });
+
+    // Existing chat events
     socket.on("joinChat", ({ userId, targetUserId, firstName }) => {
-
       const roomId = secretRoomId({ userId, targetUserId });
       logger.info(`${firstName} join the room with id ${roomId}`);
-
       socket.join(roomId);
+
+      // Also ensure the user is registered as online if not already
+      if (userId) {
+        currentUserId = String(userId);
+        if (!onlineUsers.has(currentUserId)) {
+          onlineUsers.set(currentUserId, new Set());
+        }
+        onlineUsers.get(currentUserId).add(socket.id);
+        io.emit("online-users-list", Array.from(onlineUsers.keys()));
+      }
     });
 
     socket.on(
       "send-message",
       async ({ firstName, lastName, photoUrl, userId, targetUserId, text }) => {
-
         try {
           const roomId = secretRoomId({ userId, targetUserId });
           let chat = await Chat.findOne({
@@ -44,14 +71,12 @@ const intitlizeSocket = async (server) => {
           chat.message.push({ senderId: userId, text });
           await chat.save();
 
-          //set to redis
           const sortedIds = [String(userId), String(targetUserId)].sort();
           const cacheKey = `chats:${sortedIds[0]}:${sortedIds[1]}`;
           logger.info(`Chat saved to redis with key ${cacheKey}`);
           const ttlSeconds = 60 * 60;
           await setDataInRedis(cacheKey, chat, ttlSeconds);
 
-          // Find the specific message we just added to get its _id and createdAt
           const savedMessage = chat.message[chat.message.length - 1];
 
           io.to(roomId).emit("receiveMessage", {
@@ -69,7 +94,20 @@ const intitlizeSocket = async (server) => {
         }
       }
     );
+
     socket.on("disconnect", () => {
+      if (currentUserId && onlineUsers.has(currentUserId)) {
+        const socketIds = onlineUsers.get(currentUserId);
+        socketIds.delete(socket.id);
+
+        if (socketIds.size === 0) {
+          onlineUsers.delete(currentUserId);
+          logger.info(`User went offline completely: ${currentUserId}`);
+        }
+
+        // Broadcast updated list
+        io.emit("online-users-list", Array.from(onlineUsers.keys()));
+      }
       logger.info("User disconnected");
     });
   });
