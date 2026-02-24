@@ -69,15 +69,17 @@ Connectly's frontend is a sleek, responsive Single Page Application (SPA) design
 - **Forms**: React Hook Form + Zod
 - **Networking**: Axios
 
-### Key Features
+## 🚀 Key Features
 
-- ⚡ **Optimized Performance** - Fast loading and smooth transitions using Vite
-- 🎨 **Modern UI** - Clean, responsive design with DaisyUI components
-- 💬 **Real-time Interaction** - Instant messaging with live status updates
-- 🤖 **AI Assistant** - Integrated chatbot powered by Grok AI
-- 💳 **Secure Payments** - Smooth Razorpay checkout experience
-- 📝 **Rich Content** - Advanced blog editing using Jodit React
-
+- ⚡ **Optimized Performance** — Fast loading and smooth user experience powered by Vite  
+- 🎨 **Modern UI** — Clean, fully responsive interface built with DaisyUI components  
+- 💬 **Real-time Messaging** — Instant chat with live message synchronization  
+- ⌨️ **Real-time Typing Indicator** — Shows when users are actively typing during conversations  
+- 🟢 **Live Online/Offline Status** — Real-time user presence tracking  
+- 🔔 **Real-time In-App Notifications** — Instant alerts for messages and platform activities  
+- 🤖 **AI Assistant** — Integrated chatbot powered by Grok AI  
+- 💳 **Secure Payments** — Seamless and secure checkout using Razorpay  
+- 📝 **Rich Content Editor** — Advanced blog creation and editing with Jodit React
 ### Project Structure
 
 ```
