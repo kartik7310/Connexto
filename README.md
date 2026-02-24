@@ -1,4 +1,4 @@
-# Connectly - Full Stack Real-time Communication Platform
+# Connexto - Full Stack Real-time Communication Platform
 
 <div align="center">
 
