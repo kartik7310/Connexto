@@ -1,22 +1,24 @@
 // Layout.jsx
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify'
 import Profile from "../services/profileService";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../store/store-slices/userSlice";
-import { useEffect } from "react";
+import { addNotification, setInitialNotifications } from "../store/store-slices/notificationSlice";
+import { useEffect, useRef } from "react";
 import Chatbot from "../components/Chatbot";
+import { createSocketConnection } from "../webSocket/socket";
+import chatService from "../services/chatService";
 
 
 export default function Layout() {
   const navigate = useNavigate()
-   const dispatch = useDispatch()
-   const user = useSelector((store=>store.user.user))
-   console.log("user",user);
-   
-   const fetchUser = async()=>{
+  const dispatch = useDispatch()
+  const user = useSelector((store => store.user.user))
+
+  const fetchUser = async () => {
     try {
       const res = await Profile.getProfile()
       dispatch(addUser(res.data))
@@ -24,32 +26,99 @@ export default function Layout() {
       navigate("/")
       toast.error(error.message);
     }
-   }
+  }
 
-   useEffect(()=>{
-    if(!user){
-        fetchUser()
+  const fetchNotifications = async () => {
+    try {
+      const res = await chatService.getUnreadNotifications();
+      dispatch(setInitialNotifications(res));
+    } catch (error) {
+      console.error("Error fetching initial notifications:", error);
     }
-  
-   },[])
+  };
+
+  const location = useLocation();
+  const isChatPage = location.pathname.startsWith("/chat/");
+  const targetUserIdInUrl = isChatPage ? location.pathname.split("/").pop() : null;
+
+  const socketRef = useRef(null);
+  const audioRef = useRef(new Audio("/fah.mp3"));
+
+  useEffect(() => {
+    if (!user) {
+      fetchUser();
+      return;
+    }
+
+    // Initial notifications load
+    fetchNotifications();
+
+    if (!socketRef.current) {
+      socketRef.current = createSocketConnection();
+      socketRef.current.emit("register-user", user._id);
+    }
+
+    const socket = socketRef.current;
+
+    const handleNotification = (notification) => {
+      console.log("New notification received:", notification);
+
+      // notification only will show when user is not in chat with that user
+      if (isChatPage && String(notification.senderId) === String(targetUserIdInUrl)) {
+        console.log("Suppressed notification (user in chat)");
+        return;
+      }
+
+      // If notification is for ME
+      if (String(notification.targetUserId) === String(user._id)) {
+        console.log("Processing notification for current user");
+        dispatch(addNotification(notification));
+
+        // notification sound
+        audioRef.current.play().catch(e => console.log("Audio play failed:", e));
+
+        // toast
+        toast.info(`New message from ${notification.firstName}`);
+      } else {
+        console.log("Notification ignored (not for this user)");
+      }
+    };
+
+    socket.on("new-notification", handleNotification);
+
+    return () => {
+      socket.off("new-notification", handleNotification);
+    };
+  }, [user, isChatPage, targetUserIdInUrl]);
+
+  // global disconnect on unmount
+  useEffect(() => {
+    return () => {
+      if (socketRef.current) {
+        socketRef.current.disconnect();
+        socketRef.current = null;
+      }
+    };
+  }, []);
+
   return (
-    <div className="min-h-dvh flex flex-col">  
-    
+    <div className="min-h-dvh flex flex-col">
+
       <Navbar />
 
-      <main className="flex-1">                
+      <main className="flex-1">
         <Outlet />
       </main>
 
-      <Footer />
+      {!isChatPage && <Footer />}
       <Chatbot />
-    
+
       <ToastContainer
-                position="top-left"
-                autoClose={5000}
-                pauseOnHover
-                theme="light"
-            />
+        position="top-left"
+        autoClose={5000}
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 }

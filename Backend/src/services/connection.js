@@ -6,7 +6,7 @@ import mongoose from "mongoose";
 const ConnectionService = {
   async createConnectionRequest(reqObject) {
 
-    
+
     const { FromUser, ToUser, status } = reqObject;
 
     const allowedStatus = ["ignored", "interested", "accepted", "rejected"];
@@ -16,7 +16,7 @@ const ConnectionService = {
     }
 
     try {
-     
+
       const toUser = await User.findById(ToUser).select("-password");
 
       if (!toUser) {
@@ -58,30 +58,30 @@ const ConnectionService = {
     }
   },
 
-  async reviewConnectionRequest(payload){
-    
+  async reviewConnectionRequest(payload) {
+
     try {
-      const {loggedInUser,requestId,status} = payload;
-      const allowedStatus = [ "accepted", "rejected"];
-      if(!allowedStatus.includes(status)){
+      const { loggedInUser, requestId, status } = payload;
+      const allowedStatus = ["accepted", "rejected"];
+      if (!allowedStatus.includes(status)) {
         logger.warn(`Invalid status type: ${status}`);
-        throw new AppError("Invalid status type",400);
+        throw new AppError("Invalid status type", 400);
       }
       const connectionReq = await ConnectionRequest.findOne({
-          _id: new mongoose.Types.ObjectId(requestId),      
-      toUserId: new mongoose.Types.ObjectId(loggedInUser), 
-      status: "interested"
+        _id: new mongoose.Types.ObjectId(requestId),
+        toUserId: new mongoose.Types.ObjectId(loggedInUser),
+        status: "interested"
       });
-     
-      
-      if(!connectionReq){
+
+
+      if (!connectionReq) {
         logger.warn(`Connection request not found: ${requestId}`);
-        throw new AppError("Connection request not found",404);
+        throw new AppError("Connection request not found", 404);
       }
-     connectionReq.status = status;
-     await connectionReq.save();
-     logger.info(`Connection request ${requestId} reviewed with status: ${status}`);
-     return connectionReq;
+      connectionReq.status = status;
+      await connectionReq.save();
+      logger.info(`Connection request ${requestId} reviewed with status: ${status}`);
+      return connectionReq;
     } catch (error) {
       logger.error("Error reviewing connection request", { error });
       throw new AppError(
@@ -90,7 +90,7 @@ const ConnectionService = {
       );
     }
   },
- 
+
 };
 
 export default ConnectionService;

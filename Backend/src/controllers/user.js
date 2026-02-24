@@ -1,9 +1,10 @@
 
 
+import mongoose from "mongoose";
 import UserService from "../services/user.js";
 
 const UserController = {
-   async getConnectionRequests(req, res, next) {
+  async getConnectionRequests(req, res, next) {
     try {
       const loggedInUser = req.user._id;
       const connectionRequests = await UserService.getConnectionRequests(loggedInUser);
@@ -16,7 +17,7 @@ const UserController = {
       next(error);
     }
   },
-   async getAllConnections(req, res, next) {
+  async getAllConnections(req, res, next) {
     try {
       const loggedInUser = req.user._id;
       const connections = await UserService.getAllConnections(loggedInUser);
@@ -31,24 +32,39 @@ const UserController = {
   },
 
   async getFeeds(req, res, next) {
-  try {
-    const loggedInUser = req.user._id;
-    const page = Math.max(1, parseInt(req.query.page) || 1);
-    let limit = parseInt(req.query.limit) || 10;
-    limit = limit > 50 ? 50 : limit;
-    const skip = (page - 1) * limit;
+    try {
+      const loggedInUser = req.user._id;
+      const page = Math.max(1, parseInt(req.query.page) || 1);
+      let limit = parseInt(req.query.limit) || 10;
+      limit = limit > 50 ? 50 : limit;
+      const skip = (page - 1) * limit;
 
-    const feeds = await UserService.getFeeds(loggedInUser, { limit, skip });
+      const feeds = await UserService.getFeeds(loggedInUser, { limit, skip });
 
-    res.status(200).json({
-      success: true,
-      message: "Feeds retrieved successfully",
-      data: feeds,
-    });
-  } catch (error) {
-    next(error);
-  }
-},
+      res.status(200).json({
+        success: true,
+        message: "Feeds retrieved successfully",
+        data: feeds,
+      });
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  async getUserById(req, res, next) {
+    try {
+      const { userId } = req.params;
+      if (!userId || !mongoose.Types.ObjectId.isValid(userId)) return next(new Error("Invalid User ID"));
+      const user = await UserService.getProfile(userId);
+      res.status(200).json({
+        success: true,
+        message: "User profile retrieved successfully",
+        data: user,
+      });
+    } catch (error) {
+      next(error);
+    }
+  },
 }
 
 export default UserController;
